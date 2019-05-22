@@ -1,0 +1,453 @@
+import React, { Fragment } from "react";
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import { Tooltip } from "@material-ui/core";
+import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
+// core components
+import styles from "./styles";
+import JobPage from "./Component";
+import { Helper } from "../../../utils";
+import Modal from "./component/Modal";
+
+const { getTxt } = Helper;
+
+const getInitialState = () => {
+  const initialState = {
+    jobs: [],
+    isLoading: true,
+    row: {},
+    isOpenModal: false,
+    citys: [],
+    status: [],
+    profession: [],
+    recruiter: [],
+    jobRequireProfessionJobList: [],
+    // idStatus: "",
+    // idRecruiter: "",
+    // idCity: "",
+    form: {
+      title: "",
+      companyName: "",
+      experience: "",
+      date: "",
+      idStatus: "",
+      idRecruiter: "",
+      idCity: ""
+    }
+  };
+  return initialState;
+};
+
+class JobPageContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...getInitialState(),
+      columns: [
+        {
+          Header: "Công việc",
+          id: "title",
+          accessor: row => getTxt(row.title)
+        },
+        {
+          Header: "Kinh nghiệm",
+          id: "experience",
+          accessor: row => getTxt(row.experience)
+        },
+        {
+          Header: "Ngày đăng tuyển",
+          id: "date",
+          accessor: row => getTxt(row.date)
+        },
+        {
+          Header: "Nhà tuyển dụng",
+          id: "companyName",
+          // accessor: row => getTxt(row.recruiter.companyName)
+          accessor: "recruiter.companyName"
+        },
+        {
+          Header: "Thành phố",
+          id: "name",
+          // accessor: row => getTxt(row.city.name)
+          accessor: "city.name"
+        },
+        {
+          Header: "Trạng thái",
+          id: "statusName",
+          // accessor: row => getTxt(row.status.statusName)
+          accessor: "status.statusName"
+        },
+        {
+          Header: "Chức năng",
+          width: 150,
+          sortable: false,
+          Cell: row => (
+            <div style={{ textAlign: "center" }}>
+              <Tooltip title="Sửa">
+                <EditIcon
+                  // eslint-disable-next-line react/prop-types
+                  className={this.props.classes.edit}
+                  onClick={() => this.handleUpdate(row.original)}
+                />
+              </Tooltip>
+              <Tooltip title="Xoá">
+                <DeleteIcon
+                  // eslint-disable-next-line react/prop-types
+                  className={this.props.classes.delete}
+                  onClick={() => this.handleDelete(row.original.id)}
+                />
+              </Tooltip>
+            </div>
+          )
+        }
+      ]
+    };
+  }
+
+  componentDidMount() {
+    this.getListJob();
+  }
+
+  getListJob = () => {
+    fetch(`/admin/api/job/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ jobs: data, isLoading: false }));
+
+    fetch(`/admin/api/city/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ citys: data }));
+
+    fetch(`/admin/api/status/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ status: data }));
+
+    fetch(`/admin/api/recruiter/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ recruiter: data }));
+
+    fetch(`/admin/api/profession/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ profession: data }));
+  };
+
+  handleAdd = () => {
+    this.setState({ isOpenModal: true });
+  };
+
+  handleClose = () => {
+    this.setState({ isOpenModal: false });
+  };
+
+  handleDelete = id => {
+    // console.log(id)
+    fetch(`/admin/api/job/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    }).then(() => {
+      let updatedJob = [...this.state.jobs].filter(i => i.id !== id);
+      this.setState({ jobs: updatedJob });
+    });
+  };
+
+  onChangeValue = (key, value) => {
+    // eslint-disable-next-line react/no-direct-mutation-state
+    let { form } = this.state;
+    form[key] = value;
+    this.setState({ form });
+    // eslint-disable-next-line no-console
+    console.log(value);
+  };
+
+  onCreateJob = async () => {
+    const { form } = this.state;
+    fetch(`/admin/api/job`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          this.getListJob();
+        }
+      });
+    this.setState({ isOpenModal: false });
+  };
+
+  handleUpdate = row => {
+    this.setState({
+      isOpenModal: true,
+      type: "edit",
+      row,
+      form: row
+    });
+  };
+
+  onUpdateJob = async id => {
+    let { form } = this.state;
+    form = { ...form, id };
+    await fetch(`/admin/api/job/`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          this.getListJob();
+        }
+      });
+    this.setState({ isOpenModal: false });
+  };
+
+  render() {
+    // eslint-disable-next-line react/prop-types
+    const { classes } = this.props;
+    const {
+      columns,
+      jobs,
+      isOpenModal,
+      row,
+      citys,
+      recruiter,
+      profession,
+      status,
+      type,
+      form
+    } = this.state;
+    const { idRecruiter, idStatus, idCity } = form;
+
+    return (
+      <Fragment>
+        <JobPage
+          jobs={jobs}
+          columns={columns}
+          classes={classes}
+          handleAdd={this.handleAdd}
+        />
+        <Modal
+          isOpenModal={isOpenModal}
+          handleClose={this.handleClose}
+          row={row}
+          type={type}
+          idRecruiter={idRecruiter}
+          idCity={idCity}
+          idStatus={idStatus}
+          citys={citys}
+          profession={profession}
+          recruiter={recruiter}
+          status={status}
+          onChangeValue={this.onChangeValue}
+          onCreateJob={this.onCreateJob}
+          onUpdateJob={this.onUpdateJob}
+        />
+      </Fragment>
+    );
+  }
+}
+
+export default withStyles(styles)(JobPageContainer);
+
+//modal:
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
+import React from "react";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "../../../Common/components/CustomButtons/Button";
+import Input from "../../../Common/components/CustomInput/CustomInput";
+import GridContainer from "../../../Common/components/Grid/GridContainer";
+import GridItem from "../../../Common/components/Grid/GridItem";
+import { withStyles } from "@material-ui/core/styles";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import { MenuItem } from "@material-ui/core";
+import SelectField from "./SelectField";
+
+const styles = theme => ({
+  textField: {
+    marginTop: "27px",
+    marginRight: theme.spacing.unit,
+    width: "100%"
+  }
+});
+
+const FormDialog = (props: Props) => {
+  const {
+    isOpenModal,
+    handleClose,
+    classes,
+    row,
+    type,
+    citys,
+    profession,
+    recruiter,
+    status,
+    onChangeValue,
+    idStatus,
+    idRecruiter,
+    idCity,
+    onCreateJob,
+    onUpdateJob
+  } = props;
+  const title = type === "edit" ? "Sửa thông tin" : "Thêm mới";
+  const selectedCity = citys.find(item => item.id === idCity) || {};
+  const onSave = type === "edit" ? () => onUpdateJob(row.id) : onCreateJob;
+  return (
+    <div>
+      <Dialog open={isOpenModal} fullWidth={true} maxWidth="false">
+        <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
+          {title}
+        </DialogTitle>
+        <DialogContent>
+          <GridContainer justify="center" noMargin>
+            <GridItem xs={11} md={4}>
+              <Input
+                labelText="Tên công việc"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: e => onChangeValue("title", e.target.value),
+                  defaultValue: row.title || ""
+                }}
+              />
+            </GridItem>
+            <GridItem xs={11} md={3}>
+              <Input
+                labelText="Kinh nghiệm (năm)"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: "number",
+                  onChange: e =>
+                    onChangeValue("experience", Number(e.target.value)),
+                  defaultValue: row.experience || ""
+                }}
+              />
+            </GridItem>
+
+            <GridItem xs={11} md={3}>
+              <Input
+                labelText="Ngày đăng tuyển (yyyy-mm-dd)"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: e => onChangeValue("date", e.target.value),
+                  defaultValue: row.date || ""
+                }}
+              />
+            </GridItem>
+            <GridItem xs={11} md={4}>
+              <FormControl className={classes.textField}>
+                {/* <InputLabel>Nhà tuyển dụng</InputLabel> */}
+                {/* <Select
+                  value={idRecruiter}
+                  inputProps={{
+                    name: "idRecruiter",
+                    onChange: e => onChangeValue("idRecruiter", e.target.value)
+                  }}
+                >
+                  {recruiter.map(item => (
+                    // eslint-disable-next-line react/jsx-key
+                    <MenuItem name="idRecruiter" value={item.id}>
+                      {item.companyName}
+                    </MenuItem>
+                  ))}
+                </Select> */}
+                <label>Nhà tuyển dụng</label>
+                <select
+                  id="selectRecruiter"
+                  className="form-control"
+                  name="recruiter"
+                >
+                  <option selected>Recruiter...</option>
+                  {/* {recruiterOptionList} */}
+                </select>
+              </FormControl>
+            </GridItem>
+            <GridItem xs={11} md={3}>
+              <FormControl className={classes.textField}>
+                <InputLabel>Thành phố</InputLabel>
+                <Select
+                  value={idCity}
+                  data={selectedCity}
+                  inputProps={{
+                    name: "id",
+                    onChange: e => onChangeValue("idCity", e.target.value)
+                  }}
+                >
+                  {citys &&
+                    citys.map(item => (
+                      <MenuItem name="idCity" value={item.id}>
+                        {item.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </GridItem>
+            <GridItem xs={11} md={3}>
+              <FormControl className={classes.textField}>
+                <InputLabel>Trạng thái</InputLabel>
+                <Select
+                  value={idStatus}
+                  inputProps={{
+                    onChange: e => onChangeValue("idStatus", e.target.value)
+                    // name: "idStatus",
+                  }}
+                >
+                  {status &&
+                    status.map(item => (
+                      <MenuItem name="idStatus" value={item.id}>
+                        {item.statusName}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </GridItem>
+            <GridItem xs={11} md={10}>
+              <SelectField profession={profession} />
+            </GridItem>
+          </GridContainer>
+        </DialogContent>
+        <GridContainer
+          style={{ height: "10%" }}
+          justify="center"
+          alignItems="center"
+        >
+          <GridItem>
+            <Button
+              onClick={onSave}
+              color="info"
+              style={{ margin: "10px 10px" }}
+            >
+              Lưu
+            </Button>
+            <Button
+              onClick={handleClose}
+              color="secondary"
+              style={{ margin: "10px 10px" }}
+            >
+              Thoát
+            </Button>
+          </GridItem>
+        </GridContainer>
+      </Dialog>
+    </div>
+  );
+}
+
+export default withStyles(styles)(FormDialog);
