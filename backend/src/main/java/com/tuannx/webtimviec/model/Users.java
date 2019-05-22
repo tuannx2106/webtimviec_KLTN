@@ -42,6 +42,12 @@ public class Users implements Serializable {
     @Column(name = "cmnd")
     private String cmnd;
 
+    @Column(name = "sdt")
+    private String sdt;
+
+    @Column(name = "gender")
+    private String gender;
+
     @Column(name = "avatar")
     private String avatar;
 

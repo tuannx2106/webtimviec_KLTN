@@ -36,6 +36,9 @@ public class Recruiter implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "phone")
     private String phone;
 
