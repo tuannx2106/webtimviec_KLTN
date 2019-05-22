@@ -44,17 +44,8 @@ public class JobRequireProfessionJobController {
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public JobRequireProfessionJob addJobRequireProfessionJob(@RequestBody JobRequireProfessionJob jobRequireProfessionJob) {
-        jobRequireProfessionJobService.saveJobRequireProfessionJob(jobRequireProfessionJob);
-        return jobRequireProfessionJob;
-    }
-
-    //Edit
-    @RequestMapping(value = "/", //
-            method = RequestMethod.PUT, //
-            produces = { MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
-    public JobRequireProfessionJob updateJobRequireProfessionJob(@RequestBody JobRequireProfessionJob jobRequireProfessionJob) {
-
+        JobRequireProfessionJobId jobRequireProfessionJobId = new JobRequireProfessionJobId(jobRequireProfessionJob.getJob().getId(),jobRequireProfessionJob.getProfessionJob().getId());
+        jobRequireProfessionJob.setJobRequireProfessionJobId(jobRequireProfessionJobId);
         jobRequireProfessionJobService.saveJobRequireProfessionJob(jobRequireProfessionJob);
         return jobRequireProfessionJob;
     }
