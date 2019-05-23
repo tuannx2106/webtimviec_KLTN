@@ -19,6 +19,8 @@ class index extends Component {
   
   render() {
     const { curentUser } = this.state;
+    if (!curentUser)
+      return <div>Loading ...</div>
     return (
       <Fragment>
         <div className="site-navbar container py-0" style={{ backgroundImage: 'url(images/hero-1.jpg)' }} role="banner">
@@ -28,7 +30,7 @@ class index extends Component {
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-3">
               <div className="text-center">
-                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" className="avatar img-circle img-thumbnail" alt="avatar" />
+                <img src={curentUser.avatar} className="avatar img-circle img-thumbnail" alt="avatar" />
                 <h6 className="txt-img">Cập nhật hình đại diện</h6>
                 <input type="file" className="text-center center-block file-upload" />
               </div>

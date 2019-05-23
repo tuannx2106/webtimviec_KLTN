@@ -1905,10 +1905,12 @@ figure figcaption {
 .bg{
   background: #eeeeee;
 }
+.bg-w{
+  background: #fff;
+}
 .scroll{
-  height: 800px;
+  height: 960px;
   overflow: overlay;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;
 }
 .border{
   border: 1px solid #fff !important;
@@ -1936,4 +1938,9 @@ figure figcaption {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   max-height: 40px;
+}
+.list-job{
+  padding: 60px 15px;
+  background: #fff;
+  border: 1px solid #fff;
 }

@@ -11,12 +11,12 @@ class JobItem extends Component {
           <div className="d-block d-md-flex listing" style={{marginBottom:"5px"}}>
             <Link to="" className="img d-block" style={{ backgroundImage: 'url("images/img_2.jpg")' }} />
             <div className="lh-content">
-              <Link to="/info-job"><h4>{item.title}</h4></Link>
+              <Link to="/info-job"><h6>{item.title}</h6></Link>
               <h3>Nhà tuyển dụng:<Link to="/"> {item.recruiter.companyName}</Link></h3>
-              <address className="addre">Địa chỉ: {item.city.name}</address>
-              <p className="mb-0">
+              {/* <address className="addre">Địa chỉ: {item.city.name}</address> */}
+              {/* <p className="mb-0">
                 <span className="review">Hạn nộp hồ sơ: {item.expired}</span>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ class ListJob extends Component {
             <h3 className="font-weight-light text-primary">Công Việc</h3>
           </div>
         </div>
-        <div className="row mt-5">
+        <div className="row mt-5 list-job">
           <JobItem jobs={jobs} />
         </div>
         <div className="col-12 text-center mt-4">

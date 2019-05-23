@@ -10,25 +10,25 @@ class ProfileUser extends Component {
       <form className="form" action="##" method="post" id="registrationForm">
         <div className="form-group form-style">
           <div className="col-xs-6">
-            <label htmlFor="first_name"><h4>Họ và tên</h4></label>
+            <label htmlFor="name"><h4>Họ và tên</h4></label>
             <input type="text" className="form-control input-form" value ={curentUser.name ? curentUser.name : ""} />
           </div>
         </div>
         <div className="form-group">
           <div className="col-xs-6">
-            <label htmlFor="last_name"><h4>Số điện thoại</h4></label>
-            <input type="text" className="form-control input-form" value ={curentUser.sdt ? curentUser.name : ""} />
+            <label htmlFor="phone"><h4>Số điện thoại</h4></label>
+            <input type="text" className="form-control input-form" value ={curentUser.sdt ? curentUser.sdt : ""} />
           </div>
         </div>
         <div className="form-group">
           <div className="col-xs-6">
-            <label htmlFor="phone"><h4>Địa chỉ</h4></label>
+            <label htmlFor="address"><h4>Địa chỉ</h4></label>
             <input type="text" className="form-control input-form" value ={curentUser.address ? curentUser.address : ""} />
           </div>
         </div>
         <div className="form-group">
           <div className="col-xs-6">
-            <label htmlFor="mobile"><h4>Giới tính</h4></label>
+            <label htmlFor="gender"><h4>Giới tính</h4></label>
             <input type="text" className="form-control input-form" value ={curentUser.gender ? curentUser.gender : ""} />
           </div>
         </div>
@@ -40,7 +40,7 @@ class ProfileUser extends Component {
         </div>
         <div className="form-group">
           <div className="col-xs-6">
-            <label htmlFor="email"><h4>Ngày sinh</h4></label>
+            <label htmlFor="birthday"><h4>Ngày sinh</h4></label>
             <input type="date" className="form-control input-form"  value ={curentUser.date_of_birth ? curentUser.date_of_birth : ""} />
           </div>
         </div>
