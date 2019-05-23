@@ -13,9 +13,9 @@ class Menu extends Component {
     this.setState({ curentUser: curUser });
   }
 
-  logOut= () =>{
+  logOut = () => {
     localStorage.removeItem("currentUser");
-    this.setState({curentUser : null})
+    this.setState({ curentUser: null })
   }
 
   render() {
@@ -32,30 +32,30 @@ class Menu extends Component {
               <li><NavLink activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/tatcacongviec">Tất cả công việc</NavLink></li>
               <li><NavLink activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/nhatuyendung">Nhà tuyển dụng</NavLink></li>
               {/* <li className="mr-5"><NavLink to="/">Thông tin</NavLink></li> */}
-            
+
               {
-                curentUser ? 
-                <>
-                <li className="nav-item">
-                <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" class="avatar-rounded img-style"></img> </span>
-              </li> 
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                 {
-                   curentUser.name
-                 }
-                </a>
-                <div class="dropdown-menu">
-                  <Link class="dropdown-item" to="/profile-user">Quản lý hồ sơ</Link>
-                  <span> <a href="#" class="dropdown-item" onClick={this.logOut}>Đăng xuất</a></span>
-                </div>
-              </li>
-              </>
-                :
-              <li className="ml-xl-3 login"><span className="border-left pl-xl-4" /><Link to="/login">Đăng Nhập</Link><Link to="/register">Đăng Ký</Link></li>
+                curentUser ?
+                  <>
+                    <li className="nav-item">
+                      <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" class="avatar-rounded img-style"></img> </span>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        {
+                          curentUser.name
+                        }
+                      </a>
+                      <div class="dropdown-menu">
+                        <Link class="dropdown-item" to="/profile-user">Quản lý hồ sơ</Link>
+                        <span> <a href="#" class="dropdown-item" onClick={this.logOut}>Đăng xuất</a></span>
+                      </div>
+                    </li>
+                  </>
+                  :
+                  <li className="ml-xl-3 login"><span className="border-left pl-xl-4" /><Link to="/login">Đăng Nhập</Link><Link to="/register">Đăng Ký</Link></li>
 
               }
-             
+
               <li><Link to="/trang-nha-tuyen-dung" className="cta"><span className="bg-primary text-white rounded">Nhà tuyển dụng</span></Link></li>
             </ul>
           </nav>

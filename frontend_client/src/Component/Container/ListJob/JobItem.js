@@ -11,7 +11,7 @@ class JobItem extends Component {
           <div className="d-block d-md-flex listing" style={{marginBottom:"5px"}}>
             <Link to="" className="img d-block" style={{ backgroundImage: 'url("images/img_2.jpg")' }} />
             <div className="lh-content">
-              <Link to="/info-job"><h4>{item.title}</h4></Link>
+              <Link to="/info-job"><h5>{item.title}</h5></Link>
               <h3>Nhà tuyển dụng:<Link to="/"> {item.recruiter.companyName}</Link></h3>
               <address className="addre">Địa chỉ: {item.city.name}</address>
               <p className="mb-0">

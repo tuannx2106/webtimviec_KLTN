@@ -17,7 +17,7 @@ class ProfileUser extends Component {
         <div className="form-group">
           <div className="col-xs-6">
             <label htmlFor="last_name"><h4>Số điện thoại</h4></label>
-            <input type="text" className="form-control input-form" value ={curentUser.sdt ? curentUser.name : ""} />
+            <input type="text" className="form-control input-form" value ={curentUser.sdt ? curentUser.sdt : ""} />
           </div>
         </div>
         <div className="form-group">
