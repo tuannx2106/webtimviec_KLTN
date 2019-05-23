@@ -8,7 +8,7 @@ import PageLogin from "./page/PageLogin/index";
 import PageRegister from './page/PageRegister';
 import ProfileUser from './page/PageProfileUser/index';
 import ProfileRecruiter from "./page/PageProfileRecruiter/index";
-
+import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
 
 const routes = [
     {
@@ -55,6 +55,11 @@ const routes = [
         path: '/profile-recruiter',
         exact: false,
         main: () => <ProfileRecruiter />
+    },
+    {
+        path: '/trang-nha-tuyen-dung',
+        exact: false,
+        main: () => < PageHomeRecruiter/>
     },
 ];
 

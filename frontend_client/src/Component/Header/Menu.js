@@ -56,7 +56,7 @@ class Menu extends Component {
 
               }
              
-              <li><Link to="/profile-recruiter" className="cta"><span className="bg-primary text-white rounded">Nhà tuyển dụng</span></Link></li>
+              <li><Link to="/trang-nha-tuyen-dung" className="cta"><span className="bg-primary text-white rounded">Nhà tuyển dụng</span></Link></li>
             </ul>
           </nav>
         </div>
