@@ -4,12 +4,13 @@ import {Link} from "react-router-dom"
 class JobItem extends Component {
   render() {
     const { jobs } = this.props;
+    console.log(jobs)
     return (
       <Fragment>
         {jobs.map(item =>(
         <div className="col-lg-6">
           <div className="d-block d-md-flex listing" style={{marginBottom:"5px"}}>
-            <Link to="" className="img d-block" style={{ backgroundImage: 'url("images/img_2.jpg")' }} />
+            <div className="img d-block"> <img className="img-job" src={item.recruiter.logo} />  </div>
             <div className="lh-content">
               <Link to="/info-job"><h6>{item.title}</h6></Link>
               <h3>Nhà tuyển dụng:<Link to="/"> {item.recruiter.companyName}</Link></h3>

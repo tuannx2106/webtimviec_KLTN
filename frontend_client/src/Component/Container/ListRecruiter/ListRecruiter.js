@@ -13,10 +13,7 @@ class ListRecruiter extends Component {
           </div>
         </div>
         <div className="row mb-3 align-items-stretch">
-          <RecruiterItem />
-          <RecruiterItem />
-          <RecruiterItem />
-          <RecruiterItem />
+          <RecruiterItem recruiters = {recruiters}/>
           <div className="col-12 text-center mt-4">
             <Link to="/nhatuyendung" className="btn btn-primary rounded py-2 px-4 text-white">Xem thêm...</Link>
           </div>

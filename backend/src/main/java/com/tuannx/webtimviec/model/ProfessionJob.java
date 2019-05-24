@@ -25,6 +25,9 @@ public class ProfessionJob implements Serializable {
     @Column(name="pjobname")
     private String professionJobName;
 
+    @Column(name = "logo")
+    private String logo;
+
     @JsonIgnore
     @OneToMany(mappedBy = "professionJob")
     private List<JobRequireProfessionJob> jobRequireProfessionJobList;
