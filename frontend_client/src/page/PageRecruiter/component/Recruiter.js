@@ -12,7 +12,7 @@ class Recruiter extends Component {
               <Link to="#" className="img d-block" style={{ backgroundImage: 'url("images/img_1.jpg")' }} />
               <div className="lh-content">
                 {/* <Link to="/info"> <span className="category">{item.companyName}</span></Link> */}
-                <a href="/" class="bookmark"><span class="icon-heart"></span></a>
+                <a href="/" className="bookmark"><span className="icon-heart"></span></a>
                <Link to="/info"> <h3>{item.companyName}</h3></Link>
                 <address>{item.address}</address>
 

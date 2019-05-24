@@ -1,43 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 class Filter extends Component {
   render() {
+    const { cities, professions } = this.props;
     return (
-      <div className="mb-5 bg-light p-2 bord">
-        <h3 className="h5 text-black mb-3 text-center">Lọc theo</h3>
-        <br></br>
-        <form action="#" method="post">
-          <div className="form-group">
-            <div className="select-wrap">
-              <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
-              <select className="form-control" >
-                <option value>Ngành nghề...</option>
-                <option value>Real Estate</option>
-                <option value>Books &amp;  Magazines</option>
-                <option value>Furniture</option>
-                <option value>Electronics</option>
-                <option value>Cars &amp; Vehicles</option>
-                <option value>Others</option>
-              </select>
+      <Fragment>
+        <div>
+          <div className="mb-3 p-2 bord bg-w">
+            <h6 className=" font mb-3 ">ĐỊA ĐIỂM</h6>
+            <div style={{ overflow: "auto", maxHeight: "315px" }}>
+              {cities && cities.map(item => (
+                <div className="select-wrap">
+                  <span className="form-control item-fil"> {item.name} </span>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="form-group">
-            <div className="select-wrap">
-              <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
-              <select className="form-control" >
-                <option value>Thành phố...</option>
-                <option value>Real Estate</option>
-                <option value>Books &amp;  Magazines</option>
-                <option value>Furniture</option>
-                <option value>Electronics</option>
-                <option value>Cars &amp; Vehicles</option>
-                <option value>Others</option>
-              </select>
+        </div>
+        <div>
+          <div className="mb-3 p-2 bord bg-w">
+            <h6 className="font mb-3 ">NGÀNH NGHỀ</h6>
+            <div style={{ overflow: "auto", maxHeight: "315px" }}>
+              {professions && professions.map(item => (
+                <div className="select-wrap">
+                  <span className="form-control item-fil"> {item.professionJobName} </span>
+                </div>
+              ))}
             </div>
           </div>
-
-        </form>
-      </div>
+        </div>
+      </Fragment>
     );
   }
 }

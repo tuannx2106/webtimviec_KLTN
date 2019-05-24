@@ -6,9 +6,9 @@ class Job extends Component {
     return (
       <div className="col-lg-12 block" >
         <div className="d-block d-md-flex listing">
-          <a href="#" className="img d-block" style={{ backgroundImage: 'url("images/img_1.jpg")' }} />
+          <a href="#" className="img d-block" style={{ backgroundImage: 'url("images/img_1.jpg")',maxHeight:"140px" }} />
           <div className="lh-content">
-           <Link to = "/info-job"> <span className="category">NodeJS</span></Link>
+          <Link to="/info-job"><h6> NodeJS</h6></Link>
             <h3>Nhà tuyển dụng:<Link to="#"> FPT</Link></h3>
             <address>Địa chỉ: Đà Nẵng</address>
             <p className="mb-0">
