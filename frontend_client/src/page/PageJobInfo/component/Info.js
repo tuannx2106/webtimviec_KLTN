@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Infomation extends Component {
   render() {
     return (
-      <div className="row">
+      <div className="row" style={{background: "#fff",padding: "30px",border: "1px solid #eee"}}>
         <div className="col-lg-8">
           <h3>Phúc lợi dành cho bạn</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil ratione dolores expedita id repudiandae nostrum aut, impedit repellat nam veritatis, pariatur facere reprehenderit alias atque molestias ipsum officia asperiores possimus eos, quis nemo hic. Autem molestias dolorum blanditiis quibusdam culpa nobis quam, soluta quasi quis, fugiat delectus pariatur, eos quae.</p>

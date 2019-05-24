@@ -30,7 +30,7 @@ class JobInfo extends Component {
   render() {
     const {jobs} = this.state;
     return (
-      <div className="site-wrap">
+      <div className="site-wrap bg-light">
         <div className="site-mobile-menu">
           <div className="site-mobile-menu-header">
             <div className="site-mobile-menu-close mt-3">
