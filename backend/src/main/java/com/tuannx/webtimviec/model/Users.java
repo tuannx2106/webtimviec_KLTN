@@ -28,7 +28,7 @@ public class Users implements Serializable {
     private String name;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private Date dateOfBirth  = new Date(Calendar.getInstance().getTime().getTime());;
 
     @Column(name = "email")
     private String email;
