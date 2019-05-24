@@ -9,9 +9,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  FormControl,
   Checkbox,
-  Select,
   FormControlLabel
 } from "@material-ui/core";
 
@@ -48,7 +46,7 @@ export class FormDialog extends React.Component {
           </DialogTitle>
           <DialogContent>
             <GridContainer justify="center" noMargin>
-              <GridItem xs={11} md={4}>
+              <GridItem xs={11} md={5}>
                 <Input
                   labelText="Họ tên"
                   formControlProps={{
@@ -60,7 +58,7 @@ export class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
-              <GridItem xs={11} md={4}>
+              <GridItem xs={11} md={5}>
                 <Input
                   labelText="Email"
                   formControlProps={{
@@ -71,25 +69,6 @@ export class FormDialog extends React.Component {
                     defaultValue: row.email || ""
                   }}
                 />
-              </GridItem>
-              <GridItem xs={11} md={2}>
-                <FormControl className={classes.formControl}>
-                  <Select
-                    style={{ marginTop: "43px" }}
-                    native
-                    value={row.gender}
-                    inputProps={{
-                      onChange: e => onChangeValue("gender", e.target.value),
-                      name: "gender"
-                      // id: "gender"
-                    }}
-                  >
-                    {" "}
-                    <option>Giới tính</option>
-                    <option value={1}>Nam</option>
-                    <option value={2}>Nữ</option>
-                  </Select>
-                </FormControl>
               </GridItem>
               <GridItem xs={11} md={4}>
                 <Input
@@ -124,7 +103,7 @@ export class FormDialog extends React.Component {
                   inputProps={{
                     onChange: e =>
                       onChangeValue("date_of_birth", e.target.value),
-                    defaultValue: row.date_of_birth || ""
+                    defaultValue: row.dateOfBirth || ""
                   }}
                 />
               </GridItem>

@@ -41,7 +41,7 @@ class ProfileUser extends Component {
         <div className="form-group">
           <div className="col-xs-6">
             <label htmlFor="birthday"><h4>Ngày sinh</h4></label>
-            <input type="date" className="form-control input-form"  value ={curentUser.date_of_birth ? curentUser.date_of_birth : ""} />
+            <input type="date" className="form-control input-form"  value ={curentUser.dateOfBirth ? curentUser.dateOfBirth : ""} />
           </div>
         </div>
         <div className="form-group">

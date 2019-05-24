@@ -10,8 +10,10 @@ import GridItem from "../../../Common/components/Grid/GridItem";
 import { FormLabel, FormControl } from "@material-ui/core";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 
-export default class FormDialog extends React.Component {
+class FormDialog extends React.Component {
   render() {
     const {
       isOpenModal,
@@ -19,9 +21,17 @@ export default class FormDialog extends React.Component {
       onChangeValue,
       row,
       type,
+      cities,
+      city_id,
       onCreateRecruiter,
       onUpdateRecruiter
     } = this.props;
+
+    const temp = cities ? cities.find(el => el.id === city_id) : {};
+    const city = {
+      value: (temp || "").id
+    };
+
     const title = type === "edit" ? "Sửa thông tin" : "Thêm mới";
     const onSave =
       type === "edit" ? () => onUpdateRecruiter(row.id) : onCreateRecruiter;
@@ -33,7 +43,7 @@ export default class FormDialog extends React.Component {
           </DialogTitle>
           <DialogContent>
             <GridContainer justify="center" noMargin>
-              <GridItem xs={11} md={10}>
+              <GridItem xs={11} md={5}>
                 <Input
                   labelText="Tên nhà tuyển dụng"
                   formControlProps={{
@@ -68,6 +78,30 @@ export default class FormDialog extends React.Component {
                     defaultValue: row.address || ""
                   }}
                 />
+              </GridItem>
+              <GridItem xs={11} md={5} style={{ marginTop: "26px" }}>
+                <FormControl style={{ width: "100%", }}>
+                  <InputLabel htmlFor="age-native-simple">Thành phố</InputLabel>
+                  <Select
+                    native
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    value={city}
+                    // onChange={handleChange('age')}
+                    inputProps={{
+                      name: 'city_id',
+                      onChange: e => onChangeValue("city_id", e.target.value),
+                      // id: 'age-native-simple',
+                    }}
+                  >
+                    {cities && cities.map(item => (
+                      <option  key={item.id} value={item.id}>
+                        {item.name}
+                      </option >
+                    ))}
+                  </Select>
+                </FormControl>
               </GridItem>
               <GridItem xs={11} md={5}>
                 <Input
@@ -162,7 +196,9 @@ FormDialog.formats = [
   "blockquote",
   "list",
   "bullet",
-  "indent"
+  "indent",
+  "link",
+  "image"
 ];
 
 FormDialog.modules = {
@@ -170,15 +206,13 @@ FormDialog.modules = {
     [{ header: "1" }, { header: "2" }, { font: [] }],
     [{ size: [] }],
     ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" }
-    ]
+    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+    ["link", "image"],
+    ["clean"]
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false
   }
 };
+export default FormDialog;

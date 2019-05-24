@@ -91,17 +91,6 @@ class FormDialog extends React.Component {
     console.log(event.target.value)
   };
 
-  componentDidMount() {
-    this.attachQuillRefs();
-  }
-  componentDidUpdate() {
-    this.attachQuillRefs();
-  }
-  attachQuillRefs = () => {
-    if (typeof this.reactQuillRef.getEditor !== "function") return;
-    this.quillRef = this.reactQuillRef.getEditor();
-  }
-
   handleChange = event => {
     const target = event.target;
     const value = target.value;

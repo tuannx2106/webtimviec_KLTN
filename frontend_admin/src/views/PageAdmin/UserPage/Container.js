@@ -26,7 +26,7 @@ const getInitialState = () => {
     form: {
       name: "",
       email: "",
-      gender: "",
+      cmnd: "",
       date_of_birth: "",
       isAdmin: "",
       address: "",
@@ -147,9 +147,9 @@ class UsersPageContainer extends React.Component {
         accessor: row => getTxt(row.email)
       },
       {
-        Header: "Giới tính",
-        id: "gender",
-        accessor: row => getTxt(row.gender)
+        Header: "Số chứng minh",
+        id: "cmnd",
+        accessor: row => getTxt(row.cmnd)
       },
       {
         Header: "Địa chỉ",
@@ -159,7 +159,7 @@ class UsersPageContainer extends React.Component {
       {
         Header: "Ngày sinh",
         id: "date_of_birth",
-        accessor: row => getTxt(row.date_of_birth)
+        accessor: row => getTxt(row.dateOfBirth)
       },
       {
         Header: "Quản trị viên",
