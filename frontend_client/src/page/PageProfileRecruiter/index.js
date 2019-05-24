@@ -1,11 +1,25 @@
 import React, { Component, Fragment } from 'react';
-import Menu from "../../Component/Header/Menu";
+import Menu from "../../PageRecruiter/ComponentRecruiter/Header/Menu";
 import "./style.css"
 import ProfileRecruiter from './ProfileRecruiter';
 import JobRecruiter from  "./myJobRecruiter";
 
 class index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      curentRecruiter: null,
+    };
+  }
+
+  componentDidMount() {
+    const curRecruiter = JSON.parse(localStorage.getItem('currentRecruiter'));
+    this.setState({ curentRecruiter: curRecruiter });
+  }
   render() {
+    const { curentRecruiter } = this.state;
+    if (!curentRecruiter)
+      return <div>Loading ...</div>
     return (
       <Fragment>
         <div className="site-navbar container py-0 " style={{ backgroundImage: 'url(images/hero-1.jpg)' }} role="banner">
@@ -15,7 +29,7 @@ class index extends Component {
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-3">
               <div className="text-center">
-                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" className="avatar img-thumbnail" alt="avatar" />
+              <img src={curentRecruiter.logoP} className="avatar img-thumbnail" alt="avatar" />
                 <h6 className="txt-img">Cập nhật logo công ty</h6>
                 <input type="file" className="text-center center-block file-upload" />
               </div>
@@ -33,7 +47,7 @@ class index extends Component {
               <div className="tab-content">
                 <div className="tab-pane active" id="profilerecruiter">
                   <hr />
-                    <ProfileRecruiter/>
+                    <ProfileRecruiter curentRecruiter ={curentRecruiter}/>
                   <hr />
                 </div>
                 <div className="tab-pane" id="myjobrecruiter">

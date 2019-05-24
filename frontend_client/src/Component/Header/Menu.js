@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, withRouter } from "react-router-dom";
 
 class Menu extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class Menu extends Component {
   logOut = () => {
     localStorage.removeItem("currentUser");
     this.setState({ curentUser: null })
+    this.props.history.push('/');
   }
 
   render() {
@@ -39,15 +40,15 @@ class Menu extends Component {
                     <li className="nav-item">
                       <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" class="avatar-rounded img-style"></img> </span>
                     </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <li className="nav-item dropdown">
+                      <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         {
                           curentUser.name
                         }
                       </a>
-                      <div class="dropdown-menu">
-                        <Link class="dropdown-item" to="/profile-user">Quản lý hồ sơ</Link>
-                        <span> <a href="#" class="dropdown-item" onClick={this.logOut}>Đăng xuất</a></span>
+                      <div className="dropdown-menu">
+                        <Link className="dropdown-item" to="/profile-user">Quản lý hồ sơ</Link>
+                        <span> <a href="#" className="dropdown-item" onClick={this.logOut}>Đăng xuất</a></span>
                       </div>
                     </li>
                   </>
@@ -68,4 +69,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default withRouter(Menu);

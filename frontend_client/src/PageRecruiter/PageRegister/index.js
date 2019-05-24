@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 
 class PageRegister extends Component {
   emptyItem = {
-    name: "",
+    companyName: "",
     email: "",
     password: "",
   };
@@ -28,7 +28,7 @@ class PageRegister extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { item } = this.state;
-    fetch('/admin/api/users', {
+    fetch('/admin/api/recruiter', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -45,11 +45,11 @@ class PageRegister extends Component {
           <div className="row justify-content-center">
             <div className="col-md-6 " data-aos="fade">
               <form onSubmit={this.handleSubmit} className=" bg-light boder-register">
-                <h3 style={{ textAlign: "center", marginBottom: "10px" }}>Đăng kí thành viên</h3>
+                <h3 style={{ textAlign: "center", marginBottom: "10px" }}>Nhà tuyển dụng đăng kí</h3>
                 <div className="row form-group">
                   <div className="col-md-12">
-                    <label >Họ và tên</label>
-                    <input type="text" className="form-control" onChange={this.handleChange} name="name" />
+                    <label >Tên nhà tuyển dụng</label>
+                    <input type="text" className="form-control" onChange={this.handleChange} name="companyName" />
                   </div>
                 </div>
                 <div className="row form-group">
@@ -75,7 +75,7 @@ class PageRegister extends Component {
                     <button type="submit" className="btn btn-primary">Đăng Ký</button>
                   </div>
                   <div className="col-12 mt-3">
-                    <h6>Bạn đã là thành viên? <Link to="/login">Đăng nhập!</Link></h6>
+                    <h6>Bạn có tài khoản? <Link to="/login-recruiter">Đăng nhập!</Link></h6>
                   </div>
                 </div>
               </form>

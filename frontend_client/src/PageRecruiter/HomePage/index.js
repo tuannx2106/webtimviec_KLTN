@@ -39,7 +39,7 @@ class HomePageRcruiter extends Component {
         
         </div>
         <div className="newsletter bg-primary py-5">
-          <InputEmail />
+        
         </div>
         <div className="site-footer">
           <Footer />

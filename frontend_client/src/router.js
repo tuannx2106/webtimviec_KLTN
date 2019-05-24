@@ -6,6 +6,8 @@ import RecruiterInfo from './page/PageRecruiterInfo/RecruiterInfo';
 import JobInfo from './page/PageJobInfo/JobInfo';
 import PageLogin from "./page/PageLogin/index";
 import PageRegister from './page/PageRegister';
+import PageLoginRecruiter from "./PageRecruiter/PageLogin/index";
+import PageRegisterREcruiter from "./PageRecruiter/PageRegister/index";
 import ProfileUser from './page/PageProfileUser/index';
 import ProfileRecruiter from "./page/PageProfileRecruiter/index";
 import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
@@ -45,6 +47,16 @@ const routes = [
         path: '/register',
         exact: false,
         main: () => <PageRegister />
+    },
+    {
+        path: '/login-recruiter',
+        exact: false,
+        main: () => <PageLoginRecruiter />
+    },
+    {
+        path: '/register-recruiter',
+        exact: false,
+        main: () => <PageRegisterREcruiter />
     },
     {
         path: '/profile-user',

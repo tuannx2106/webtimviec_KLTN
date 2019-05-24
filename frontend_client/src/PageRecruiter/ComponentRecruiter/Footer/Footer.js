@@ -9,16 +9,15 @@ class Footer extends Component {
             <div className="row">
               <div className="col-md-6">
                 <h2 className="footer-heading mb-4">Thông tin</h2>
-                <p>Trường đại học Sư phạm kỹ thuật TPHCM</p>
+                <p>Trường đại học Sư phạm kỹ thuật TP.HCM</p>
                 <p></p>
               </div>
               <div className="col-md-3">
                 <h2 className="footer-heading mb-4">Điều hướng</h2>
                 <ul className="list-unstyled">
                   <li><a href="#">Trang chủ</a></li>
-                  <li><a href="#">Tất cả công việc</a></li>
-                  <li><a href="#">Nhà tuyển dụng</a></li>
-                  <li><a href="#">Thông tin</a></li>
+                  <li><a href="#">Đăng tuyển</a></li>
+                  <li><a href="#">Tìm hồ sơ</a></li>
                 </ul>
               </div>
               <div className="col-md-3">
