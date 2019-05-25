@@ -29,7 +29,7 @@ class index extends Component {
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-3">
               <div className="text-center">
-              <img src={curentRecruiter.logoP} className="avatar img-thumbnail" alt="avatar" />
+              <img src={curentRecruiter.logo} className="avatar img-thumbnail" alt="avatar" />
                 <h6 className="txt-img">Cập nhật logo công ty</h6>
                 <input type="file" className="text-center center-block file-upload" />
               </div>
