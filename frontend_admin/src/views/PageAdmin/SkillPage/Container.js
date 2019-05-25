@@ -50,7 +50,7 @@ class SkillPageContainer extends React.Component {
       .catch(err => console.log(err));
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true });
+  handleAdd = () => this.setState({ isOpenModal: true, type:""});
 
   handleClose = () => {
     this.setState({ isOpenModal: false });
@@ -124,11 +124,11 @@ class SkillPageContainer extends React.Component {
     this.setState({ isOpenModal: false });
   };
 
-  handleUpdate = row => {
+  handleUpdate = value => {
     this.setState({
       isOpenModal: true,
       type: "edit",
-      row
+      row: value
     });
   };
 

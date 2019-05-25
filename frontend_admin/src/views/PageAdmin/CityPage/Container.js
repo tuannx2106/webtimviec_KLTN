@@ -67,7 +67,7 @@ class CityPageContainer extends React.Component {
       .catch(err => console.log(err));
   }
 
-  handleAdd = () => this.setState({ isOpenModal: true });
+  handleAdd = () => this.setState({ isOpenModal: true, type:"" });
 
   handleClose = () => {
     this.setState({ isOpenModal: false });

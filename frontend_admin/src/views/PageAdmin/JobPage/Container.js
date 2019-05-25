@@ -137,7 +137,7 @@ class JobPageContainer extends React.Component {
   };
 
   handleAdd = () => {
-    this.setState({ isOpenModal: true });
+    this.setState({ isOpenModal: true, type:"" });
   };
 
   handleClose = () => {
