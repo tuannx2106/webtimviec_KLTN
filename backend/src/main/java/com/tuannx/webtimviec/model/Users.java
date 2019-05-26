@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -27,8 +27,8 @@ public class Users implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth  = new Date(Calendar.getInstance().getTime().getTime());;
+    @Column(name = "birthday")
+    private Date birthday  = new Date(Calendar.getInstance().getTime().getTime());;
 
     @Column(name = "email")
     private String email;

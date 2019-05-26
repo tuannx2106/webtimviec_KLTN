@@ -4,13 +4,14 @@ import {Link} from "react-router-dom"
 class JobItem extends Component {
   render() {
     const { jobs } = this.props;
-    console.log(jobs)
+    if (!jobs)
+      return <div>Loading ...</div>
     return (
       <Fragment>
-        {jobs.map(item =>(
+        {jobs && jobs.map(item =>(
         <div className="col-lg-6">
           <div className="d-block d-md-flex listing" style={{marginBottom:"5px"}}>
-            <div className="img d-block"> <img className="img-job" src={item.recruiter.logo} />  </div>
+            <div className="img d-block"> <img className="img-job" src={item.recruiter.logo || ""} />  </div>
             <div className="lh-content">
               <Link to="/info-job"><h6>{item.title}</h6></Link>
               <h3>Nhà tuyển dụng:<Link to="/"> {item.recruiter.companyName}</Link></h3>

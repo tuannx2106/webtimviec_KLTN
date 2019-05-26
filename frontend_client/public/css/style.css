@@ -1948,6 +1948,7 @@ figure figcaption {
 .img-job{
   max-width: 120px;
   max-height: 95px;
+  height: 95px;
   float: none!important;
   margin: auto;
   border: 0!important;
@@ -1956,6 +1957,7 @@ figure figcaption {
 }
 .img-recruiter{
   max-height: 154px;
+  height: 154px;
   width: auto;
   margin: auto;
   display: block;

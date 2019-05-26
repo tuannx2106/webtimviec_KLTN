@@ -84,7 +84,7 @@ export class FormDialog extends React.Component {
               </GridItem>
               <GridItem xs={11} md={3}>
                 <Input
-                  labelText="Chứng minh nhân dân"
+                  labelText="Số điện thoại"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -102,8 +102,8 @@ export class FormDialog extends React.Component {
                   }}
                   inputProps={{
                     onChange: e =>
-                      onChangeValue("date_of_birth", e.target.value),
-                    defaultValue: row.dateOfBirth || ""
+                      onChangeValue("birthday", e.target.value),
+                    defaultValue: row.birthday || ""
                   }}
                 />
               </GridItem>

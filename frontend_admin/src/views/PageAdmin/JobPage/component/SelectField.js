@@ -3,7 +3,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -48,7 +47,6 @@ function getStyles(name, that) {
         : that.props.theme.typography.fontWeightMedium
   };
 }
-
 class MultipleSelect extends React.Component {
   state = {
     name: []
@@ -73,7 +71,6 @@ class MultipleSelect extends React.Component {
             multiple
             value={this.state.name}
             onChange={this.handleChange}
-            input={<Input id="select-multiple-chip" />}
             renderValue={selected => (
               <div className={classes.chips}>
                 {selected.map(value => (

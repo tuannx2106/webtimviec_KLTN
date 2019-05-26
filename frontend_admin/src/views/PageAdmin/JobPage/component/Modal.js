@@ -11,7 +11,6 @@ import "react-quill/dist/quill.snow.css";
 import {
   FormLabel,
   FormControl,
-  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -238,7 +237,6 @@ class FormDialog extends React.Component {
                   value={item.experience || row.experience}
                 />
               </GridItem>
-
               <GridItem xs={11} md={2}>
                 <label>Ngày đăng tuyển</label>
                 <input
@@ -302,7 +300,6 @@ class FormDialog extends React.Component {
                 </FormControl>
               </GridItem>
               <GridItem xs={11} md={10}>
-                {/* <SelectField profession={profession} /> */}
                 <div className={classes.root}>
                   <FormControl
                     className={classes.formControl}
@@ -319,7 +316,7 @@ class FormDialog extends React.Component {
                       multiple
                       value={this.state.name}
                       onChange={this.handleChangeSelectField}
-                      input={<Input id="select-multiple-chip" />}
+                      // input={<Input id="select-multiple-chip" />}
                       renderValue={selected => (
                         <div className={classes.chips}>
                           {selected.map(value => (
@@ -342,7 +339,6 @@ class FormDialog extends React.Component {
                   </FormControl>
                 </div>
               </GridItem>
-
               <GridItem xs={12} md={10}>
                 <FormControl
                   style={{
