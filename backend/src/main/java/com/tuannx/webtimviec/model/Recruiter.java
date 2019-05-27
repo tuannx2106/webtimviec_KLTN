@@ -45,7 +45,6 @@ public class Recruiter implements Serializable {
     @Column(name = "verify")
     private Boolean verify = false;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="city_id")
     private City city;

@@ -27,6 +27,7 @@ public class City implements Serializable {
     @OneToMany(mappedBy = "city")
     private List<Job> jobList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "city")
     private List<Recruiter> recruiterList;
 }
