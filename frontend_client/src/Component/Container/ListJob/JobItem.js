@@ -9,7 +9,7 @@ class JobItem extends Component {
     return (
       <Fragment>
         {jobs && jobs.map(item =>(
-        <div className="col-lg-6">
+        <div className="col-lg-6 max-height">
           <div className="d-block d-md-flex listing" style={{marginBottom:"5px"}}>
             <div className="img d-block"> <img className="img-job" src={item.recruiter.logo || ""} />  </div>
             <div className="lh-content">

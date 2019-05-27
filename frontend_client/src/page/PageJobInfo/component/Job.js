@@ -6,7 +6,7 @@ class Job extends Component {
     return (
       <div className="col-lg-12 block" >
         <div className="d-block d-md-flex listing" style={{height:"150px"}}>
-          <a href="#" className="img d-block" style={{ backgroundImage: 'url("images/img_1.jpg")'}}/>
+          <a href="#" className="img d-block img-max" style={{ backgroundImage: 'url("images/img_1.jpg")'}}/>
           <div className="lh-content">
           <Link to="/info-job"><h6> NodeJS</h6></Link>
           <a href="/" className="bookmark"><span class="icon-heart"></span></a>

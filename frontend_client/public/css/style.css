@@ -1632,7 +1632,7 @@ h1, h2, h3, h4, h5,
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     /* border-top-left-radius: 7px;
     border-bottom-left-radius: 7px; */
     -webkit-box-flex: 0;
@@ -1655,13 +1655,13 @@ h1, h2, h3, h4, h5,
     color: #000;
     font-weight: bold; }
   .listing .lh-content {
-    padding: 10px 20px;
+    padding: 10px;
     margin: auto;
     position: relative; 
     width: 100%; }
     .listing .lh-content .bookmark {
       position: absolute;
-      right: 20px;
+      right: 10px;
       top: 20px;
       width: 30px;
       height: 30px;
@@ -1946,19 +1946,22 @@ figure figcaption {
   border: 1px solid #fff;
 }
 .img-job{
-  max-width: 120px;
+  max-width: 150px;
   max-height: 95px;
   height: 95px;
+  width: 150px;
   float: none!important;
-  margin: auto;
+  margin: 13px auto;
   border: 0!important;
   vertical-align: middle;
   display: block;
 }
 .img-recruiter{
-  max-height: 154px;
-  height: 154px;
-  width: auto;
+  max-height: 150px;
+  height: 150px;
+  width: 230px;
+  max-width: 230px;
+  padding: 5px 0px;
   margin: auto;
   display: block;
 }
@@ -1966,6 +1969,10 @@ figure figcaption {
   max-height: 120px;
   display: block;
   margin: auto;
+  height: 120px;
+  max-width: 190px;
+  width: 190px;
+  padding: 3px 0px
 }
 .item-fil{
   height: 35px;
@@ -2146,4 +2153,20 @@ text-align: left;
   border: 1px solid #e0e0e0;
   border-radius: 2px;
   text-align: center;
+}
+.max-height{
+  max-height: 125px;
+  height: 125px;
+}
+.address{
+  margin:0px
+}
+.w-254{
+  height: 254px;
+}
+.img-max{
+  width: 197px;
+  height: 150px;
+  max-height: 150px;
+  max-width: 197px;
 }
