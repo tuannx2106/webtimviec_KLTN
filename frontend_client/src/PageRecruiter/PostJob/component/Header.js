@@ -7,7 +7,7 @@ class Header extends Component {
         <div className="col-md-10" data-aos="fade-up" data-aos-delay={400}>
           <div className="row justify-content-center mt-5">
             <div className="col-md-8 text-center">
-              <h1>Thông tin công việc</h1>
+              <h1>Đăng tuyển công việc</h1>
             </div>
           </div>
         </div>
@@ -15,5 +15,4 @@ class Header extends Component {
     );
   }
 }
-
 export default Header;

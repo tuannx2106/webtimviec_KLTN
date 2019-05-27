@@ -10,8 +10,6 @@ import GridItem from "../../../Common/components/Grid/GridItem";
 import { FormLabel, FormControl } from "@material-ui/core";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 
 class FormDialog extends React.Component {
   render() {
@@ -21,16 +19,9 @@ class FormDialog extends React.Component {
       onChangeValue,
       row,
       type,
-      cities,
-      city_id,
       onCreateRecruiter,
       onUpdateRecruiter
     } = this.props;
-
-    const temp = cities ? cities.find(el => el.id === city_id) : {};
-    const city = {
-      value: (temp || "").id
-    };
 
     const title = type === "edit" ? "Sửa thông tin" : "Thêm mới";
     const onSave =
@@ -43,7 +34,7 @@ class FormDialog extends React.Component {
           </DialogTitle>
           <DialogContent>
             <GridContainer justify="center" noMargin>
-              <GridItem xs={11} md={5}>
+              <GridItem xs={11} md={10}>
                 <Input
                   labelText="Tên nhà tuyển dụng"
                   formControlProps={{
@@ -78,30 +69,6 @@ class FormDialog extends React.Component {
                     defaultValue: row.address || ""
                   }}
                 />
-              </GridItem>
-              <GridItem xs={11} md={5} style={{ marginTop: "26px" }}>
-                <FormControl style={{ width: "100%", }}>
-                  <InputLabel htmlFor="age-native-simple">Thành phố</InputLabel>
-                  <Select
-                    native
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    value={city}
-                    // onChange={handleChange('age')}
-                    inputProps={{
-                      name: 'city_id',
-                      onChange: e => onChangeValue("city_id", e.target.value),
-                      // id: 'age-native-simple',
-                    }}
-                  >
-                    {cities && cities.map(item => (
-                      <option  key={item.id} value={item.id}>
-                        {item.name}
-                      </option >
-                    ))}
-                  </Select>
-                </FormControl>
               </GridItem>
               <GridItem xs={11} md={5}>
                 <Input

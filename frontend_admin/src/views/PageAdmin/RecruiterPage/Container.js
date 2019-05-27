@@ -21,7 +21,6 @@ const getInitialState = () => {
     row: {},
     isLoading: true,
     recruiters: [],
-    cities: [],
     form: {
       id: null,
       companyName: "",
@@ -29,7 +28,6 @@ const getInitialState = () => {
       description: "",
       address: "",
       logo: "",
-      city_id: "",
       phone: ""
     }
   };
@@ -51,12 +49,6 @@ class RecruiterPageContainer extends React.Component {
       .get("/admin/api/recruiter/list")
       .then(response => {
         this.setState({ recruiters: response.data, isLoading: false });
-      })
-      .catch(err => console.log(err));
-    axios
-      .get("/admin/api/city/list")
-      .then(response => {
-        this.setState({ cities: response.data, isLoading: false });
       })
       .catch(err => console.log(err));
   };
@@ -143,7 +135,7 @@ class RecruiterPageContainer extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { recruiters, isOpenModal, row, type, city_id, cities } = this.state;
+    const { recruiters, isOpenModal, row, type } = this.state;
 
     const columns = [
       {
@@ -204,8 +196,6 @@ class RecruiterPageContainer extends React.Component {
         />
         {isOpenModal && (
           <Modal
-            city_id={city_id}
-            cities={cities}
             isOpenModal={isOpenModal}
             handleClose={this.handleClose}
             onChangeValue={this.onChangeValue}
