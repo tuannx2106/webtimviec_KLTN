@@ -39,6 +39,7 @@ class AllJob extends Component {
       .then(response => response.json())
       .then(data => this.setState({ professions: data, isLoading: false }));
   };
+  
   render() {
     const { cities, jobs, professions } = this.state;
     return (

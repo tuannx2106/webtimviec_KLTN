@@ -29,9 +29,9 @@ const routes = [
         main: () => <PageRecruiter />
     },
     {
-        path: '/info-job',
+        path: '/job/:id',
         exact: false,
-        main: () => <JobInfo />
+        main: JobInfo
     },
     {
         path: '/info',
@@ -72,7 +72,7 @@ const routes = [
         path: '/trang-nha-tuyen-dung',
         exact: false,
         main: () => < PageHomeRecruiter/>
-    },
+    }
 ];
 
 export default routes;

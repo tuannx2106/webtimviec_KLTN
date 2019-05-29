@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 class Job extends Component {
   render() {
     const { jobs } = this.props;
+
     return (
       <Fragment>
         {jobs && jobs.map(item => (
@@ -11,7 +12,7 @@ class Job extends Component {
             <div className="d-block d-md-flex listing border list">
               <div className="img d-block"> <img className="img-alljob" src={item.recruiter.logo} /> </div>
               <div className="lh-content">
-                <Link to="/info-job"><h6> {item.title}</h6></Link>
+                <Link to={"/job/" + item.id}><h6> {item.title}</h6></Link>
                 <a href="/" className="bookmark"><span class="icon-heart"></span></a>
                 <h3>Nhà tuyển dụng:<Link to="#"> {item.recruiter.companyName}</Link></h3>
                 <address className="addre">Địa chỉ: {item.city.name}</address>
