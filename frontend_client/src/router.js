@@ -30,9 +30,9 @@ const routes = [
         main: () => <PageRecruiter />
     },
     {
-        path: '/info-job',
+        path: '/job/:id',
         exact: false,
-        main: () => <JobInfo />
+        main: JobInfo
     },
     {
         path: '/info',
