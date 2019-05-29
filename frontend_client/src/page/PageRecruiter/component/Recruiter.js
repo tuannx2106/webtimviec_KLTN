@@ -8,7 +8,7 @@ class Recruiter extends Component {
       <Fragment>
         {recruiters.map(item => (
           <div className="col-lg-3 pb-3">
-            <div className="d-block d-md-flex listing vertical">
+            <div className="d-block d-md-flex listing vertical w-254">
               <div className="img d-block"> <img className="img-recruiter" src = {item.logo}/>  </div>
               <div className="lh-content">
                 {/* <Link to="/info"> <span className="category">{item.companyName}</span></Link> */}

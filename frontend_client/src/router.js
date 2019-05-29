@@ -11,6 +11,7 @@ import PageRegisterREcruiter from "./PageRecruiter/PageRegister/index";
 import ProfileUser from './page/PageProfileUser/index';
 import ProfileRecruiter from "./page/PageProfileRecruiter/index";
 import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
+import PostJob from "./PageRecruiter/PostJob/index";
 
 const routes = [
     {
@@ -72,7 +73,12 @@ const routes = [
         path: '/trang-nha-tuyen-dung',
         exact: false,
         main: () => < PageHomeRecruiter/>
-    }
+    },
+    {
+        path: '/dang-cong-viec',
+        exact: false,
+        main: () => < PostJob/>
+    },
 ];
 
 export default routes;

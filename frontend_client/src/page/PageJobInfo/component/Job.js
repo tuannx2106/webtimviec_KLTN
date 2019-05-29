@@ -7,8 +7,8 @@ class Job extends Component {
 
     return (
       <div className="col-lg-12 block" >
-        <div className="d-block d-md-flex listing" style={{ height: "150px" }}>
-          <a href="#" className="img d-block" style={{ backgroundImage: `url("${job.recruiter.logo}")` }} />
+        <div className="d-block d-md-flex listing" style={{height:"150px"}}>
+          <a href="#" className="img d-block img-max" style={{ backgroundImage: `url("${job.recruiter.logo}")`}}/>
           <div className="lh-content">
             <h6>{job.title}</h6>
             <a href="/" className="bookmark"><span class="icon-heart"></span></a>

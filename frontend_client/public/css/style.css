@@ -1632,7 +1632,7 @@ h1, h2, h3, h4, h5,
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     /* border-top-left-radius: 7px;
     border-bottom-left-radius: 7px; */
     -webkit-box-flex: 0;
@@ -1655,13 +1655,13 @@ h1, h2, h3, h4, h5,
     color: #000;
     font-weight: bold; }
   .listing .lh-content {
-    padding: 10px 20px;
+    padding: 10px;
     margin: auto;
     position: relative; 
     width: 100%; }
     .listing .lh-content .bookmark {
       position: absolute;
-      right: 20px;
+      right: 10px;
       top: 20px;
       width: 30px;
       height: 30px;
@@ -1946,19 +1946,22 @@ figure figcaption {
   border: 1px solid #fff;
 }
 .img-job{
-  max-width: 120px;
+  max-width: 150px;
   max-height: 95px;
   height: 95px;
+  width: 150px;
   float: none!important;
-  margin: auto;
+  margin: 13px auto;
   border: 0!important;
   vertical-align: middle;
   display: block;
 }
 .img-recruiter{
-  max-height: 154px;
-  height: 154px;
-  width: auto;
+  max-height: 150px;
+  height: 150px;
+  width: 230px;
+  max-width: 230px;
+  padding: 5px 0px;
   margin: auto;
   display: block;
 }
@@ -1966,6 +1969,10 @@ figure figcaption {
   max-height: 120px;
   display: block;
   margin: auto;
+  height: 120px;
+  max-width: 190px;
+  width: 190px;
+  padding: 3px 0px
 }
 .item-fil{
   height: 35px;
@@ -2006,4 +2013,160 @@ padding: 10px 5px;
   position: absolute;
   bottom: 10px;
   right: 20px;
+}
+.product-list{
+  display: flex;
+  justify-content: space-around;
+  height: 200px;
+  width:85%;
+  margin: 0 auto 0;
+}
+.product-list-box{
+  border-radius: 30px;
+  box-shadow: 0 8px 20px 0 rgba(0,0,0,.2);
+  background-color: #fff;
+  border: solid 1px #dae0e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  height: 270px;
+  padding: 0 11px;
+  border: 1px solid #eee;
+    margin-top: -138px;
+    margin-bottom: 0;
+}
+.product-list__numberEMRank{
+  max-width: 190px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 35px;
+}
+.product-list__textNew{
+  font-family: Roboto;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    text-align: center;
+    color: #4a4a4a;
+    text-transform: uppercase;
+    margin-top: 22px;
+    margin-bottom: 5px;
+}
+.product-list__benefit{
+  margin-bottom: 20px;
+    text-align: center;
+}
+.list-pro{
+  padding: 60px 0;
+}
+.relative{
+  position: relative;
+}
+.fontsize40{
+  font-size: 40px;
+  color: #363636;
+  font-weight: 300;
+  text-align: left
+}
+.cycle-green{
+  width: 50px;
+  height: 50px;
+  background-color: #22924c;
+  color: #ffffff;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  left: 0;
+  line-height: 50px;
+  margin-right: 20px;
+  margin-top: -12px;
+  position: absolute;
+  left: 0;
+}
+.txt-in-70{
+  text-indent: 70px;
+}
+.list-char-pr{
+  margin: 45px 0px 10px;
+  padding: 0px;
+}
+.list-char-pr li{
+position: relative;
+list-style: none;
+font-size: 16px;
+color: #363636;
+margin-bottom: 50px;
+padding-left: 70px;
+min-height: 40px;
+text-align: left;
+}
+.pst-img-big{
+  position: absolute;
+  top: 66px;
+  right: -105px;
+}
+.mar-img{
+  margin-top: 25px;
+  margin-left: -50px;
+}
+.btn.btn-orange-48{
+  height: 48px;
+  line-height: 48px;
+  background-color: #f57c00;
+  padding: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 3px;
+  width: 220px!important;
+}
+.font300{
+  color: #363636 !important;
+  text-align: center;
+  font-weight: 300;
+  font-size: 24px
+}
+.font600{
+  font-weight: 600
+}
+.row-10{
+  margin: 30px -10px 50px -10px;
+}
+.icon-dv-1{
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  width: auto
+}
+.box-dv{
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  text-align: center;
+}
+.max-height{
+  max-height: 125px;
+  height: 125px;
+}
+.address{
+  margin:0px
+}
+.w-254{
+  height: 254px;
+}
+.img-max{
+  width: 197px;
+  height: 150px;
+  max-height: 150px;
+  max-width: 197px;
 }
