@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom"
 
 class Header extends Component {
   constructor(props) {
@@ -56,7 +57,12 @@ class Header extends Component {
                 </div>
               </div>
               <div className="col-lg-12 col-xl-2 ml-auto">
-              <a href="#" className="btn btn-primary rounded py-2 px-4 text-white">Tìm kiếm</a>
+                <Link to={{
+                  pathname: '/tatcacongviec',
+                  state: {
+                    fromNotifications: true
+                  }
+                }} className="btn btn-primary rounded py-2 px-4 text-white">Tìm kiếm </Link>
               </div>
             </div>
           </form>

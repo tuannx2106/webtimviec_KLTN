@@ -22,25 +22,18 @@ class AllJob extends Component {
     this.state = getInitialState();
   }
 
-  componentDidMount() {
-    this.getList();
+  async componentDidMount() {
+    let jobList = await fetch('/admin/api/job/list').then(response => response.json())
+    let cityList = await fetch('/admin/api/city/list').then(response => response.json())
+    let profList = await fetch('admin/api/profession/list').then(response => response.json())
+
+    this.setState({
+      jobs: jobList,
+      professions: profList,
+      cities: cityList
+    })
   }
 
-  getList = () => {
-    fetch("/admin/api/city/list")
-      .then(response => response.json())
-      .then(data => this.setState({ cities: data, isLoading: false }));
-
-    fetch("/admin/api/job/list")
-      .then(response => response.json())
-      .then(data => this.setState({ jobs: data, isLoading: false }));
-
-    fetch("/admin/api/profession/list")
-      .then(response => response.json())
-      .then(data => this.setState({ professions: data, isLoading: false }));
-  };
-
-  
   render() {
     const { cities, jobs, professions } = this.state;
     return (
@@ -78,9 +71,9 @@ class AllJob extends Component {
               </div>
               <div className="col-9 mt-5 text-center">
                 <div className="custom-pagination">
-               
+
                   <button onClick={this.loadMore} type="button" className="btn btn-primary">Xem thêm</button>
-               
+
                 </div>
               </div>
             </div>
