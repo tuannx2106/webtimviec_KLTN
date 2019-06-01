@@ -47,7 +47,7 @@ class RecruiterInfo extends Component {
             <Infomation recruiter={recruiter} />
             <h4 className="text-center">Giới thiệu về công ty</h4>
             <DescriptionRecruiter recruiter={recruiter}/>
-            <h4 className="text-center">Việc làm CÔNG TY TNHH TRANG THIẾT BỊ THÁI DƯƠNG tuyển dụng</h4>
+            <h4 className="text-center">Việc làm {recruiter.companyName} tuyển dụng</h4>
             <JobOfRecruiter />
           </div>
         </div>

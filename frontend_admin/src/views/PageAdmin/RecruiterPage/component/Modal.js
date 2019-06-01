@@ -7,6 +7,8 @@ import Button from "../../../Common/components/CustomButtons/Button";
 import Input from "../../../Common/components/CustomInput/CustomInput";
 import GridContainer from "../../../Common/components/Grid/GridContainer";
 import GridItem from "../../../Common/components/Grid/GridItem";
+import InputLabel from '@material-ui/core/InputLabel';
+import Autocomplete from "../../../Common/components/Autocomple/Autocomplete";
 import { FormLabel, FormControl } from "@material-ui/core";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -17,11 +19,21 @@ class FormDialog extends React.Component {
       isOpenModal,
       handleClose,
       onChangeValue,
+      handleChangeSelect,
       row,
+      city,
+      citys,
       type,
       onCreateRecruiter,
       onUpdateRecruiter
     } = this.props;
+
+    const temp = citys ? citys.find(el => el.id === city) : {};
+    const cities = {
+      label: (temp || "").name,
+      value: (temp || "").id
+    };
+
 
     const title = type === "edit" ? "Sửa thông tin" : "Thêm mới";
     const onSave =
@@ -34,7 +46,7 @@ class FormDialog extends React.Component {
           </DialogTitle>
           <DialogContent>
             <GridContainer justify="center" noMargin>
-              <GridItem xs={11} md={10}>
+              <GridItem xs={11} md={5}>
                 <Input
                   labelText="Tên nhà tuyển dụng"
                   formControlProps={{
@@ -68,6 +80,15 @@ class FormDialog extends React.Component {
                     onChange: e => onChangeValue("address", e.target.value),
                     defaultValue: row.address || ""
                   }}
+                />
+              </GridItem>
+              <GridItem xs={11} md={5} style={{marginTop:"9px"}}>
+                <InputLabel >Thành phố</InputLabel>
+                <Autocomplete
+                  data={citys ? citys.map(el => ({ label: el.name, value: el.id })) : []}
+                  defaultValue={cities}
+                  type="city"
+                  onChange={handleChangeSelect}
                 />
               </GridItem>
               <GridItem xs={11} md={5}>
@@ -149,17 +170,17 @@ class FormDialog extends React.Component {
     );
   }
 }
-/* 
+/*
  * Quill modules to attach to editor
  * See https://quilljs.com/docs/modules/ for complete options
  */
 FormDialog.modules = {
   toolbar: [
-    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-    [{size: []}],
+    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+    [{ size: [] }],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, 
-     {'indent': '-1'}, {'indent': '+1'}],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' },
+    { 'indent': '-1' }, { 'indent': '+1' }],
     ['link', 'image', 'video'],
     ['clean']
   ],

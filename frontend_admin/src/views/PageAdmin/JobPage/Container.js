@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { Fragment } from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -9,7 +8,6 @@ import styles from "./styles";
 import JobPage from "./Component";
 import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
-import axios from "axios";
 
 const { getTxt } = Helper;
 
@@ -18,13 +16,25 @@ const getInitialState = () => {
     jobs: [],
     isLoading: true,
     row: {},
-    type: "",
     isOpenModal: false,
     citys: [],
-    status: [],
-    profession: [],
-    recruiter: [],
-    jobRequireProfessionJobList: []
+    statuss: [],
+    professions: [],
+    recruiters: [],
+    jobRequireProfessionJobList: [],
+    status: "",
+    recruiter: "",
+    city: "",
+    form: {
+      title: "",
+      companyName: "",
+      expired:"",
+      experience: "",
+      date: "",
+      status: "",
+      recruiter: "",
+      city: "",
+    }
   };
   return initialState;
 };
@@ -53,20 +63,20 @@ class JobPageContainer extends React.Component {
         {
           Header: "Nhà tuyển dụng",
           id: "companyName",
-          // accessor: row => getTxt(row.recruiter.companyName)
-          accessor: "recruiter.companyName"
+          accessor: row => getTxt(row.recruiter.companyName)
+          // accessor: "recruiter.companyName"
         },
         {
           Header: "Thành phố",
           id: "name",
-          // accessor: row => getTxt(row.city.name)
-          accessor: "city.name"
+          accessor: row => getTxt(row.city.name)
+          // accessor: "city.name"
         },
         {
           Header: "Trạng thái",
           id: "statusName",
-          // accessor: row => getTxt(row.status.statusName)
-          accessor: "status.statusName"
+          accessor: row => getTxt(row.status.statusName)
+          // accessor: "status.statusName"
         },
         {
           Header: "Chức năng",
@@ -100,44 +110,29 @@ class JobPageContainer extends React.Component {
   }
 
   getListJob = () => {
-    axios
-      .get("/admin/api/job/list")
-      .then(response => {
-        this.setState({ jobs: response.data, isLoading: false });
-      })
-      .catch(err => console.log(err));
+    fetch(`/admin/api/job/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ jobs: data, isLoading: false }));
 
-    axios
-      .get("/admin/api/city/list")
-      .then(response => {
-        this.setState({ citys: response.data, isLoading: false });
-      })
-      .catch(err => console.log(err));
+    fetch(`/admin/api/city/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ citys: data }));
 
-    axios
-      .get("/admin/api/status/list")
-      .then(response => {
-        this.setState({ status: response.data, isLoading: false });
-      })
-      .catch(err => console.log(err));
+    fetch(`/admin/api/status/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ statuss: data }));
 
-    axios
-      .get("/admin/api/recruiter/list")
-      .then(response => {
-        this.setState({ recruiter: response.data, isLoading: false });
-      })
-      .catch(err => console.log(err));
+    fetch(`/admin/api/recruiter/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ recruiters: data }));
 
-    axios
-      .get("/admin/api/profession/list")
-      .then(response => {
-        this.setState({ profession: response.data, isLoading: false });
-      })
-      .catch(err => console.log(err));
+    fetch(`/admin/api/profession/list`)
+      .then(response => response.json())
+      .then(data => this.setState({ professions: data }));
   };
 
   handleAdd = () => {
-    this.setState({ isOpenModal: true, type:"" });
+    this.setState({ isOpenModal: true });
   };
 
   handleClose = () => {
@@ -146,76 +141,83 @@ class JobPageContainer extends React.Component {
 
   handleDelete = id => {
     // console.log(id)
-    axios
-      .delete(`/admin/api/job/${id}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      })
-      .then(() => {
-        let updatedJob = [...this.state.jobs].filter(i => i.id !== id);
-        this.setState({ jobs: updatedJob });
-      })
-      .catch(err => console.log(err));
+    fetch(`/admin/api/job/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    }).then(() => {
+      let updatedJob = [...this.state.jobs].filter(i => i.id !== id);
+      this.setState({ jobs: updatedJob });
+    });
   };
 
-  // onChangeValue = (key, value) => {
-  //   // eslint-disable-next-line react/no-direct-mutation-state
-  //   let { form } = this.state;
-  //   form[key] = value;
-  //   this.setState({ form });
-  //   // eslint-disable-next-line no-console
-  //   console.log(value);
-  // };
+  onChangeValue = (key, value) => {
+    // eslint-disable-next-line react/no-direct-mutation-state
+    let { form } = this.state;
+    form[key] = value;
+    this.setState({ form });
+    // eslint-disable-next-line no-console
+    console.log(value);
+  };
 
-  // onCreateJob = async () => {
-  //   const { form } = this.state;
-  //   fetch(`/admin/api/job`, {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(form)
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       if (data) {
-  //         this.getListJob();
-  //       }
-  //     });
-  //   this.setState({ isOpenModal: false });
-  // };
+  handleChangeSelect = (key, value) => {
+    let {form} = this.state;
+    form[key] = {
+      id: value
+    };
+    this.setState({ form: form });
+    console.log(value);
+  };
+
+  onCreateJob = async () => {
+    const { form } = this.state;
+    fetch(`/admin/api/job`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          this.getListJob();
+        }
+      });
+    this.setState({ isOpenModal: false });
+  };
 
   handleUpdate = row => {
     this.setState({
       isOpenModal: true,
       type: "edit",
-      row
-      // form: row
+      row,
+      form: row
     });
   };
 
-  // onUpdateJob = async id => {
-  //   let { form } = this.state;
-  //   form = { ...form, id };
-  //   await fetch(`/admin/api/job/`, {
-  //     method: "PUT",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(form)
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       if (data) {
-  //         this.getListJob();
-  //       }
-  //     });
-  //   this.setState({ isOpenModal: false });
-  // };
+  onUpdateJob = async id => {
+    let { form } = this.state;
+    form = { ...form, id };
+    await fetch(`/admin/api/job/`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          this.getListJob();
+        }
+      });
+    this.setState({ isOpenModal: false });
+  };
 
   render() {
     // eslint-disable-next-line react/prop-types
@@ -226,10 +228,13 @@ class JobPageContainer extends React.Component {
       isOpenModal,
       row,
       citys,
+      recruiters,
+      professions,
+      statuss,
+      type,
+      city,
       recruiter,
-      profession,
       status,
-      type
     } = this.state;
 
     return (
@@ -241,18 +246,21 @@ class JobPageContainer extends React.Component {
           handleAdd={this.handleAdd}
         />
         <Modal
-          getListJob={this.getListJob}
           isOpenModal={isOpenModal}
           handleClose={this.handleClose}
           row={row}
           type={type}
-          citys={citys}
-          profession={profession}
           recruiter={recruiter}
+          city={city}
           status={status}
-          // onChangeValue={this.onChangeValue}
-          // onCreateJob={this.onCreateJob}
-          // onUpdateJob={this.onUpdateJob}
+          citys={citys}
+          professions={professions}
+          recruiters={recruiters}
+          statuss={statuss}
+          onChangeValue={this.onChangeValue}
+          handleChangeSelect={this.handleChangeSelect}
+          onCreateJob={this.onCreateJob}
+          onUpdateJob={this.onUpdateJob}
         />
       </Fragment>
     );

@@ -11,7 +11,7 @@ function Footer({ ...props }) {
   const { classes } = props;
   return (
     <footer className={classes.footer}>
-      <div className={classes.container}>
+      <div className={classes.container} style={{textAlign:"center"}}>
         {/* <div className={classes.left}> */}
         {/* <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
@@ -36,8 +36,8 @@ function Footer({ ...props }) {
             </ListItem>
           </List> */}
         {/* </div> */}
-        <p className={classes.center}>
-          &copy; {1900 + new Date().getYear()} Webtimviec
+          <p className={classes.center}>
+            &copy; {1900 + new Date().getYear()} Webtimviec
         </p>
       </div>
     </footer>
