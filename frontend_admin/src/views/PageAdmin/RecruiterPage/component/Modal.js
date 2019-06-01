@@ -120,10 +120,7 @@ class FormDialog extends React.Component {
                     modules={FormDialog.modules}
                     formats={FormDialog.formats}
                     placeholder={"Viết nội dung vào đây..."}
-                    ref={el => {
-                      this.reactQuill = el;
-                    }}
-                    style={{ height: "200px" }}
+                    style={{ height: 200, marginBottom: 20 }}
                   />
                 </FormControl>
               </GridItem>
@@ -152,34 +149,37 @@ class FormDialog extends React.Component {
     );
   }
 }
-FormDialog.formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image"
-];
-
+/* 
+ * Quill modules to attach to editor
+ * See https://quilljs.com/docs/modules/ for complete options
+ */
 FormDialog.modules = {
   toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-    ["link", "image"],
-    ["clean"]
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+    [{size: []}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, 
+     {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image', 'video'],
+    ['clean']
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false
+    matchVisual: false,
   }
-};
+}
+/* 
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
+FormDialog.formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video'
+]
+
+/* 
+ * PropType validation
+ */
 export default FormDialog;

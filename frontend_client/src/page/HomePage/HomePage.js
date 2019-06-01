@@ -67,15 +67,13 @@ class HomePage extends Component {
             </div>
           </div>
         </div>
-        <div class="site-section bg-light" data-aos="fade">
+        <div class="site-section1 bg-light" data-aos="fade">
           <ListProfession professions={professions} />
         </div>
-        <br></br>
-        <div className="site-section bg-light">
+        <div className="bg-light">
           <ListJob jobs={jobs} />
         </div>
-        <br></br>
-        <div className="site-section bg-light">
+        <div className="site-section1 bg-light">
           <ListRecruiter recruiters={recruiters} />
         </div>
         <div className="newsletter bg-primary py-5">

@@ -48,7 +48,7 @@ class JobInfo extends Component {
             <Header />
           </div>
         </div>
-        <div className="site-section mt-5">
+        <div className="site-section" style={{marginTop:"70px"}}>
           <div className="container">
             <Infomation job ={job}/>
           </div>

@@ -17,17 +17,17 @@ const routes = [
     {
         path: '/',
         exact: true,
-        main: () => <HomePage />
+        main: HomePage
     },
     {
         path: '/tatcacongviec',
         exact: false,
-        main: () => <AllJob />
+        main: AllJob
     },
     {
         path: '/nhatuyendung',
         exact: false,
-        main: () => <PageRecruiter />
+        main: PageRecruiter
     },
     {
         path: '/job/:id',
@@ -35,49 +35,49 @@ const routes = [
         main: JobInfo
     },
     {
-        path: '/info',
+        path: '/recruiter/:id',
         exact: false,
-        main: () => <RecruiterInfo />
+        main: RecruiterInfo
     },
     {
         path: '/login',
         exact: false,
-        main: () => <PageLogin />
+        main: PageLogin
     },
     {
         path: '/register',
         exact: false,
-        main: () => <PageRegister />
+        main: PageRegister
     },
     {
         path: '/login-recruiter',
         exact: false,
-        main: () => <PageLoginRecruiter />
+        main: PageLoginRecruiter
     },
     {
         path: '/register-recruiter',
         exact: false,
-        main: () => <PageRegisterREcruiter />
+        main: PageRegisterREcruiter
     },
     {
         path: '/profile-user',
         exact: false,
-        main: () => <ProfileUser />
+        main: ProfileUser
     },
     {
         path: '/profile-recruiter',
         exact: false,
-        main: () => <ProfileRecruiter />
+        main: ProfileRecruiter
     },
     {
         path: '/trang-nha-tuyen-dung',
         exact: false,
-        main: () => < PageHomeRecruiter/>
+        main:  PageHomeRecruiter
     },
     {
         path: '/dang-cong-viec',
         exact: false,
-        main: () => < PostJob/>
+        main:  PostJob
     },
 ];
 

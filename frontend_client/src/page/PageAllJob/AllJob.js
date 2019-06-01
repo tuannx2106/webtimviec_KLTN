@@ -39,6 +39,7 @@ class AllJob extends Component {
       .then(response => response.json())
       .then(data => this.setState({ professions: data, isLoading: false }));
   };
+
   
   render() {
     const { cities, jobs, professions } = this.state;
@@ -77,11 +78,9 @@ class AllJob extends Component {
               </div>
               <div className="col-9 mt-5 text-center">
                 <div className="custom-pagination">
-                  <span>1</span>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <span className="more-page">...</span>
-                  <a href="#">10</a>
+               
+                  <button onClick={this.loadMore} type="button" className="btn btn-primary">Xem thêm</button>
+               
                 </div>
               </div>
             </div>

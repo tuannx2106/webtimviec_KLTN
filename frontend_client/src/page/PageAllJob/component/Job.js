@@ -11,7 +11,7 @@ class Job extends Component {
           <div className="col-lg-12 ">
             <div className="d-block d-md-flex listing border list">
               <div className="img d-block"> <img className="img-alljob" src={item.recruiter.logo} /> </div>
-              <div className="lh-content">
+              <div className="lh-content txt-lhcontent">
                 <Link to={"/job/" + item.id}><h6> {item.title}</h6></Link>
                 <a href="/" className="bookmark"><span class="icon-heart"></span></a>
                 <h3>Nhà tuyển dụng:<Link to="#"> {item.recruiter.companyName}</Link></h3>

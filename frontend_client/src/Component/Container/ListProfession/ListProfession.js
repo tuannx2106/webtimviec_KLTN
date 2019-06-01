@@ -16,9 +16,6 @@ class ListProfession extends Component {
             <ProfessionItem professions={professions}/>
           </div>
         </div>
-        <div className="col-12 text-center mt-4">
-            <a href="#" className="btn btn-primary rounded py-2 px-4 text-white">Xem thêm...</a>
-          </div>
       </div>
     );
   }

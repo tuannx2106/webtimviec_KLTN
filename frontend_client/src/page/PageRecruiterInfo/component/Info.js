@@ -1,39 +1,52 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 class Infomation extends Component {
   render() {
-    const { recruiters } = this.props;
+    const { recruiter } = this.props;
     return (
-      <div className="row">
-
-        <div className="col-lg-8">
-          {recruiters.map(item => (
-            <Fragment>
-              {/* <figure>
-                <img src="images/img_2.jpg" alt="Image" className="img-fluid" />
-                <figcaption>Hình ảnh công ty</figcaption>
-              </figure>
-              <h5>Thông tin</h5>
-              <p>Lorem ipsum dolor sit amet, consectuta quasi quis, fugiat delectus pariatur, eos quae.</p> */}
-              {item.description}
-            </Fragment>
-          ))}
+      <div className="info-employer col-xs-12">
+        <div className="col-xs-12 col-sm-3 div-logo-employer">
+          <div className="div-logo-12">
+            <div className="logo-employer">
+              <img src={recruiter.logo} alt={recruiter.companyName} />
+            </div>
+          </div>
         </div>
-
-       {/* <div className="col-lg-3 ml-auto">
-      //   <div className="mb-5">
-      //     <h3 className="h5 text-black mb-3">Filters</h3>
-      //     <form action="#" method="post">
-      //       <div className="form-group">
-      //         <input type="text" placeholder="What are you looking for?" className="form-control" />
-      //       </div>
-      //     </form>
-      //   </div>
-      // </div> */}
-
-
+        <div className="col-sm-9 info-company">
+          <h2 className="company-name">{recruiter.companyName}</h2>
+          <table className="info_employer" style={{ width: 'auto', marginBottom:"15px" }}>
+            <tbody>
+              <tr className="marginBottom20">
+                <td className="icon-detail-company">
+                  <span><img className="icon2" src={"/images/icon2.png"}></img></span>
+                </td>
+                <td className="detail-info-company">
+                  <b>Địa chỉ:&nbsp;</b>
+                  <span>{recruiter.address}</span>
+                </td>
+              </tr>
+              <tr className="marginBottom20">
+                <td className="icon-detail-company">
+                <span><img className="icon2" src={"/images/icon3.png"}></img></span>
+                </td>
+                <td className="detail-info-company">
+                  <b>Email liên hệ:&nbsp;</b>
+                  <span>{recruiter.email}</span>
+                </td>
+              </tr>
+              <tr className="marginBottom20">
+                <td className="icon-detail-company">
+                <span><img className="icon2" src={"/images/icon4.png"}></img></span>
+                </td>
+                <td className="detail-info-company">
+                  <b>Số điện thoại liên hệ:&nbsp;</b>
+                  <span>{recruiter.phone}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-
     );
   }
 }
