@@ -23,19 +23,42 @@ class AllJob extends Component {
   }
 
   async componentDidMount() {
+    const { selectedCity, selectedProf, searchInput } = this.props.location.state ? this.props.location.state : { selectedCity: 0 }
+
     let jobList = await fetch('/admin/api/job/list').then(response => response.json())
     let cityList = await fetch('/admin/api/city/list').then(response => response.json())
     let profList = await fetch('admin/api/profession/list').then(response => response.json())
+    let jobsResult = this.jobsSearchResult(jobList, searchInput, parseInt(selectedCity), parseInt(selectedProf))
 
-    this.setState({
-      jobs: jobList,
-      professions: profList,
-      cities: cityList
+    if (jobsResult.length !== 0) {
+      this.setState({
+        jobs: jobsResult,
+        professions: profList,
+        cities: cityList
+      })
+    } else {
+      this.setState({
+        jobs: jobList,
+        professions: profList,
+        cities: cityList
+      })
+    }
+
+  }
+
+  jobsSearchResult = (jobList, inputSearch, cityId, professionId) => {
+    return jobList.filter(job => {
+      if (job.city.id && job.jobRequireProfessionJobList[0])
+        return job.city.id === cityId
+          && job.jobRequireProfessionJobList[0].professionJob.id === professionId
+          && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
+      else return job.city.id !== -1
     })
   }
 
   render() {
     const { cities, jobs, professions } = this.state;
+
     return (
       <div className="site-wrap">
         <div className="site-mobile-menu">
@@ -59,7 +82,7 @@ class AllJob extends Component {
           <div className="container">
             <div className="row">
               <div className="title-list-job">
-                <h5 style={{lineHeight:"1", margin:"0",fontFamily: "Roboto, Verdana", fontSize:"17px"}}>CÔNG VIỆC TÌM THẤY</h5>
+                <h5 style={{ lineHeight: "1", margin: "0", fontFamily: "Roboto, Verdana", fontSize: "17px" }}>CÔNG VIỆC TÌM THẤY</h5>
               </div>
               <div className="col-lg-9">
                 <div className="row scroll">

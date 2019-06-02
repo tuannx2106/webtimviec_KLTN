@@ -37,16 +37,6 @@ class HomePage extends Component {
     })
   }
 
-  jobsSearchResult = (jobList, inputSearch, cityId, professionId) => {
-    return jobList.filter(job => {
-      if (job.city.id && job.jobRequireProfessionJobList[0])
-        return job.city.id === cityId
-          && job.jobRequireProfessionJobList[0].professionJob.id === professionId
-          && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
-      else return job.city.id !== -1
-    })
-  }
-
   render() {
     const { jobs, recruiters, cities, professions } = this.state;
     return (

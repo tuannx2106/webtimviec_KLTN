@@ -4,7 +4,7 @@ body {
   color: #4d4d4d;
   font-weight: 400;
   font-size: 1rem;
-  font-family: 'Open Sans', sans-serif; 
+  font-family: 'Open Sans', sans-serif;
 }
 
 ::-moz-selection {
@@ -1657,7 +1657,7 @@ h1, h2, h3, h4, h5,
   .listing .lh-content {
     padding: 10px;
     margin: auto;
-    position: relative; 
+    position: relative;
     width: 100%; }
     .listing .lh-content .bookmark {
       position: absolute;
@@ -1887,7 +1887,7 @@ figure figcaption {
 .block{
   position: absolute;
   margin: 0px 270px 0px;
-  top:82%;  
+  top:82%;
   width: 60%;
 }
 .fix-size{
@@ -1965,7 +1965,6 @@ figure figcaption {
 .img-recruiter{
   max-height: 150px;
   height: 150px;
-  width: 230px;
   max-width: 230px;
   padding: 5px 0px;
   margin: auto;
@@ -1976,8 +1975,6 @@ figure figcaption {
   display: block;
   margin: auto;
   height: 120px;
-  max-width: 190px;
-  width: 190px;
   padding: 3px 0px
 }
 .item-fil{
