@@ -28,7 +28,7 @@ const getInitialState = () => {
     form: {
       title: "",
       companyName: "",
-      expired:"",
+      expired: "",
       experience: "",
       date: "",
       status: "",
@@ -163,7 +163,7 @@ class JobPageContainer extends React.Component {
   };
 
   handleChangeSelect = (key, value) => {
-    let {form} = this.state;
+    let { form } = this.state;
     form[key] = {
       id: value
     };
@@ -173,7 +173,7 @@ class JobPageContainer extends React.Component {
 
   onCreateJob = async () => {
     const { form } = this.state;
-    fetch(`/admin/api/job`, {
+    await fetch(`/admin/api/job`, {
       method: "POST",
       headers: {
         Accept: "application/json",

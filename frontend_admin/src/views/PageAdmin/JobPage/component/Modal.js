@@ -18,7 +18,6 @@ import "react-quill/dist/quill.snow.css";
 
 const styles = theme => ({
   textField: {
-   
     marginRight: theme.spacing.unit,
     width: "100%"
   }
@@ -123,7 +122,7 @@ const FormDialog = (props: Props) => {
                 }}
               />
             </GridItem>
-            <GridItem xs={11} md={4} style={{marginTop:"45px"}}>
+            <GridItem xs={11} md={4} style={{ marginTop: "45px" }}>
               <InputLabel>Thành phố</InputLabel>
               <Autocomplete
                 data={citys ? citys.map(el => ({ label: el.name, value: el.id })) : []}
@@ -132,7 +131,7 @@ const FormDialog = (props: Props) => {
                 onChange={handleChangeSelect}
               />
             </GridItem>
-            <GridItem xs={11} md={4} style={{marginTop:"45px"}}>
+            <GridItem xs={11} md={4} style={{ marginTop: "45px" }}>
               <InputLabel>Nhà tuyển dụng</InputLabel>
               <Autocomplete
                 data={recruiters ? recruiters.map(el => ({ label: el.companyName, value: el.id })) : []}
@@ -141,7 +140,7 @@ const FormDialog = (props: Props) => {
                 onChange={handleChangeSelect}
               />
             </GridItem>
-            <GridItem xs={11} md={2} style={{marginTop:"45px"}}>
+            <GridItem xs={11} md={2} style={{ marginTop: "45px" }}>
               <InputLabel>Trạng thái</InputLabel>
               <Autocomplete
                 data={statuss ? statuss.map(el => ({ label: el.statusName, value: el.id })) : []}
@@ -150,8 +149,11 @@ const FormDialog = (props: Props) => {
                 onChange={handleChangeSelect}
               />
             </GridItem>
-            <GridItem xs={11} md={10}>
-              <SelectField profession={professions} />
+            <GridItem xs={11} md={10} style={{ margin: "55px 0px 25px 0px" }}>
+              <InputLabel>Ngành nghề</InputLabel>
+              <SelectField 
+              options={professions ? professions.map(el => ({ label: el.professionJobName, value: el.id })) : []}
+              />
             </GridItem>
             <GridItem xs={12} md={10}>
               <FormControl

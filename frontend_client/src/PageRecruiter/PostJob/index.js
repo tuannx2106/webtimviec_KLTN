@@ -44,7 +44,7 @@ class PostJob extends Component {
   };
 
   render() {
-    const { cities, status, curentRecruiter, recruiter } = this.state;
+    const { cities, status, curentRecruiter } = this.state;
     if (!curentRecruiter)
       return <div>Loading ...</div>
     return (
