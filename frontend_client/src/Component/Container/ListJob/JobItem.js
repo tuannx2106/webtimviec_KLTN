@@ -16,7 +16,7 @@ class JobItem extends Component {
                 <div className="info-left">
                   <span className="icon-detail-company"><img className="img-job" src={item.recruiter.logo}></img></span>
                   <div className="text-gray-light">
-                    <Link to="#"><h6 className="txt-title">{item.title}</h6></Link>
+                    <Link to={"/job/" + item.id}><h6 className="txt-title">{item.title}</h6></Link>
                     <address className="addre">{item.recruiter.companyName}</address>
                   </div>
                 </div>
