@@ -74,7 +74,7 @@ class AllJob extends Component {
         </div>
         <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(images/hero_2.jpg)' }} data-aos="fade" data-stellar-background-ratio="0.5">
           <div className="container">
-            <Header cities={cities} />
+            <Header cities={cities} professions={professions} />
           </div>
         </div>
 
