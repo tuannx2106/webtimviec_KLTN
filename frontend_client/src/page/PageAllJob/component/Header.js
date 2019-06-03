@@ -29,8 +29,8 @@ class Header extends Component {
                   </select>
                 </div>
               </div>
-              <div className="col-lg-12 col-xl-3 ml-auto text-right">
-                <input className="btn btn-primary btn-block rounded" defaultValue="Tìm kiếm" />
+              <div className="col-lg-12 col-xl-3 ml-auto text-center">
+                <button className="btn btn-primary btn-block rounded padding8" >Tìm kiếm</button>
               </div>
             </div>
           </form>

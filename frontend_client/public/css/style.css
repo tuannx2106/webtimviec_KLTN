@@ -1975,7 +1975,9 @@ figure figcaption {
   display: block;
   margin: auto;
   height: 120px;
-  padding: 3px 0px
+  padding: 3px 0px;
+  max-width:163px;
+  width: auto;
 }
 .item-fil{
   height: 35px;
@@ -2312,4 +2314,7 @@ text-align: left;
 }
 .color-red{
   color: red;
+}
+.padding8{
+  padding: 8px !important;
 }
