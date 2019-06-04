@@ -67,7 +67,7 @@ class Pagination extends Component {
         </div>
         <div className="col-lg-4 cbRightHome">
           <div className="block20">
-            <img src="https://ads.careerbuilder.vn/www/images/3e6a65ffca2c78881bf9d11db9a5c535.jpg"></img>
+            <img src="images/adver-side-2.png"></img>
           </div>
         </div>
       </div>
