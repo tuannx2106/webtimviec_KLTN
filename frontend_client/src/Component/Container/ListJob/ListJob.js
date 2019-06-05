@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import JobItem from './JobItem';
-import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
 

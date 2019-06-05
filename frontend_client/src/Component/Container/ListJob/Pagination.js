@@ -67,7 +67,7 @@ class Pagination extends Component {
         </div>
         <div className="col-lg-4 cbRightHome">
           <div className="block20">
-            <img src="images/adver-side-2.png"></img>
+            <img src="images/adver-side-2.png" alt=""></img>
           </div>
         </div>
       </div>

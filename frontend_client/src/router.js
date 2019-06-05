@@ -1,4 +1,3 @@
-import React from 'react';
 import HomePage from "./page/HomePage/HomePage";
 import AllJob from './page/PageAllJob/AllJob';
 import PageRecruiter from "./page/PageRecruiter/PageRecruiter";

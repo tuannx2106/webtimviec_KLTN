@@ -23,7 +23,6 @@ class RecruiterInfo extends Component {
 
   render() {
     const { recruiter } = this.state;
-    console.log(recruiter)
     return (
       <div className="site-wrap">
         <div className="site-mobile-menu">
@@ -47,7 +46,7 @@ class RecruiterInfo extends Component {
             <Infomation recruiter={recruiter} />
             <h4 className="text-center">Giới thiệu về công ty</h4>
             <DescriptionRecruiter recruiter={recruiter}/>
-            <h4 className="text-center">Việc làm {recruiter.companyName} tuyển dụng</h4>
+            <h4 className="text-center">Việc làm {recruiter ? recruiter.companyName:""} tuyển dụng</h4>
             <JobOfRecruiter />
           </div>
         </div>

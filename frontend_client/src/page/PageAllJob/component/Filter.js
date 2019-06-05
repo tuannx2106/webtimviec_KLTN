@@ -8,10 +8,10 @@ class Filter extends Component {
         <div>
           <div className="mb-3 p-2 bord bg-w">
             <h6 className=" font mb-3 ">ĐỊA ĐIỂM</h6>
-            <div style={{ overflow: "auto", maxHeight: "175px" }}>
+            <div style={{ overflow: "auto", maxHeight: "220px" }}>
               {cities && cities.map(item => (
                 <div className="select-wrap">
-                  <span className="form-control item-fil"> {item.name} </span>
+                  <button className="form-control item-fil text-left"> {item.name} </button>
                 </div>
               ))}
             </div>
@@ -20,10 +20,10 @@ class Filter extends Component {
         <div>
           <div className="mb-3 p-2 bord bg-w">
             <h6 className="font mb-3 ">NGÀNH NGHỀ</h6>
-            <div style={{ overflow: "auto", maxHeight: "195px" }}>
+            <div style={{ overflow: "auto", maxHeight: "220px" }}>
               {professions && professions.map(item => (
                 <div className="select-wrap">
-                  <span className="form-control item-fil"> {item.professionJobName} </span>
+                  <button className="form-control item-fil text-left"> {item.professionJobName} </button>
                 </div>
               ))}
             </div>

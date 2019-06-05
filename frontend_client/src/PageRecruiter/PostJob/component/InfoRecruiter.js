@@ -12,9 +12,9 @@ class InfoRecruiter extends Component {
           <p className="mb-0 font-weight-bold">Địa chỉ</p>
           <p className="mb-4">{curentRecruiter.address}</p>
           <p className="mb-0 font-weight-bold">Số điên thoại</p>
-          <p className="mb-4"><a href="#">{curentRecruiter.phone}</a></p>
+          <p className="mb-4">{curentRecruiter.phone}</p>
           <p className="mb-0 font-weight-bold">Email</p>
-          <p className="mb-0"><a href="#">{curentRecruiter.email}</a></p>
+          <p className="mb-0" style={{color:"#2f89fc"}}>{curentRecruiter.email}</p>
         </div>
       </Fragment>
     );

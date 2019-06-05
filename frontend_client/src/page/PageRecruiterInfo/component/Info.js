@@ -18,7 +18,7 @@ class Infomation extends Component {
             <tbody>
               <tr className="marginBottom20">
                 <td className="icon-detail-company">
-                  <span><img className="icon2" src={"/images/icon2.png"}></img></span>
+                  <span><img className="icon2" src={"/images/icon2.png"} alt=""></img></span>
                 </td>
                 <td className="detail-info-company">
                   <b>Địa chỉ:&nbsp;</b>
@@ -27,7 +27,7 @@ class Infomation extends Component {
               </tr>
               <tr className="marginBottom20">
                 <td className="icon-detail-company">
-                <span><img className="icon2" src={"/images/icon3.png"}></img></span>
+                <span><img className="icon2" src={"/images/icon3.png"} alt=""></img></span>
                 </td>
                 <td className="detail-info-company">
                   <b>Email liên hệ:&nbsp;</b>
@@ -36,7 +36,7 @@ class Infomation extends Component {
               </tr>
               <tr className="marginBottom20">
                 <td className="icon-detail-company">
-                <span><img className="icon2" src={"/images/icon4.png"}></img></span>
+                <span><img className="icon2" src={"/images/icon4.png"} alt=""></img></span>
                 </td>
                 <td className="detail-info-company">
                   <b>Số điện thoại liên hệ:&nbsp;</b>

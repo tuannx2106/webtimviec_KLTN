@@ -4,7 +4,6 @@ import Header from './component/Header';
 import Footer from '../../Component/Footer/Footer';
 import InputEmail from '../../Component/Container/InputEmail/InputEmail';
 import Recruiter from './component/Recruiter';
-import Filter from './component/Filter';
 
 const getInitialState = () => {
   const initialState = {
@@ -53,15 +52,6 @@ class PageRecruiter extends Component {
               <div className="col-lg-12">
                 <div className="row">
                   <Recruiter recruiters={recruiters} />
-                </div>
-                <div className="col-12 mt-5 text-center">
-                  <div className="custom-pagination">
-                    <span>1</span>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <span className="more-page">...</span>
-                    <a href="#">10</a>
-                  </div>
                 </div>
               </div>
             </div>

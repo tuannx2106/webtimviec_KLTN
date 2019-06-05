@@ -14,19 +14,19 @@ class JobItem extends Component {
             {data && data.map(item => (
               <div className="info-employer-job">
                 <div className="info-left">
-                  <span className="icon-detail-company"><img className="img-job" src={item.recruiter.logo}></img></span>
+                  <span className="icon-detail-company"><img className="img-job" src={item.recruiter.logo} alt=""></img></span>
                   <div className="text-gray-light">
                     <Link to={"/job/" + item.id}><h6 className="txt-title">{item.title}</h6></Link>
                     <address className="addre">{item.recruiter.companyName}</address>
                   </div>
                 </div>
                 <div className="info-right">
-                  <span className="review"><img className="icon3" src={"/images/icon7.png"}></img></span>
+                  <span className="review"><img className="icon3" src={"/images/icon7.png"} alt=""></img></span>
                   <p>{item.city.name}</p>
                 </div>
 
                 <div className="info-right">
-                  <span className="review"><img className="icon3" src={"/images/icon6.png"}></img></span>
+                  <span className="review"><img className="icon3" src={"/images/icon6.png"} alt=""></img></span>
                   <p className="color-red">{item.expired}</p>
                 </div>
               </div>

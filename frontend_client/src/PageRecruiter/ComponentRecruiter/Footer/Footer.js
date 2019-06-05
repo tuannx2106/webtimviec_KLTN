@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 class Footer extends Component {
   render() {
@@ -15,17 +16,17 @@ class Footer extends Component {
               <div className="col-md-3">
                 <h2 className="footer-heading mb-4">Điều hướng</h2>
                 <ul className="list-unstyled">
-                  <li><a href="#">Trang chủ</a></li>
-                  <li><a href="#">Đăng tuyển</a></li>
-                  <li><a href="#">Tìm hồ sơ</a></li>
+                  <li><Link to="/trang-nha-tuyen-dung">Trang chủ</Link></li>
+                  <li><Link to="/dang-cong-viec">Đăng tuyển</Link></li>
+                  <li><Link to="#">Tìm hồ sơ</Link></li>
                 </ul>
               </div>
               <div className="col-md-3">
                 <h2 className="footer-heading mb-4">Theo dõi chúng tôi</h2>
-                <a href="#" className="pl-0 pr-3"><span className="icon-facebook" /></a>
-                <a href="#" className="pl-3 pr-3"><span className="icon-twitter" /></a>
-                <a href="#" className="pl-3 pr-3"><span className="icon-instagram" /></a>
-                <a href="#" className="pl-3 pr-3"><span className="icon-linkedin" /></a>
+                <Link to="#" className="pl-0 pr-3"><span className="icon-facebook" /></Link>
+                <Link to="#" className="pl-3 pr-3"><span className="icon-twitter" /></Link>
+                <Link to="#" className="pl-3 pr-3"><span className="icon-instagram" /></Link>
+                <Link to="#" className="pl-3 pr-3"><span className="icon-linkedin" /></Link>
               </div>
             </div>
           </div>
@@ -45,7 +46,7 @@ class Footer extends Component {
             <div className="border-top pt-5">
               <p>
                 {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
-                Wesite © Tìm việc nhanh | Đồ án tốt nghiệp <i className="icon-heart" aria-hidden="true" /> Thành viên <a href="https://colorlib.com" target="_blank">Sơn - Tuấn</a>
+                Wesite © Tìm việc nhanh | Đồ án tốt nghiệp <i className="icon-heart" aria-hidden="true" /> Thành viên: Quang Sơn - Xuân Tuấn
                 {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
               </p>
             </div>

@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import routes from './router';
-
+import ScrollToTop from "./ScrollOnTop";
 
 class App extends Component {
   render() {
     return (
       <Router>
+        <ScrollToTop>
         <div>
           {this.showContentMenus(routes)}
         </div>
+        </ScrollToTop>
       </Router>
     );
   }

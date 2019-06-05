@@ -1,39 +1,15 @@
 import React from 'react';
 
 class ProfileUser extends React.Component {
-  // emptyItem = {
-  //   name: "",
-  //   sdt: "",
-  //   address: "",
-  //   gender: "",
-  //   email: "",
-  //   dateOfBirth: "",
-  //   password: "",
-  // };
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     item: this.emptyItem
-  //   };
-  // }
 
   handleChange = event => {
     const { curentUser } = this.props
     curentUser[event.target.name] = event.target.value
     this.setState({ curentUser: { ...curentUser } })
-    // const target = event.target;
-    // const value = target.value;
-    // const name = target.name;
-    // let item = { ...this.state.item };
-    // item[name] = value;
-    // this.setState({ item: item });
-    // console.log(target.value);
   };
 
   onUpdateUser = () => {
     const { curentUser } = this.props;
-    // curentUser = { ...curentUser };
     fetch(`/admin/api/users/`, {
       method: "PUT",
       headers: {
