@@ -27,7 +27,7 @@ class HomePageRcruiter extends Component {
             </div>
           </div>
         </div>
-        <div class="bg-light" data-aos="fade">
+        <div className="bg-light" data-aos="fade">
           <div className="row product-list">
             <div className="product-list-box">
               <img className="product-list__numberEMRank" src='logo/logo1.png' alt="" ></img>

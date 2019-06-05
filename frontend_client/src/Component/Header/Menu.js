@@ -36,7 +36,7 @@ class Menu extends Component {
                 curentUser ?
                   <>
                     <li className="nav-item">
-                      <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" class="avatar-rounded img-style"></img> </span>
+                      <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" className="avatar-rounded img-style"></img> </span>
                     </li>
                     <li className="nav-item dropdown">
                       <Link className="nav-link dropdown-toggle" to="#" id="navbardrop" data-toggle="dropdown">
