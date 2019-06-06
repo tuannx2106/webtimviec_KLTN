@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 class JobItem extends Component {
 
   render() {
-    const { data } = this.props;
-    if (!data)
+    const { jobs } = this.props;
+    if (!jobs)
       return <div>Loading ...</div>
     return (
       <Fragment>
         <div className="col-lg-12">
           <div className="job-list">
-            {data && data.map(item => (
+            {jobs && jobs.map(item => (
               <div className="info-employer-job">
                 <div className="info-left">
                   <span className="icon-detail-company"><img className="img-job" src={item.recruiter.logo} alt=""></img></span>

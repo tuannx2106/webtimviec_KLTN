@@ -29,6 +29,9 @@ class Filter extends Component {
             </div>
           </div>
         </div>
+        <div className="p-2 bord bg-w">
+             <img src="images/adver-side-2.png" alt="" style={{maxWidth:"237px"}}></img>
+        </div>
       </Fragment>
     );
   }

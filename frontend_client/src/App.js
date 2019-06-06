@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import routes from './router';
 import ScrollToTop from "./ScrollOnTop";
+import PageNotFound from "./PageNotFound/index";
 
 class App extends Component {
   render() {
     return (
       <Router>
         <ScrollToTop>
-        <div>
-          {this.showContentMenus(routes)}
-        </div>
+          <div>
+            {this.showContentMenus(routes)}
+          </div>
         </ScrollToTop>
       </Router>
     );
@@ -30,7 +31,11 @@ class App extends Component {
         );
       });
     }
-    return <Switch>{result}</Switch>;
+    return (
+      <Switch>
+        {result}
+        <Route component={PageNotFound} />
+      </Switch>);
   }
 
 }

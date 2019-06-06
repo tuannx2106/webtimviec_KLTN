@@ -12,7 +12,7 @@ class InputEmail extends Component {
           <div className="col-md-6">
             <form className="d-flex">
               <input type="text" className="form-control " placeholder="Email" />
-              <a href="/" className="btn btn-white" >Nhập</a> 
+              <a href="#" className="btn btn-white" >Nhập</a> 
             </form>
           </div>
         </div>

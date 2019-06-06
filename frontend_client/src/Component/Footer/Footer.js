@@ -10,7 +10,8 @@ class Footer extends Component {
             <div className="row">
               <div className="col-md-6">
                 <h2 className="footer-heading mb-4">Thông tin</h2>
-                <p>Trường đại học Sư phạm kỹ thuật TPHCM</p>
+                <p>Trường đại học Sư phạm kỹ thuật TP.HCM</p>
+                <p>Khoá luận tốt nghiệp @ 2019 @</p>
                 <p></p>
               </div>
               <div className="col-md-3">

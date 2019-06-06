@@ -4,13 +4,16 @@ import Header from './component/Header';
 import Footer from '../../Component/Footer/Footer';
 import InputEmail from '../../Component/Container/InputEmail/InputEmail';
 import Recruiter from './component/Recruiter';
+import Pagination from "../../Component/Pagination/Pagination";
 
 const getInitialState = () => {
   const initialState = {
     recruiters: [],
+    pageOfItems: []
   };
   return initialState;
 };
+
 class PageRecruiter extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +29,12 @@ class PageRecruiter extends Component {
       .then(response => response.json())
       .then(data => this.setState({ recruiters: data, isLoading: false }));
   };
+
+  onChangePage = (pageOfItems) => {
+    // update state with new page of items
+    this.setState({ pageOfItems: pageOfItems });
+  }
+
   render() {
     const { recruiters } = this.state;
     return (
@@ -51,7 +60,10 @@ class PageRecruiter extends Component {
             <div className="row">
               <div className="col-lg-12">
                 <div className="row">
-                  <Recruiter recruiters={recruiters} />
+                  <Recruiter recruiters={this.state.pageOfItems} />
+                </div>
+                <div className='pagination-controls' style={{ display: "flex", float:"right", marginRight: "11px" }}>
+                  <Pagination items={recruiters} onChangePage={this.onChangePage} pageJob />
                 </div>
               </div>
             </div>

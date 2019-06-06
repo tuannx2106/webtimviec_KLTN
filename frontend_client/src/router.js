@@ -11,6 +11,7 @@ import ProfileUser from './page/PageProfileUser/index';
 import ProfileRecruiter from "./page/PageProfileRecruiter/index";
 import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
 import PostJob from "./PageRecruiter/PostJob/index";
+import PageNotFound from "./PageNotFound/index";
 
 const routes = [
     {
@@ -20,12 +21,12 @@ const routes = [
     },
     {
         path: '/tatcacongviec',
-        exact: false,
+        exact: true,
         main: AllJob
     },
     {
         path: '/nhatuyendung',
-        exact: false,
+        exact: true,
         main: PageRecruiter
     },
     {
@@ -77,6 +78,11 @@ const routes = [
         path: '/dang-cong-viec',
         exact: false,
         main:  PostJob
+    },
+    {
+        path: '/404-not-found',
+        exact: false,
+        main:  PageNotFound
     },
 ];
 

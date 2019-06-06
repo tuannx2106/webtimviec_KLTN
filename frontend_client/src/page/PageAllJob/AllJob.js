@@ -4,6 +4,7 @@ import Header from './component/Header';
 import Footer from '../../Component/Footer/Footer';
 import InputEmail from '../../Component/Container/InputEmail/InputEmail';
 import Job from './component/Job';
+import Pagination from "../../Component/Pagination/Pagination";
 import Filter from './component/Filter';
 
 const getInitialState = () => {
@@ -11,12 +12,12 @@ const getInitialState = () => {
     jobs: [],
     cities: [],
     professions: [],
+    pageOfItems: []
   };
   return initialState;
 };
 
 class AllJob extends Component {
-
   constructor(props) {
     super(props);
     this.state = getInitialState();
@@ -56,6 +57,11 @@ class AllJob extends Component {
     })
   }
 
+  onChangePage = (pageOfItems) => {
+    // update state with new page of items
+    this.setState({ pageOfItems: pageOfItems });
+  }
+
   render() {
     const { cities, jobs, professions } = this.state;
 
@@ -85,20 +91,17 @@ class AllJob extends Component {
                 <h5 style={{ lineHeight: "1", margin: "0", fontFamily: "Roboto, Verdana", fontSize: "17px" }}>CÔNG VIỆC TÌM THẤY</h5>
               </div>
               <div className="col-lg-9">
-                <div className="row scroll">
-                  <Job jobs={jobs} />
+                <div className="row">
+                  <Job jobs={this.state.pageOfItems} />
+                </div>
+                <div className='pagination-controls' style={{ display: "flex", float:"right", marginRight: "11px" }}>
+                  <Pagination items={jobs} onChangePage={this.onChangePage} pageJob />
                 </div>
               </div>
               <div className="col-lg-3">
                 <Filter cities={cities} professions={professions} />
               </div>
-              <div className="col-9 mt-5 text-center">
-                <div className="custom-pagination">
-
-                  <button onClick={this.loadMore} type="button" className="btn btn-primary">Xem thêm</button>
-
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
