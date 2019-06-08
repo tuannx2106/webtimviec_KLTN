@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 class Filter extends Component {
   render() {
-    const { cities, professions } = this.props;
+    const { cities, professions, onClickCity, onClickProf } = this.props;
     return (
       <Fragment>
         <div>
@@ -11,7 +11,7 @@ class Filter extends Component {
             <div style={{ overflow: "auto", maxHeight: "220px" }}>
               {cities && cities.map(item => (
                 <div className="select-wrap">
-                  <button className="form-control item-fil text-left"> {item.name} </button>
+                  <button className="form-control item-fil text-left" data-id={item.id} onClick={onClickCity}> {item.name} </button>
                 </div>
               ))}
             </div>
@@ -23,14 +23,14 @@ class Filter extends Component {
             <div style={{ overflow: "auto", maxHeight: "220px" }}>
               {professions && professions.map(item => (
                 <div className="select-wrap">
-                  <button className="form-control item-fil text-left"> {item.professionJobName} </button>
+                  <button className="form-control item-fil text-left" data-id={item.id} onClick={onClickProf}> {item.professionJobName} </button>
                 </div>
               ))}
             </div>
           </div>
         </div>
         <div className="p-2 bord bg-w">
-             <img src="images/adver-side-2.png" alt="" style={{maxWidth:"237px"}}></img>
+          <img src="images/adver-side-2.png" alt="" style={{ maxWidth: "237px" }}></img>
         </div>
       </Fragment>
     );
