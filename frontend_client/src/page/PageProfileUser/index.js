@@ -4,19 +4,40 @@ import "./style.css"
 import Profile from './ProfileUser';
 import Myjob from './myJob';
 
+
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
       curentUser: null,
+      selectedFile: null,
     };
   }
+
+  fileSelectHandle = event =>{
+    this.setState({
+      selectedFile: event.target.files[0]
+    })
+  }
+
+  onUpdateAvatar = () => {
+    const body = new FormData();
+    body.append('avatar', this.state.selectedFile);
+    fetch(`/admin/api/users`, {
+      method: "PUT",
+      body: body
+    })
+      .then(response => {
+      console.log(response);
+    })
+  };
+
 
   componentDidMount() {
     const curUser = JSON.parse(localStorage.getItem('currentUser'));
     this.setState({ curentUser: curUser });
   }
-  
+
   render() {
     const { curentUser } = this.state;
     if (!curentUser)
@@ -30,13 +51,28 @@ class index extends Component {
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-3">
               <div className="text-center">
-                <img src={curentUser.avatar} className="avatar img-circle img-thumbnail" alt="avatar" />
+                {curentUser.avatar && (
+                  <div className="img-select">
+                    <img
+                      src={curentUser.avatar}
+                      className="avatar img-circle img-thumbnail"
+                      alt="avatar"
+                    />
+                  </div>
+                )}
+                {/* <img src={curentUser.avatar} className="avatar img-circle img-thumbnail" alt="avatar" /> */}
                 <h6 className="txt-img">Cập nhật hình đại diện</h6>
-                <input type="file" className="text-center center-block file-upload" />
+                <input
+                  type="file"
+                  name="avatar"
+                  onChange={this.fileSelectHandle}
+                  className="text-center center-block file-upload"
+                />
+                <button className="btn btn-primary mt-3" onClick={this.onUpdateAvatar}>Cập nhật hình đại diện</button>
               </div>
             </div>
             <div className="col-sm-9">
-              <ul className="nav nav-tabs" role="ta blist">
+              <ul className="nav nav-tabs">
                 <li className="nav-item">
                   <a className="nav-link active" href="#profile" role="tab" data-toggle="tab">Hồ sơ</a>
                 </li>

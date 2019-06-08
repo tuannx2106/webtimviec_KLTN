@@ -21,16 +21,17 @@ const getInitialState = () => {
     row: {},
     isLoading: true,
     recruiters: [],
-    cities: [],
+    citys: [],
+    city:"",
     form: {
-      id: null,
+      // id: null,
       companyName: "",
       email: "",
       description: "",
       address: "",
       logo: "",
-      city_id: "",
-      phone: ""
+      phone: "",
+      city: "",
     }
   };
   return initialState;
@@ -56,7 +57,7 @@ class RecruiterPageContainer extends React.Component {
     axios
       .get("/admin/api/city/list")
       .then(response => {
-        this.setState({ cities: response.data, isLoading: false });
+        this.setState({ citys: response.data, isLoading: false });
       })
       .catch(err => console.log(err));
   };
@@ -90,6 +91,16 @@ class RecruiterPageContainer extends React.Component {
     this.state.form[key] = value;
     console.log(value)
   };
+
+  handleChangeSelect = (key, value) => {
+    let {form} = this.state;
+    form[key] = {
+      id: value
+    };
+    this.setState({ form: form });
+    console.log(value);
+  };
+  
 
   onCreateRecruiter = async () => {
     const { form } = this.state;
@@ -143,7 +154,7 @@ class RecruiterPageContainer extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { recruiters, isOpenModal, row, type, city_id, cities } = this.state;
+    const { recruiters, isOpenModal, row, type, citys, city } = this.state;
 
     const columns = [
       {
@@ -204,10 +215,11 @@ class RecruiterPageContainer extends React.Component {
         />
         {isOpenModal && (
           <Modal
-            city_id={city_id}
-            cities={cities}
+            citys={citys}
+            city={city}
             isOpenModal={isOpenModal}
             handleClose={this.handleClose}
+            handleChangeSelect={this.handleChangeSelect}
             onChangeValue={this.onChangeValue}
             onCreateRecruiter={this.onCreateRecruiter}
             onUpdateRecruiter={this.onUpdateRecruiter}

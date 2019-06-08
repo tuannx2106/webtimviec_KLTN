@@ -25,7 +25,7 @@ export default class FormDialog extends React.Component {
       <div>
         <Dialog
           open={isOpenModal}
-          onClose={handleClose}
+          // onClose={handleClose}
           fullWidth={true}
           maxWidth="false"
         >

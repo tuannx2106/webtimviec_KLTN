@@ -23,14 +23,14 @@ class Header extends Component {
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
                   <select className="form-control rounded">
                     <option selected>Thành phố ...</option>
-                      <option value="1" >demo</option>
-                      <option value="2" >demo</option>
+                    <option value="1" >demo</option>
+                    <option value="2" >demo</option>
                     ))}
                   </select>
                 </div>
               </div>
               <div className="col-lg-12 col-xl-3 ml-auto text-right">
-                <input className="btn btn-primary btn-block rounded" defaultValue="Tìm kiếm" />
+                <button className="btn btn-primary btn-block rounded padding8">Tìm kiếm</button>
               </div>
             </div>
           </form>

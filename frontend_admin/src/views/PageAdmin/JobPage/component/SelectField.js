@@ -1,103 +1,93 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-console */
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Chip from "@material-ui/core/Chip";
+import React, { Component } from 'react';
+import MultiSelect from '@khanacademy/react-multi-select';
+import Checkbox from 'material-ui/Checkbox';
+import Chip from 'material-ui/Chip';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const styles = theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-    maxWidth: 300
-  },
-  chips: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
+const muiTheme = getMuiTheme({});
+
+const styles = {
   chip: {
-    margin: theme.spacing.unit / 4
-  }
-});
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
+    margin: 2,
+    marginRight: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxHeight: '100%',
+  },
 };
 
-function getStyles(name, that) {
-  return {
-    fontWeight:
-      that.state.name.indexOf(name) === -1
-        ? that.props.theme.typography.fontWeightRegular
-        : that.props.theme.typography.fontWeightMedium
-  };
-}
-class MultipleSelect extends React.Component {
+export default class MultiSelectExample extends Component {
   state = {
-    name: []
-  };
+    selectedOptions: [],
+  }
 
-  handleChange = event => {
-    this.setState({ name: event.target.value });
-    console.log(event.target.value)
-  };
+  handleSelectedChanged = (selectedOptions) => (
+    this.setState({ selectedOptions })
+  )
 
-  render() {
-    const { classes, profession } = this.props;
+  handleUnselectItem = (removedVal) => () => (
+    this.setState({
+      selectedOptions: this.state.selectedOptions
+        .filter(option => option !== removedVal)
+    })
+  )
+
+  renderOption = ({ checked, option, onClick }) => (
+    <Checkbox
+      label={option.label}
+      onCheck={onClick}
+      checked={checked}
+    />
+  )
+
+  renderSelected = (selected, options) => {
+    if (!options.length) {
+      return <span>Không có ngành nghề nào</span>;
+    }
+
+    if (!selected.length) {
+      return <span>Chọn ngành nghề...</span>;
+    }
+
+    if (selected.length === options.length) {
+      return <span>Tất cả</span>;
+    }
+
+    if (selected.length > 6) {
+      return <span>Đã chọn {selected.length} ngành nghề</span>;
+    }
 
     return (
-      <div className={classes.root}>
-        <FormControl
-          className={classes.formControl}
-          style={{ margin: "36px 0px", width: "100%", maxWidth: "none" }}
-        >
-          <InputLabel htmlFor="select-multiple-chip">Ngành nghề</InputLabel>
-          <Select
-            multiple
-            value={this.state.name}
-            onChange={this.handleChange}
-            renderValue={selected => (
-              <div className={classes.chips}>
-                {selected.map(value => (
-                  <Chip key={value} label={value} className={classes.chip} />
-                ))}
-              </div>
-            )}
-            MenuProps={MenuProps}
+      <div style={styles.wrapper}>
+        {selected.map(value => (
+          <Chip
+            key={value}
+            style={styles.chip}
+            onRequestDelete={this.handleUnselectItem(value)}
           >
-            {profession.map(item => (
-              <MenuItem
-                key={item.id}
-                value={item.professionJobName}
-                style={getStyles(item.professionJobName, this)}
-              >
-                {item.professionJobName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+            {options.find(o => value === o.value).label}
+          </Chip>
+        ))}
       </div>
+    )
+  }
+
+  render() {
+    const { selectedOptions } = this.state;
+    const {options} = this.props;
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <MultiSelect
+          options={options}
+          selected={selectedOptions}
+          ItemRenderer={this.renderOption}
+          valueRenderer={this.renderSelected}
+          onSelectedChanged={this.handleSelectedChanged}
+        />
+      </MuiThemeProvider>
     );
   }
 }
-
-MultipleSelect.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles, { withTheme: true })(MultipleSelect);

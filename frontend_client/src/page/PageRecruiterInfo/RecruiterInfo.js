@@ -4,32 +4,25 @@ import Header from './component/Header';
 import Infomation from './component/Info';
 import InputEmail from '../../Component/Container/InputEmail/InputEmail';
 import Footer from '../../Component/Footer/Footer';
-
-const getInitialState = () => {
-  const initialState = {
-    recruiters: [],
-  };
-  return initialState;
-};
+import DescriptionRecruiter from './component/DescriptionRecruiter';
+import JobOfRecruiter from './component/JobOfRecruiter';
 
 class RecruiterInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = getInitialState();
+    this.state = {
+        recruiter: {},
+    }
   }
 
   componentDidMount() {
-    this.getList();
+    fetch(`/admin/api/recruiter/${this.props.match.params.id}`)
+      .then(response => response.json())
+      .then(data => this.setState({ recruiter: data }));
   }
 
-  getList = () => {
-    fetch("/admin/api/recruiter/list")
-      .then(response => response.json())
-      .then(data => this.setState({ recruiters: data, isLoading: false }));
-  };
   render() {
-    const { recruiters } = this.state;
-    console.log(recruiters)
+    const { recruiter } = this.state;
     return (
       <div className="site-wrap">
         <div className="site-mobile-menu">
@@ -43,14 +36,18 @@ class RecruiterInfo extends Component {
         <div className="site-navbar container py-0 " role="banner">
           <Menu />
         </div>
-        <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(images/hero_2.jpg)' }} data-aos="fade" data-stellar-background-ratio="0.5">
+        <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(/images/hero_2.jpg)' }} data-aos="fade" data-stellar-background-ratio="0.5">
           <div className="container">
             <Header />
           </div>
         </div>
-        <div className="site-section">
+        <div className="site-section bg-light">
           <div className="container">
-            <Infomation recruiters={recruiters}/>
+            <Infomation recruiter={recruiter} />
+            <h4 className="text-center">Giới thiệu về công ty</h4>
+            <DescriptionRecruiter recruiter={recruiter}/>
+            <h4 className="text-center">Việc làm {recruiter ? recruiter.companyName:""} tuyển dụng</h4>
+            <JobOfRecruiter />
           </div>
         </div>
         <div className="newsletter bg-primary py-5">

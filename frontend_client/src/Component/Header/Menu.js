@@ -32,23 +32,21 @@ class Menu extends Component {
               <li><NavLink exact activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/">Trang chủ</NavLink></li>
               <li><NavLink activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/tatcacongviec">Tất cả công việc</NavLink></li>
               <li><NavLink activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/nhatuyendung">Nhà tuyển dụng</NavLink></li>
-              {/* <li className="mr-5"><NavLink to="/">Thông tin</NavLink></li> */}
-
               {
                 curentUser ?
                   <>
                     <li className="nav-item">
-                      <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" class="avatar-rounded img-style"></img> </span>
+                      <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" className="avatar-rounded img-style"></img> </span>
                     </li>
                     <li className="nav-item dropdown">
-                      <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                      <Link className="nav-link dropdown-toggle" to="#" id="navbardrop" data-toggle="dropdown">
                         {
                           curentUser.name
                         }
-                      </a>
+                      </Link>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/profile-user">Quản lý hồ sơ</Link>
-                        <span> <a href="#" className="dropdown-item" onClick={this.logOut}>Đăng xuất</a></span>
+                        <span> <Link to="#" className="dropdown-item" onClick={this.logOut}>Đăng xuất</Link></span>
                       </div>
                     </li>
                   </>
@@ -62,7 +60,7 @@ class Menu extends Component {
           </nav>
         </div>
         <div className="d-inline-block d-xl-none ml-auto py-3 col-6 text-right" style={{ position: 'relative', top: '3px' }}>
-          <a href="#" className="site-menu-toggle js-menu-toggle text-white"><span className="icon-menu h3" /></a>
+          <Link to="#" className="site-menu-toggle js-menu-toggle text-white"><span className="icon-menu h3" /></Link>
         </div>
       </div>
     );

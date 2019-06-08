@@ -5,7 +5,7 @@ class Myjob extends Component {
   render() {
     return (
       <div className="d-block d-md-flex listing border">
-        <a href="#" className="img d-block" style={{ backgroundImage: 'url("images/img_1.jpg")' }} />
+        <Link to="#" className="img d-block" style={{ backgroundImage: 'url("images/img_1.jpg")' }} />
         <div className="lh-content" >
           <Link to="/info-job"><h4> NodeJS</h4></Link>
           <h3>Nhà tuyển dụng:<Link to="#"> FPT</Link></h3>

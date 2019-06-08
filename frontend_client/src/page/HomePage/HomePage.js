@@ -23,27 +23,19 @@ class HomePage extends Component {
     this.state = getInitialState();
   }
 
-  componentDidMount() {
-    this.getList();
+  async componentDidMount() {
+    let jobList = await fetch('/admin/api/job/list').then(response => response.json())
+    let cityList = await fetch('/admin/api/city/list').then(response => response.json())
+    let profList = await fetch('admin/api/profession/list').then(response => response.json())
+    let recruiterList = await fetch('/admin/api/recruiter/list').then(response => response.json())
+
+    this.setState({
+      jobs: jobList,
+      recruiters: recruiterList,
+      professions: profList,
+      cities: cityList
+    })
   }
-
-  getList = () => {
-    fetch("/admin/api/recruiter/list")
-      .then(response => response.json())
-      .then(data => this.setState({ recruiters: data, isLoading: false }));
-
-    fetch("/admin/api/city/list")
-      .then(response => response.json())
-      .then(data => this.setState({ cities: data, isLoading: false }));
-
-    fetch("/admin/api/job/list")
-      .then(response => response.json())
-      .then(data => this.setState({ jobs: data, isLoading: false }));
-
-    fetch("/admin/api/profession/list")
-      .then(response => response.json())
-      .then(data => this.setState({ professions: data, isLoading: false }));
-  };
 
   render() {
     const { jobs, recruiters, cities, professions } = this.state;
@@ -67,15 +59,13 @@ class HomePage extends Component {
             </div>
           </div>
         </div>
-        <div class="site-section bg-light" data-aos="fade">
+        <div class="site-section1 bg-light" data-aos="fade">
           <ListProfession professions={professions} />
         </div>
-        <br></br>
-        <div className="site-section bg-light">
+        <div className="bg-light">
           <ListJob jobs={jobs} />
         </div>
-        <br></br>
-        <div className="site-section bg-light">
+        <div className="site-section1 bg-light">
           <ListRecruiter recruiters={recruiters} />
         </div>
         <div className="newsletter bg-primary py-5">

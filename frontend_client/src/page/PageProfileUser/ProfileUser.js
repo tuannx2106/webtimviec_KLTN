@@ -1,39 +1,15 @@
 import React from 'react';
 
 class ProfileUser extends React.Component {
-  // emptyItem = {
-  //   name: "",
-  //   sdt: "",
-  //   address: "",
-  //   gender: "",
-  //   email: "",
-  //   dateOfBirth: "",
-  //   password: "",
-  // };
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     item: this.emptyItem
-  //   };
-  // }
 
   handleChange = event => {
     const { curentUser } = this.props
     curentUser[event.target.name] = event.target.value
     this.setState({ curentUser: { ...curentUser } })
-    // const target = event.target;
-    // const value = target.value;
-    // const name = target.name;
-    // let item = { ...this.state.item };
-    // item[name] = value;
-    // this.setState({ item: item });
-    // console.log(target.value);
   };
 
   onUpdateUser = () => {
     const { curentUser } = this.props;
-    // curentUser = { ...curentUser };
     fetch(`/admin/api/users/`, {
       method: "PUT",
       headers: {
@@ -71,6 +47,12 @@ class ProfileUser extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-xs-6">
+            <label htmlFor="phone"><h4>Số chứng minh nhân dân</h4></label>
+            <input type="text" className="form-control input-form" value={curentUser.cmnd ? curentUser.cmnd : ""} name="cmnd" onChange={this.handleChange} />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-xs-6">
             <label htmlFor="address"><h4>Địa chỉ</h4></label>
             <input type="text" className="form-control input-form" value={curentUser.address ? curentUser.address : ""} name="address" onChange={this.handleChange} />
           </div>
@@ -89,14 +71,14 @@ class ProfileUser extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-xs-6">
-            <label htmlFor="birthday"><h4>Ngày sinh</h4></label>
-            <input type="date" className="form-control input-form" value={curentUser.dateOfBirth ? curentUser.dateOfBirth : ""} name="dateOfBirth" onChange={this.handleChange} />
+            <label htmlFor="password"><h4>Mật khẩu</h4></label>
+            <input type="password" className="form-control input-form" id="password" value={curentUser.password ? curentUser.password : ""} name="password" onChange={this.handleChange} />
           </div>
         </div>
         <div className="form-group">
           <div className="col-xs-6">
-            <label htmlFor="password"><h4>Mật khẩu</h4></label>
-            <input type="password" className="form-control input-form" id="password" value={curentUser.password ? curentUser.password : ""} name="password" onChange={this.handleChange} />
+            <label htmlFor="birthday"><h4>Ngày sinh</h4></label>
+            <input type="date" className="form-control input-form" value={curentUser.birthday ? curentUser.birthday : ""} name="birthday" onChange={this.handleChange} />
           </div>
         </div>
         <div className="form-group">

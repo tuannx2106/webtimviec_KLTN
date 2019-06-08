@@ -1,4 +1,3 @@
-import React from 'react';
 import HomePage from "./page/HomePage/HomePage";
 import AllJob from './page/PageAllJob/AllJob';
 import PageRecruiter from "./page/PageRecruiter/PageRecruiter";
@@ -11,67 +10,79 @@ import PageRegisterREcruiter from "./PageRecruiter/PageRegister/index";
 import ProfileUser from './page/PageProfileUser/index';
 import ProfileRecruiter from "./page/PageProfileRecruiter/index";
 import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
+import PostJob from "./PageRecruiter/PostJob/index";
+import PageNotFound from "./PageNotFound/index";
 
 const routes = [
     {
         path: '/',
         exact: true,
-        main: () => <HomePage />
+        main: HomePage
     },
     {
         path: '/tatcacongviec',
-        exact: false,
-        main: () => <AllJob />
+        exact: true,
+        main: AllJob
     },
     {
         path: '/nhatuyendung',
-        exact: false,
-        main: () => <PageRecruiter />
+        exact: true,
+        main: PageRecruiter
     },
     {
-        path: '/info-job',
+        path: '/job/:id',
         exact: false,
-        main: () => <JobInfo />
+        main: JobInfo
     },
     {
-        path: '/info',
+        path: '/recruiter/:id',
         exact: false,
-        main: () => <RecruiterInfo />
+        main: RecruiterInfo
     },
     {
         path: '/login',
         exact: false,
-        main: () => <PageLogin />
+        main: PageLogin
     },
     {
         path: '/register',
         exact: false,
-        main: () => <PageRegister />
+        main: PageRegister
     },
     {
         path: '/login-recruiter',
         exact: false,
-        main: () => <PageLoginRecruiter />
+        main: PageLoginRecruiter
     },
     {
         path: '/register-recruiter',
         exact: false,
-        main: () => <PageRegisterREcruiter />
+        main: PageRegisterREcruiter
     },
     {
         path: '/profile-user',
         exact: false,
-        main: () => <ProfileUser />
+        main: ProfileUser
     },
     {
         path: '/profile-recruiter',
         exact: false,
-        main: () => <ProfileRecruiter />
+        main: ProfileRecruiter
     },
     {
         path: '/trang-nha-tuyen-dung',
         exact: false,
-        main: () => < PageHomeRecruiter/>
+        main:  PageHomeRecruiter
+    },
+    {
+        path: '/dang-cong-viec',
+        exact: false,
+        main:  PostJob
+    },
+    {
+        path: '/404-not-found',
+        exact: false,
+        main:  PageNotFound
     },
 ];
 

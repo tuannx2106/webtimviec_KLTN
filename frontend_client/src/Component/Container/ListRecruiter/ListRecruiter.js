@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
 import RecruiterItem from './RecruiterItem';
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom";
+import Pagination from "../../Pagination/Pagination";
 
 class ListRecruiter extends Component {
+  constructor() {
+    super();
+    this.state = {
+      pageOfItems: []
+    };
+  }
+
+  onChangePage = (pageOfItems) => {
+    // update state with new page of items
+    this.setState({ pageOfItems: pageOfItems });
+  }
   render() {
     const { recruiters } = this.props;
     return (
       <div className="container">
-        <div className="row justify-content-center mb-5">
+        <div className="row justify-content-center mb-5 ">
           <div className="col-md-7 text-center">
-            <h3 className="font-weight-light text-primary">Nhà Tuyển Dụng</h3>
+            <h3 className="font-weight-light text-primary">Nhà tuyển dụng hàng đầu</h3>
           </div>
         </div>
-        <div className="row mb-3 align-items-stretch">
-          <RecruiterItem recruiters = {recruiters}/>
-          <div className="col-12 text-center mt-4">
-            <Link to="/nhatuyendung" className="btn btn-primary rounded py-2 px-4 text-white">Xem thêm...</Link>
-          </div>
+        <div className="row align-items-stretch overlap-category" style={{ height: "550px", padding: "15px 0px", boxShadow: "0 2px 17px -7px rgba(0, 0, 0, 0.2)" }}>
+          <RecruiterItem recruiters={this.state.pageOfItems} />
+        </div>
+        <Link to="/nhatuyendung"><div style={{float:"right",margin: "10px 0px 0px 15px", color: "darkorange"}}>Xem thêm...</div></Link>
+        <div className="col-12 text-right" style={{width:"55%"}}>
+          <Pagination items={recruiters} onChangePage={this.onChangePage} next/>
         </div>
       </div>
     );

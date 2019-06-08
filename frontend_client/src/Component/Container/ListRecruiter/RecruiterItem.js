@@ -8,11 +8,11 @@ class RecruiterItem extends Component {
       <Fragment>
         {recruiters && recruiters.map(item => (
           <div className="col-lg-3" style={{marginBottom:"10px"}}>
-            <div className="d-block d-md-flex listing vertical">
-              <div className="img d-block"> <img className="img-recruiter" src={item.logo} /> </div>
-              <div className="lh-content">
-                <h3>Công ty:<a href="#"> {item.companyName}</a></h3>
-                <address>Địa chỉ: {item.address}</address>
+            <div className="d-block d-md-flex listing vertical w-254">
+              <div className="img d-block"> <img className="img-recruiter" src={item.logo} alt="" /> </div>
+              <div className="lh-content" style={{padding:"5px 12px"}}>
+                <Link to={"/recruiter/" + item.id}><h3>{item.companyName}</h3></Link>
+                <address className="address">Địa chỉ: {item.address}</address>
               </div>
             </div>
           </div>

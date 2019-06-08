@@ -7,11 +7,11 @@ import Button from "../../../Common/components/CustomButtons/Button";
 import Input from "../../../Common/components/CustomInput/CustomInput";
 import GridContainer from "../../../Common/components/Grid/GridContainer";
 import GridItem from "../../../Common/components/Grid/GridItem";
+import InputLabel from '@material-ui/core/InputLabel';
+import Autocomplete from "../../../Common/components/Autocomple/Autocomplete";
 import { FormLabel, FormControl } from "@material-ui/core";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 
 class FormDialog extends React.Component {
   render() {
@@ -19,18 +19,21 @@ class FormDialog extends React.Component {
       isOpenModal,
       handleClose,
       onChangeValue,
+      handleChangeSelect,
       row,
+      city,
+      citys,
       type,
-      cities,
-      city_id,
       onCreateRecruiter,
       onUpdateRecruiter
     } = this.props;
 
-    const temp = cities ? cities.find(el => el.id === city_id) : {};
-    const city = {
+    const temp = citys ? citys.find(el => el.id === city) : {};
+    const cities = {
+      label: (temp || "").name,
       value: (temp || "").id
     };
+
 
     const title = type === "edit" ? "Sửa thông tin" : "Thêm mới";
     const onSave =
@@ -79,29 +82,14 @@ class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
-              <GridItem xs={11} md={5} style={{ marginTop: "26px" }}>
-                <FormControl style={{ width: "100%", }}>
-                  <InputLabel htmlFor="age-native-simple">Thành phố</InputLabel>
-                  <Select
-                    native
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    value={city}
-                    // onChange={handleChange('age')}
-                    inputProps={{
-                      name: 'city_id',
-                      onChange: e => onChangeValue("city_id", e.target.value),
-                      // id: 'age-native-simple',
-                    }}
-                  >
-                    {cities && cities.map(item => (
-                      <option  key={item.id} value={item.id}>
-                        {item.name}
-                      </option >
-                    ))}
-                  </Select>
-                </FormControl>
+              <GridItem xs={11} md={5} style={{marginTop:"9px"}}>
+                <InputLabel >Thành phố</InputLabel>
+                <Autocomplete
+                  data={citys ? citys.map(el => ({ label: el.name, value: el.id })) : []}
+                  defaultValue={cities}
+                  type="city"
+                  onChange={handleChangeSelect}
+                />
               </GridItem>
               <GridItem xs={11} md={5}>
                 <Input
@@ -153,10 +141,7 @@ class FormDialog extends React.Component {
                     modules={FormDialog.modules}
                     formats={FormDialog.formats}
                     placeholder={"Viết nội dung vào đây..."}
-                    ref={el => {
-                      this.reactQuill = el;
-                    }}
-                    style={{ height: "200px" }}
+                    style={{ height: 200, marginBottom: 20 }}
                   />
                 </FormControl>
               </GridItem>
@@ -185,34 +170,37 @@ class FormDialog extends React.Component {
     );
   }
 }
-FormDialog.formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image"
-];
-
+/*
+ * Quill modules to attach to editor
+ * See https://quilljs.com/docs/modules/ for complete options
+ */
 FormDialog.modules = {
   toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
     [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-    ["link", "image"],
-    ["clean"]
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' },
+    { 'indent': '-1' }, { 'indent': '+1' }],
+    ['link', 'image', 'video'],
+    ['clean']
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false
+    matchVisual: false,
   }
-};
+}
+/* 
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
+FormDialog.formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video'
+]
+
+/* 
+ * PropType validation
+ */
 export default FormDialog;
