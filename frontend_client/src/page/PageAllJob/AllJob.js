@@ -48,17 +48,18 @@ class AllJob extends Component {
 
   jobsSearchResult = (jobList, inputSearch, cityId, professionId) => {
     return jobList.filter(job => {
-      if (job.city.id && job.jobRequireProfessionJobList[0])
-        return job.city.id === cityId
-          && job.jobRequireProfessionJobList[0].professionJob.id === professionId
-          && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
-      else return job.city.id !== -1
+      return job.city.id === cityId
+        && job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == professionId).length !== 0
+        && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
     })
   }
 
   jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id == cityId))
 
-  jobsFilterByProf = (jobList, profId) => (jobList.filter(job => job.jobRequireProfessionJobList[0].professionJob.id == profId))
+  jobsFilterByProf = (jobList, profId) => (jobList.filter(job => {
+    console.log(job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == profId).length)
+    return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == profId).length !== 0 ? job : null
+  }))
 
   onChangePage = (pageOfItems) => {
     // update state with new page of items
@@ -66,11 +67,11 @@ class AllJob extends Component {
   }
 
   onClickCity = e => {
-    this.setState({jobs: this.jobsFilterByCity(this.state.jobs, e.target.dataset.id)})
+    this.setState({ jobs: this.jobsFilterByCity(this.state.jobs, e.target.dataset.id) })
   }
 
   onClickProf = e => {
-    this.setState({jobs: this.jobsFilterByProf(this.state.jobs, e.target.dataset.id)})
+    this.setState({ jobs: this.jobsFilterByProf(this.state.jobs, e.target.dataset.id) })
   }
 
   render() {
@@ -111,9 +112,9 @@ class AllJob extends Component {
               </div>
               <div className="col-lg-3">
                 <Filter cities={cities}
-                onClickCity={this.onClickCity} 
-                professions={professions}
-                onClickProf={this.onClickProf} />
+                  onClickCity={this.onClickCity}
+                  professions={professions}
+                  onClickProf={this.onClickProf} />
               </div>
 
             </div>
