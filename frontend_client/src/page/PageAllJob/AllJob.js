@@ -7,29 +7,28 @@ import Job from './component/Job';
 import Pagination from "../../Component/Pagination/Pagination";
 import Filter from './component/Filter';
 
-const getInitialState = () => {
-  const initialState = {
-    jobs: [],
-    cities: [],
-    professions: [],
-    pageOfItems: []
-  };
-  return initialState;
-};
 
 class AllJob extends Component {
   constructor(props) {
     super(props);
-    this.state = getInitialState();
+    this.state = {
+      jobs: [],
+      cities: [],
+      professions: [],
+      pageOfItems: [],
+      filterCity: 0,
+      filterProf: 0
+    };
+    this.allJob = [];
   }
 
   async componentDidMount() {
     const { selectedCity, selectedProf, searchInput } = this.props.location.state ? this.props.location.state : { selectedCity: 0 }
 
-    let jobList = await fetch('/admin/api/job/list').then(response => response.json())
+    this.allJob = await fetch('/admin/api/job/list').then(response => response.json())
     let cityList = await fetch('/admin/api/city/list').then(response => response.json())
     let profList = await fetch('admin/api/profession/list').then(response => response.json())
-    let jobsResult = this.jobsSearchResult(jobList, searchInput, parseInt(selectedCity), parseInt(selectedProf))
+    let jobsResult = this.jobsSearchResult(this.allJob, searchInput, parseInt(selectedCity), parseInt(selectedProf))
 
     if (jobsResult.length !== 0) {
       this.setState({
@@ -39,7 +38,7 @@ class AllJob extends Component {
       })
     } else {
       this.setState({
-        jobs: jobList,
+        jobs: this.allJob,
         professions: profList,
         cities: cityList
       })
@@ -49,17 +48,30 @@ class AllJob extends Component {
 
   jobsSearchResult = (jobList, inputSearch, cityId, professionId) => {
     return jobList.filter(job => {
-      if (job.city.id && job.jobRequireProfessionJobList[0])
-        return job.city.id === cityId
-          && job.jobRequireProfessionJobList[0].professionJob.id === professionId
-          && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
-      else return job.city.id !== -1
+      return job.city.id === cityId
+        && job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == professionId).length !== 0
+        && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
     })
   }
+
+  jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id == cityId))
+
+  jobsFilterByProf = (jobList, profId) => (jobList.filter(job => {
+    console.log(job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == profId).length)
+    return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == profId).length !== 0 ? job : null
+  }))
 
   onChangePage = (pageOfItems) => {
     // update state with new page of items
     this.setState({ pageOfItems: pageOfItems });
+  }
+
+  onClickCity = e => {
+    this.setState({ jobs: this.jobsFilterByCity(this.state.jobs, e.target.dataset.id) })
+  }
+
+  onClickProf = e => {
+    this.setState({ jobs: this.jobsFilterByProf(this.state.jobs, e.target.dataset.id) })
   }
 
   render() {
@@ -94,14 +106,17 @@ class AllJob extends Component {
                 <div className="row">
                   <Job jobs={this.state.pageOfItems} />
                 </div>
-                <div className='pagination-controls' style={{ display: "flex", float:"right", marginRight: "11px" }}>
+                <div className='pagination-controls' style={{ display: "flex", float: "right", marginRight: "11px" }}>
                   <Pagination items={jobs} onChangePage={this.onChangePage} pageJob />
                 </div>
               </div>
               <div className="col-lg-3">
-                <Filter cities={cities} professions={professions} />
+                <Filter cities={cities}
+                  onClickCity={this.onClickCity}
+                  professions={professions}
+                  onClickProf={this.onClickProf} />
               </div>
-              
+
             </div>
           </div>
         </div>
