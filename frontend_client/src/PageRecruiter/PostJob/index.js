@@ -12,6 +12,7 @@ const getInitialState = () => {
     cities: [],
     status: [],
     recruiter: [],
+    profession: [],
     curentRecruiter: null,
   };
   return initialState;
@@ -27,7 +28,7 @@ class PostJob extends Component {
   componentWillMount() {
     const token = localStorage.getItem("currentRecruiter");
     console.log(token)
-    if(!token){
+    if (!token) {
       this.props.history.push("/login-recruiter")
     }
   }
@@ -49,10 +50,13 @@ class PostJob extends Component {
     fetch("/admin/api/recruiter/list")
       .then(response => response.json())
       .then(data => this.setState({ recruiter: data, isLoading: false }));
+    fetch("/admin/api/profession/list")
+      .then(response => response.json())
+      .then(data => this.setState({ profession: data, isLoading: false }));
   };
 
   render() {
-    const { cities, status, curentRecruiter } = this.state;
+    const { cities, status, curentRecruiter, profession } = this.state;
     if (!curentRecruiter)
       return <div>Loading ...</div>
     return (
@@ -78,17 +82,13 @@ class PostJob extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 col-lg-8 mb-5">
-                <NewPost curentRecruiter={curentRecruiter} cities={cities} status={status} />
+                <NewPost curentRecruiter={curentRecruiter} cities={cities} status={status} profession={profession} />
               </div>
               <div className="col-lg-4">
                 <InfoRecruiter curentRecruiter={curentRecruiter} />
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="newsletter bg-primary py-5">
-          {/* <InputEmail /> */}
         </div>
         <div className="site-footer">
           <Footer />
