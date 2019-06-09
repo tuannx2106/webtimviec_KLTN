@@ -1,5 +1,7 @@
 package com.tuannx.webtimviec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tuannx.webtimviec.model.Identity.UsersJobId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +28,4 @@ public class UsersJob implements Serializable {
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users users;
-
 }
