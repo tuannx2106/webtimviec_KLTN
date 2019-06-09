@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@khanacademy/react-multi-select": "^0.3.3",
     "bootstrap-less": "^3.3.8",
+    "material-ui": "^0.20.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-js-pagination": "^3.0.2",

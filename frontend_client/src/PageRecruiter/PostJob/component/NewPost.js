@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import ReactQuill from "react-quill";
+import SelectField from "./SelectField";
 import "react-quill/dist/quill.snow.css";
 
 class NewPost extends Component {
@@ -77,6 +78,7 @@ class NewPost extends Component {
 
   render() {
     const { item } = this.state;
+    const {profession} = this.props;
     const statusOptionList = this.props.status.map(tus => {
       return (
         <option key={tus.id} value={tus.id}>
@@ -143,6 +145,14 @@ class NewPost extends Component {
                 <option selected>Trạng thái...</option>
                 {statusOptionList}
               </select>
+            </div>
+          </div>
+          <div className="row form-group mb-4">
+            <div className="col-md-12 mb-3 mb-md-0">
+              <label className="font-weight-bold" htmlFor="fullname">Thuộc Ngành nghề</label>
+              <SelectField 
+              options={profession ? profession.map(el => ({ label: el.professionJobName, value: el.id })) : []}
+              />
             </div>
           </div>
           <div className="row form-group mb-4">

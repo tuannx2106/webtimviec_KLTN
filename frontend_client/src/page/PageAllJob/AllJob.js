@@ -49,16 +49,16 @@ class AllJob extends Component {
   jobsSearchResult = (jobList, inputSearch, cityId, professionId) => {
     return jobList.filter(job => {
       return job.city.id === cityId
-        && job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == professionId).length !== 0
+        && job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === professionId).length !== 0
         && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
     })
   }
 
-  jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id == cityId))
+  jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id === cityId))
 
   jobsFilterByProf = (jobList, profId) => (jobList.filter(job => {
-    console.log(job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == profId).length)
-    return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id == profId).length !== 0 ? job : null
+    console.log(job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length)
+    return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length !== 0 ? job : null
   }))
 
   onChangePage = (pageOfItems) => {
