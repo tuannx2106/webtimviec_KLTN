@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Header extends Component {
   render() {
+    const { cities } = this.props;
     return (
       <div className="row align-items-center justify-content-center text-center">
         <div className="col-md-10" data-aos="fade-up" data-aos-delay={400}>
@@ -12,7 +13,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <div className="form-search-wrap mb-3" data-aos="fade-up" data-aos-delay={200}>
+        <div className="form-search-wrap mb-3" data-aos="fade-up" data-aos-delay={200} style={{width:"60%"}}>
           <form method="post">
             <div className="row align-items-center">
               <div className="col-lg-12 mb-4 mb-xl-0 col-xl-5">
@@ -23,8 +24,8 @@ class Header extends Component {
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
                   <select className="form-control rounded">
                     <option selected>Thành phố ...</option>
-                    <option value="1" >demo</option>
-                    <option value="2" >demo</option>
+                    {cities && cities.map(item => (
+                      <option value={item.id} >{item.name}</option>
                     ))}
                   </select>
                 </div>

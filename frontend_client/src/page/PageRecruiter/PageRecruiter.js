@@ -9,6 +9,7 @@ import Pagination from "../../Component/Pagination/Pagination";
 const getInitialState = () => {
   const initialState = {
     recruiters: [],
+    cities: [],
     pageOfItems: []
   };
   return initialState;
@@ -28,6 +29,9 @@ class PageRecruiter extends Component {
     fetch("/admin/api/recruiter/list")
       .then(response => response.json())
       .then(data => this.setState({ recruiters: data, isLoading: false }));
+    fetch("/admin/api/city/list")
+      .then(response => response.json())
+      .then(data => this.setState({ cities: data, isLoading: false }));
   };
 
   onChangePage = (pageOfItems) => {
@@ -36,7 +40,7 @@ class PageRecruiter extends Component {
   }
 
   render() {
-    const { recruiters } = this.state;
+    const { recruiters, cities } = this.state;
     return (
       <div className="site-wrap">
         <div className="site-mobile-menu">
@@ -52,7 +56,7 @@ class PageRecruiter extends Component {
         </div>
         <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(images/hero_2.jpg)' }} data-aos="fade" data-stellar-background-ratio="0.5">
           <div className="container">
-            <Header />
+            <Header cities={cities}/>
           </div>
         </div>
         <div className="site-section bg-light">
@@ -62,7 +66,7 @@ class PageRecruiter extends Component {
                 <div className="row">
                   <Recruiter recruiters={this.state.pageOfItems} />
                 </div>
-                <div className='pagination-controls' style={{ display: "flex", float:"right", marginRight: "11px" }}>
+                <div className='pagination-controls' style={{ display: "flex", float: "right", marginRight: "11px" }}>
                   <Pagination items={recruiters} onChangePage={this.onChangePage} pageJob />
                 </div>
               </div>

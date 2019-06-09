@@ -24,7 +24,7 @@ class ListRecruiter extends Component {
             <h3 className="font-weight-light text-primary">Nhà tuyển dụng hàng đầu</h3>
           </div>
         </div>
-        <div className="row align-items-stretch overlap-category" style={{ height: "550px", padding: "15px 0px", boxShadow: "0 2px 17px -7px rgba(0, 0, 0, 0.2)" }}>
+        <div className="row align-items-stretch overlap-category" style={{ height: "600px", padding: "35px 0px", boxShadow: "0 2px 17px -7px rgba(0, 0, 0, 0.2)" }}>
           <RecruiterItem recruiters={this.state.pageOfItems} />
         </div>
         <Link to="/nhatuyendung"><div style={{float:"right",margin: "10px 0px 0px 15px", color: "darkorange"}}>Xem thêm...</div></Link>
