@@ -67,11 +67,11 @@ class AllJob extends Component {
   }
 
   onClickCity = e => {
-    this.setState({ jobs: this.jobsFilterByCity(this.state.jobs, e.target.dataset.id) })
+    this.setState({ jobs: this.jobsFilterByCity(this.state.jobs, parseInt(e.target.dataset.id)) })
   }
 
   onClickProf = e => {
-    this.setState({ jobs: this.jobsFilterByProf(this.state.jobs, e.target.dataset.id) })
+    this.setState({ jobs: this.jobsFilterByProf(this.state.jobs, parseInt(e.target.dataset.id)) })
   }
 
   render() {
