@@ -11,6 +11,7 @@ import ProfileUser from './page/PageProfileUser/index';
 import ProfileRecruiter from "./page/PageProfileRecruiter/index";
 import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
 import PostJob from "./PageRecruiter/PostJob/index";
+import UserApplyJob from "./page/pageUserApplyJob/UserApplyJob";
 import PageNotFound from "./PageNotFound/index";
 
 const routes = [
@@ -83,6 +84,11 @@ const routes = [
         path: '/404-not-found',
         exact: false,
         main:  PageNotFound
+    },
+    {
+        path: '/user-apply-job',
+        exact: false,
+        main:  UserApplyJob
     },
 ];
 

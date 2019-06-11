@@ -11,10 +11,11 @@ class index extends Component {
     this.state = {
       curentUser: null,
       selectedFile: null,
+      jobUsers: []
     };
   }
 
-  fileSelectHandle = event =>{
+  fileSelectHandle = event => {
     this.setState({
       selectedFile: event.target.files[0]
     })
@@ -28,18 +29,22 @@ class index extends Component {
       body: body
     })
       .then(response => {
-      console.log(response);
-    })
+        console.log(response);
+      })
   };
 
 
-  componentDidMount() {
-    const curUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.setState({ curentUser: curUser });
+  async componentDidMount() {
+    const curUser = await JSON.parse(localStorage.getItem('currentUser'));
+    let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
+    this.setState({ 
+      curentUser: curUser,
+      jobUsers: data,
+     })
   }
 
   render() {
-    const { curentUser } = this.state;
+    const { curentUser, jobUsers } = this.state;
     if (!curentUser)
       return <div>Loading ...</div>
     return (
@@ -89,7 +94,7 @@ class index extends Component {
                 </div>
                 <div className="tab-pane" id="myjob">
                   <hr />
-                  <Myjob />
+                  <Myjob jobUsers={jobUsers} />
                   <hr />
                 </div>
               </div>

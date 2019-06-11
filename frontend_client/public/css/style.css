@@ -2269,6 +2269,23 @@ text-align: left;
   margin: 0 auto 8px;
   height: 18px;
 }
+.avatar{
+  max-width: 75%;
+}
+.img-JobUser{
+  height: 122px;
+  width: auto;
+  max-width: 197px;
+  padding: 6px;
+}
+.btn-apply{
+  float: right;
+  position: absolute;
+  right: 25px;
+  bottom: 15px;
+  color: #fff;
+}
+}
 .cbLeftHome{
   padding: 20px;
   position: relative;
