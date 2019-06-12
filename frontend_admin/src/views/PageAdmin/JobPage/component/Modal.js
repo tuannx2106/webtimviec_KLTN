@@ -39,7 +39,7 @@ const FormDialog = (props: Props) => {
     recruiter,
     city,
     onCreateJob,
-    onUpdateJob
+    onUpdateJob,
   } = props;
 
   const temp = citys ? citys.find(el => el.id === city) : {};
@@ -151,9 +151,11 @@ const FormDialog = (props: Props) => {
             </GridItem>
             <GridItem xs={11} md={10} style={{ margin: "55px 0px 25px 0px" }}>
               <InputLabel>Ngành nghề</InputLabel>
-              <SelectField 
-              options={professions ? professions.map(el => ({ label: el.professionJobName, value: el.id })) : []}
-              />
+              <SelectField
+                 options={professions ? professions.map(el => ({ name: el.professionJobName, value: el.id })) : []}
+                 type="jobRequireProfessionJobList"
+                 onChange={handleChangeSelect}
+               /> 
             </GridItem>
             <GridItem xs={12} md={10}>
               <FormControl

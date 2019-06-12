@@ -34,6 +34,7 @@ const getInitialState = () => {
       status: "",
       recruiter: "",
       city: "",
+      jobRequireProfessionJobList: ""
     }
   };
   return initialState;
@@ -140,7 +141,6 @@ class JobPageContainer extends React.Component {
   };
 
   handleDelete = id => {
-    // console.log(id)
     fetch(`/admin/api/job/${id}`, {
       method: "DELETE",
       headers: {
@@ -173,6 +173,7 @@ class JobPageContainer extends React.Component {
 
   onCreateJob = async () => {
     const { form } = this.state;
+    console.log(form)
     await fetch(`/admin/api/job`, {
       method: "POST",
       headers: {
@@ -236,7 +237,6 @@ class JobPageContainer extends React.Component {
       recruiter,
       status,
     } = this.state;
-
     return (
       <Fragment>
         <JobPage

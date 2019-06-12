@@ -108,12 +108,12 @@ class Pagination extends Component {
       <ul className="pagination1">
         { pageJob && 
         <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(1)}>Đầu</a>
+          <a onClick={() => this.setPage(1)}>&lt;&lt;</a>
         </li>
         }
         {
         <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage - 1)}>Trước</a>
+          <a onClick={() => this.setPage(pager.currentPage - 1)}>&lt;</a>
         </li>
         }
         { pageJob && pager.pages.map((page, index) =>
@@ -123,12 +123,12 @@ class Pagination extends Component {
         )}
         { 
         <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage + 1)}>Sau</a>
+          <a onClick={() => this.setPage(pager.currentPage + 1)}>&gt;</a>
         </li>
         }
         { pageJob &&
         <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.totalPages)}>Cuối</a>
+          <a onClick={() => this.setPage(pager.totalPages)}>&gt;&gt;</a>
         </li>
         }
       </ul>
