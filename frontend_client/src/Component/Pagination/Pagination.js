@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import "./pagination.css";
@@ -50,12 +51,16 @@ class Pagination extends Component {
     // default to first page
     currentPage = currentPage || 1;
 
-    // default page size is 10
-    pageSize = pageSize || 8;
+    // default page size is
+    {
+      this.props.pageJob ?
+        pageSize = pageSize || 16 :
+        pageSize = pageSize || 8
+    }
 
     // calculate total pages
-    // var totalPages = Math.ceil(totalItems / pageSize);
-    var totalPages = Math.ceil(24 / pageSize);
+    var totalPages = Math.ceil(totalItems / pageSize);
+    // var totalPages = Math.ceil(24 / pageSize);
 
     var startPage, endPage;
     if (totalPages <= 10) {
@@ -97,7 +102,7 @@ class Pagination extends Component {
     };
   }
   render() {
-    const {pageJob} = this.props;
+    const { pageJob } = this.props;
     var pager = this.state.pager;
 
     if (!pager.pages || pager.pages.length <= 1) {
@@ -106,30 +111,30 @@ class Pagination extends Component {
     }
     return (
       <ul className="pagination1">
-        { pageJob && 
-        <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(1)}>&lt;&lt;</a>
-        </li>
+        {pageJob &&
+          <li className={pager.currentPage === 1 ? 'disabled' : ''}>
+            <a onClick={() => this.setPage(1)}>&lt;&lt;</a>
+          </li>
         }
         {
-        <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage - 1)}>&lt;</a>
-        </li>
+          <li className={pager.currentPage === 1 ? 'disabled' : ''}>
+            <a onClick={() => this.setPage(pager.currentPage - 1)}>&lt;</a>
+          </li>
         }
-        { pageJob && pager.pages.map((page, index) =>
+        {pageJob && pager.pages.map((page, index) =>
           <li key={index} className={pager.currentPage === page ? 'active' : ''}>
             <a onClick={() => this.setPage(page)}>{page}</a>
           </li>
         )}
-        { 
-        <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.currentPage + 1)}>&gt;</a>
-        </li>
+        {
+          <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
+            <a onClick={() => this.setPage(pager.currentPage + 1)}>&gt;</a>
+          </li>
         }
-        { pageJob &&
-        <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-          <a onClick={() => this.setPage(pager.totalPages)}>&gt;&gt;</a>
-        </li>
+        {pageJob &&
+          <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
+            <a onClick={() => this.setPage(pager.totalPages)}>&gt;&gt;</a>
+          </li>
         }
       </ul>
     );
