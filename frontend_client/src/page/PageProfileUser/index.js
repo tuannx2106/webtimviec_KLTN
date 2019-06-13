@@ -46,7 +46,7 @@ class index extends Component {
   render() {
     const { curentUser, jobUsers } = this.state;
     if (!curentUser)
-      return <div>Loading ...</div>
+      return <div>Đang tải ...</div>
     return (
       <Fragment>
         <div className="site-navbar container py-0" style={{ backgroundImage: 'url(images/hero-1.jpg)' }} role="banner">

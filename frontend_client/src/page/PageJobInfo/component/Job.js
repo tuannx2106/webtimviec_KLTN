@@ -9,12 +9,18 @@ class Job extends Component {
     this.state = {
       curentUser: null,
       isOpenModal: false,
+      jobUsers: []
     };
   }
 
-  componentDidMount() {
-    const curUser = JSON.parse(localStorage.getItem('currentUser'));
+  async componentDidMount() {
+    const curUser = await JSON.parse(localStorage.getItem('currentUser'));
     this.setState({ curentUser: curUser });
+
+    let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
+    this.setState({
+      jobUsers: data,
+    })
   }
 
   handleApply = async (id) => {
@@ -38,11 +44,12 @@ class Job extends Component {
   }
   handleClose = () => {
     this.setState({ isOpenModal: false });
+    this.props.history.push("/tatcacongviec")
   };
 
   render() {
     const { job } = this.props
-    const { isOpenModal } = this.state;
+    const { isOpenModal, jobUsers } = this.state;
     return (
       <Fragment>
         {isOpenModal && (
@@ -61,7 +68,12 @@ class Job extends Component {
               <address className="mb-0">Địa chỉ: {job.recruiter.address} </address>
               <span className="review mb-0">Hạn nộp hồ sơ: {job.expired}</span>
               <div className=" submit-bt">
-                <button className="btn btn-primary rounded py-2 px-4 text-white" onClick={() => this.handleApply(job.id)}>NỘP ĐƠN</button>
+                {(jobUsers.map(item => (item.job.id))).indexOf(job.id) > -1
+                  ?
+                  <button className="btn btn-primary rounded py-2 px-4 text-white " disabled >NỘP ĐƠN</button>
+                  :
+                  <button className="btn btn-primary rounded py-2 px-4 text-white " onClick={() => this.handleApply(job.id)}>NỘP ĐƠN</button>
+                }
               </div>
             </div>
           </div>

@@ -83,6 +83,9 @@ class PageLogin extends Component {
                   <div className="col-12 mt-3">
                     <h6>Nếu chưa có tài khoản? <Link to="/register-recruiter">Đăng kí!</Link></h6>
                   </div>
+                  <div className="col-12" >
+                   <Link to="/trang-nha-tuyen-dung"><h6>Quay về trang chủ</h6></Link>
+                  </div>
                 </div>
               </form>
             </div>

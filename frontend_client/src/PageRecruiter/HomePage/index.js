@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Menu from "../ComponentRecruiter/Header/Menu";
 import Header from "../ComponentRecruiter/Header/Header";
 import Footer from "../ComponentRecruiter/Footer/Footer"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class HomePageRcruiter extends Component {
 
@@ -31,22 +31,22 @@ class HomePageRcruiter extends Component {
           <div className="row product-list">
             <div className="product-list-box">
               <img className="product-list__numberEMRank" src='logo/logo1.png' alt="" ></img>
-              <div className="product-list__textNew">Đăng tuyển công việc</div>
+              <a href="#dangtuyen" className="product-list__textNew">Đăng tuyển công việc</a>
               <div className="product-list__benefit">Giúp đẩy mạnh, quảng bá thương hiệu tuyển dụng</div>
             </div>
             <div className="product-list-box">
-              <img className="product-list__numberEMRank" src="logo/logo2.png" alt=""/>
-              <div className="product-list__textNew">Lọc hồ sơ ứng viên </div>
+              <img className="product-list__numberEMRank" src="logo/logo2.png" alt="" />
+              <a href="#lochoso" className="product-list__textNew">Lọc hồ sơ ứng viên </a>
               <div className="product-list__benefit">Giúp đẩy mạnh, quảng bá thương hiệu tuyển dụng</div>
             </div>
             <div className="product-list-box">
               <img className="product-list__numberEMRank" src="logo/logo3.png" alt="" />
-              <div className="product-list__textNew">Quảng bá tuyển dụng</div>
+              <a href="#quangcao" className="product-list__textNew">Quảng bá tuyển dụng</a>
               <div className="product-list__benefit">Giúp đẩy mạnh, quảng bá thương hiệu tuyển dụng</div>
             </div>
           </div>
         </div>
-        <div className="row list-pro">
+        <div className="row list-pro" id="dangtuyen" >
           <div className="container">
             <div className="row relative">
               <div className="col-xs-12 col-sm-5 paddingRight0 padding0-mb">
@@ -74,13 +74,12 @@ class HomePageRcruiter extends Component {
               </div>
             </div>
           </div>
-
         </div>
-        <div className="row list-pro bg-light">
+        <div className="row list-pro bg-light" id="lochoso">
           <div className="container" style={{ maxWidth: "980px" }}>
             <div className="row relative">
               <div className=" col-sm-7 padding0-mb">
-                <img className="mar-img" src="logo/logo5.png" alt=""/>
+                <img className="mar-img" src="logo/logo5.png" alt="" />
               </div>
               <div className="col-xs-12 col-sm-5 marginTop25-mb padding0-mb">
                 <h2 className="fontsize40">Lọc hồ sơ</h2>
@@ -106,7 +105,7 @@ class HomePageRcruiter extends Component {
           </div>
         </div>
         <br></br>
-        <div className="bg-w">
+        <div className="bg-w" id="quangcao">
           <div className="container" style={{ maxWidth: "980px" }}>
             <div className="font300">Quảng bá tuyển dụng với<br />
               <b className="font600">các gói dịch vụ tốt nhất</b>
@@ -123,7 +122,7 @@ class HomePageRcruiter extends Component {
               </div>
               <div className="col-xs-12 col-sm-4 paddingRight10 paddingLeft10">
                 <div className="box-dv">
-                  <img className="icon-dv-1" src="logo/logo7.png" alt=""/>
+                  <img className="icon-dv-1" src="logo/logo7.png" alt="" />
                   <div style={{ fontSize: "18px", color: "#363636", textTransform: "uppercase", fontWeight: "700" }}>
                     Đăng tin trang ngành</div>
                   <div style={{ fontSize: "18px", color: "#f87612 ", textTransform: "uppercase", fontWeight: "700" }}>
@@ -133,7 +132,7 @@ class HomePageRcruiter extends Component {
 
               <div className="col-xs-12 col-sm-4 paddingRight10 paddingLeft10">
                 <div className="box-dv">
-                  <img className="icon-dv-1" src="logo/logo8.png" alt=""/>
+                  <img className="icon-dv-1" src="logo/logo8.png" alt="" />
                   <div style={{ fontSize: "18px", color: "#363636", textTransform: "uppercase", fontWeight: "700" }}>
                     Lọc hồ sơ</div>
                   <div style={{ fontSize: "18px", color: "#f87612 ", textTransform: "uppercase", fontWeight: "700" }}>

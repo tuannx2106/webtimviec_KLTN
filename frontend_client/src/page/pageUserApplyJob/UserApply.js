@@ -13,7 +13,7 @@ class UserApply extends Component {
             </div>
             <div className="lh-content">
               <h5>Tên ứng viên: <Link to="#">{item.users.name} </Link> </h5>
-              <h3>Email:<Link to="#"> {item.users.email}</Link></h3>
+              <h3>Email:<Link to="#"> {item.users.email} </Link>|  Số điện thoại: {item.users.sdt}</h3>
               <h3 className="review mb-0">Giới tính: {item.users.gender}</h3>
               <h3 className="review mb-0">Ngày sinh: {item.users.birthday}</h3>
             </div>
