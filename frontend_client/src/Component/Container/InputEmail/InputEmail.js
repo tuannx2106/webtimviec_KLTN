@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 class InputEmail extends Component {
   render() {
@@ -12,7 +13,7 @@ class InputEmail extends Component {
           <div className="col-md-6">
             <form className="d-flex">
               <input type="text" className="form-control " placeholder="Email" />
-              <button className="btn btn-warning btn-white" >Nhập</button> 
+              <Link to="#" className="btn btn-warning" >Nhập</Link> 
             </form>
           </div>
         </div>

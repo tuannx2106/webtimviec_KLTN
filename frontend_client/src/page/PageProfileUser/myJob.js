@@ -2,22 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom"
 
 class Myjob extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     jobUsers: []
-  //   };
-  // }
-
-  // componentDidMount() {
-  //   fetch(`/admin/api/userjob/user/1`)
-  //     .then(response => response.json())
-  //     .then(data => this.setState({ jobUsers: data }));
-  // }
-
   render() {
     const { jobUsers } = this.props;
-    console.log(jobUsers);
     if (!jobUsers)
     return <div>Đang tải...</div>
     return (
