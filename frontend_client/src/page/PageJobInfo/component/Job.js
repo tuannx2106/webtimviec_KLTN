@@ -17,10 +17,11 @@ class Job extends Component {
     const curUser = await JSON.parse(localStorage.getItem('currentUser'));
     this.setState({ curentUser: curUser });
 
+    if(curUser){
     let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
     this.setState({
       jobUsers: data,
-    })
+    })}
   }
 
   handleApply = async (id) => {
@@ -50,6 +51,7 @@ class Job extends Component {
   render() {
     const { job } = this.props
     const { isOpenModal, jobUsers } = this.state;
+
     return (
       <Fragment>
         {isOpenModal && (
