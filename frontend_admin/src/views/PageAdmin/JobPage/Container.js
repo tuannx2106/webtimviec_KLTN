@@ -209,6 +209,11 @@ class JobPageContainer extends React.Component {
         },
         body: JSON.stringify(jrpj)
       }).then(res => res.json())
+        .then(data => {
+          if (data) {
+            this.getListJob();
+          }
+        });
     })
 
     this.setState({ isOpenModal: false });
