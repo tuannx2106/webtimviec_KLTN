@@ -26,6 +26,16 @@ public class JobController {
         return list;
     }
 
+    //Find all by job
+    @RequestMapping(value = "/recruiter/{recruiterId}",
+            method = RequestMethod.GET,
+            produces = { MediaType.APPLICATION_JSON_VALUE })
+    @ResponseBody
+    public List<Job> getAllByRecruiter(@PathVariable("recruiterId") String recruiterId) {
+        List<Job> list = jobService.findAllByUser(Integer.valueOf(recruiterId));
+        return list;
+    }
+
     //Find particular
     @RequestMapping(value = "/{jobId}", //
             method = RequestMethod.GET, //

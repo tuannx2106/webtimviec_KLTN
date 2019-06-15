@@ -4,8 +4,10 @@ package com.tuannx.webtimviec.service;
 import com.tuannx.webtimviec.model.Job;
 import com.tuannx.webtimviec.model.JobRequireProfessionJob;
 import com.tuannx.webtimviec.model.ProfessionJob;
+import com.tuannx.webtimviec.model.Recruiter;
 import com.tuannx.webtimviec.repository.JobRepository;
 import com.tuannx.webtimviec.repository.JobRequireProfessionJobRepository;
+import com.tuannx.webtimviec.repository.RecruiterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,21 @@ public class JobService {
     JobRepository jobRepository;
 
     @Autowired
+    RecruiterRepository recruiterRepository;
+
+    @Autowired
     JobRequireProfessionJobRepository jobRequireProfessionJobRepository;
 
     public List<JobRequireProfessionJob> findAllByProfessionJob(ProfessionJob professionJob) {
         return jobRequireProfessionJobRepository.findAllByProfessionJob(professionJob);
+    }
+
+    public List<Job> findAllByUser(Integer recruiterId) {
+        Optional<Recruiter> optionalRecruiter = recruiterRepository.findById(recruiterId);
+        if(optionalRecruiter.isPresent()) {
+            return jobRepository.findAllByRecruiter(optionalRecruiter.get());
+        }
+        else return null;
     }
 
     ////////////////// Admin
