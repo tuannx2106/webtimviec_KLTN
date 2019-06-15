@@ -39,7 +39,7 @@ public class JobRequireProfessionJobController {
     }
 
     //Add
-    @RequestMapping(value = "/", //
+    @RequestMapping(value = "", //
             method = RequestMethod.POST, //
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
