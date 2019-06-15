@@ -27,7 +27,7 @@ const getInitialState = () => {
     city: "",
     form: {
       title: "",
-      companyName: "",
+      description: "",
       expired: "",
       experience: "",
       date: "",
@@ -171,11 +171,11 @@ class JobPageContainer extends React.Component {
 
   onCreateJob = async () => {
     const { form } = this.state;
-    const { title, companyName, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList } = form
+    const { title, description, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList } = form
 
     const jobItem = {
       title,
-      companyName,
+      description,
       expired,
       experience,
       date,
