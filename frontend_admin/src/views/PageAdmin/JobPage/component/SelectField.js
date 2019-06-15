@@ -17,7 +17,6 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
     if (values) {
       onChange(type, values);
     }
-    console.log(values)
   }
 
   selectionRenderer = (values) => {

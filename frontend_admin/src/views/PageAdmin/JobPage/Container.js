@@ -159,7 +159,6 @@ class JobPageContainer extends React.Component {
     form[key] = value;
     this.setState({ form });
     // eslint-disable-next-line no-console
-    console.log(value);
   };
 
   handleChangeSelect = (key, value) => {
@@ -168,26 +167,50 @@ class JobPageContainer extends React.Component {
       id: value
     };
     this.setState({ form: form });
-    console.log(value);
   };
 
   onCreateJob = async () => {
     const { form } = this.state;
-    console.log(form)
-    await fetch(`/admin/api/job`, {
+    const { title, companyName, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList } = form
+
+    const jobItem = {
+      title,
+      companyName,
+      expired,
+      experience,
+      date,
+      status,
+      recruiter,
+      city
+    }
+
+    //Add job
+    const newJob = await fetch(`/admin/api/job`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(form)
+      body: JSON.stringify(jobItem)
+    }).then(res => res.json())
+
+    const jrpjList = [...jobRequireProfessionJobList.id.map(profId => ({
+      job: { id: newJob.id },
+      professionJob: { id: profId }
+    }))]
+
+    //add profession Job to that job
+    await jrpjList.map(async jrpj => {
+      const jrpjAfterAdd = await fetch('/admin/api/jobrequireprofession', {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jrpj)
+      }).then(res => res.json())
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data) {
-          this.getListJob();
-        }
-      });
+
     this.setState({ isOpenModal: false });
   };
 
