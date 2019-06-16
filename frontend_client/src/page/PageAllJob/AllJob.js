@@ -19,7 +19,11 @@ class AllJob extends Component {
       filterCity: 0,
       filterProf: 0
     };
-    this.allJob = [];
+    this.allJob = [{
+      city: {},
+      jobRequireProfessionJobList: [{ professionJob: {} }],
+      title: ""
+    }];
   }
 
   async componentDidMount() {
