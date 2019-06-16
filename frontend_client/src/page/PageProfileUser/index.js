@@ -10,29 +10,9 @@ class index extends Component {
     super(props);
     this.state = {
       curentUser: null,
-      selectedFile: null,
       jobUsers: []
     };
   }
-
-  fileSelectHandle = event => {
-    this.setState({
-      selectedFile: event.target.files[0]
-    })
-  }
-
-  onUpdateAvatar = () => {
-    const body = new FormData();
-    body.append('avatar', this.state.selectedFile);
-    fetch(`/admin/api/users`, {
-      method: "PUT",
-      body: body
-    })
-      .then(response => {
-        console.log(response);
-      })
-  };
-
 
   async componentDidMount() {
     const curUser = await JSON.parse(localStorage.getItem('currentUser'));
@@ -66,14 +46,14 @@ class index extends Component {
                   </div>
                 )}
                 {/* <img src={curentUser.avatar} className="avatar img-circle img-thumbnail" alt="avatar" /> */}
-                <h6 className="txt-img">Cập nhật hình đại diện</h6>
+                <h6 className="txt-img">Dán link hình vào đây để cập nhật hình đại diện</h6>
                 <input
-                  type="file"
+                  type="text"
                   name="avatar"
-                  onChange={this.fileSelectHandle}
-                  className="text-center center-block file-upload"
+                  // onChange={this.fileSelectHandle}
+                  className="center-block file-upload"
                 />
-                <button className="btn btn-primary mt-3" onClick={this.onUpdateAvatar}>Cập nhật hình đại diện</button>
+                <button className="btn btn-primary mt-3" >Cập nhật hình đại diện</button>
               </div>
             </div>
             <div className="col-sm-9">

@@ -10,7 +10,7 @@ class Myjob extends Component {
       <Fragment>
         {jobUsers && jobUsers.map(item => (
         <div className="d-block d-md-flex listing border">
-          <div className="img d-block" style={{textAlign:"center"}}>
+          <div className="img d-block text-center">
               <img className="img-JobUser" src={item.job.recruiter.logo} alt="" />
             </div>
           <div className="lh-content" >
