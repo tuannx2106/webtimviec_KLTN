@@ -2,24 +2,30 @@ import React, { Component, Fragment } from 'react';
 import Menu from "../../PageRecruiter/ComponentRecruiter/Header/Menu";
 import "./style.css"
 import ProfileRecruiter from './ProfileRecruiter';
-import JobRecruiter from  "./myJobRecruiter";
+import JobRecruiter from "./myJobRecruiter";
 
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
       curentRecruiter: null,
+      listJobRecruiter: []
     };
   }
 
-  componentDidMount() {
-    const curRecruiter = JSON.parse(localStorage.getItem('currentRecruiter'));
-    this.setState({ curentRecruiter: curRecruiter });
+  async componentDidMount() {
+    const curRecruiter = await JSON.parse(localStorage.getItem('currentRecruiter'));
+
+    let data = await fetch(`/admin/api/job/recruiter/` + curRecruiter.id).then(response => response.json())
+    this.setState({
+      curentRecruiter: curRecruiter,
+      listJobRecruiter: data,
+    })
   }
   render() {
-    const { curentRecruiter } = this.state;
+    const { curentRecruiter, listJobRecruiter } = this.state;
     if (!curentRecruiter)
-      return <div>Loading ...</div>
+      return <div>Đang tải ...</div>
     return (
       <Fragment>
         <div className="site-navbar container py-0 " style={{ backgroundImage: 'url(images/hero-1.jpg)' }} role="banner">
@@ -29,9 +35,10 @@ class index extends Component {
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-3">
               <div className="text-center">
-              <img src={curentRecruiter.logo} className="avatar img-thumbnail" alt="avatar" />
-                <h6 className="txt-img">Cập nhật logo công ty</h6>
-                <input type="file" className="text-center center-block file-upload" />
+                <img src={curentRecruiter.logo} className="avatar img-thumbnail" alt="avatar" />
+                <h6 className="txt-img">Dán link ảnh vào đây để cập nhật logo công ty</h6>
+                <input type="text" className="center-block file-upload" />
+                <button className="btn btn-primary mt-3" >Cập nhật logo</button>
               </div>
             </div>
             <div className="col-sm-9">
@@ -47,12 +54,12 @@ class index extends Component {
               <div className="tab-content">
                 <div className="tab-pane active" id="profilerecruiter">
                   <hr />
-                    <ProfileRecruiter curentRecruiter ={curentRecruiter}/>
+                  <ProfileRecruiter curentRecruiter={curentRecruiter} />
                   <hr />
                 </div>
                 <div className="tab-pane" id="myjobrecruiter">
                   <hr />
-                    <JobRecruiter/>
+                  <JobRecruiter listJobRecruiter={listJobRecruiter} curentRecruiter={curentRecruiter}/>
                   <hr />
                 </div>
               </div>

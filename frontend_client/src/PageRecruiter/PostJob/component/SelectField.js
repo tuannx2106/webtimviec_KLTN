@@ -1,92 +1,62 @@
 import React, { Component } from 'react';
-import MultiSelect from '@khanacademy/react-multi-select';
-import Checkbox from 'material-ui/Checkbox';
-import Chip from 'material-ui/Chip';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const muiTheme = getMuiTheme({});
 
-const styles = {
-  chip: {
-    margin: 2,
-    marginRight: 4,
-  },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    maxHeight: '100%',
-  },
-};
-
-export default class MultiSelectExample extends Component {
+export default class SelectFieldExampleSelectionRenderer extends Component {
   state = {
-    selectedOptions: [],
+    values: [],
+  };
+
+  handleChange = (event, index, values) => {
+    const { type, onChange } = this.props;
+    this.setState({ values });
+    if (values) {
+      onChange(type, values);
+    }
+    console.log(values)
   }
 
-  handleSelectedChanged = (selectedOptions) => (
-    this.setState({ selectedOptions })
-  )
-
-  handleUnselectItem = (removedVal) => () => (
-    this.setState({
-      selectedOptions: this.state.selectedOptions
-        .filter(option => option !== removedVal)
-    })
-  )
-
-  renderOption = ({ checked, option, onClick }) => (
-    <Checkbox
-      label={option.label}
-      onCheck={onClick}
-      checked={checked}
-    />
-  )
-
-  renderSelected = (selected, options) => {
-    if (!options.length) {
-      return <span>Không có ngành nghề nào</span>;
+  selectionRenderer = (values) => {
+    switch (values.length) {
+      case 0:
+        return '';
+      case 1:
+        return this.props.options[values[0]].name;
+      default:
+        return `${values.length} ngành nghề được chọn`;
     }
+  }
 
-    if (!selected.length) {
-      return <span>Chọn ngành nghề...</span>;
-    }
-
-    if (selected.length === options.length) {
-      return <span>Tất cả</span>;
-    }
-
-    if (selected.length > 6) {
-      return <span>Đã chọn {selected.length} ngành nghề</span>;
-    }
-
-    return (
-      <div style={styles.wrapper}>
-        {selected.map(value => (
-          <Chip
-            key={value}
-            style={styles.chip}
-            onRequestDelete={this.handleUnselectItem(value)}
-          >
-            {options.find(o => value === o.value).label}
-          </Chip>
-        ))}
-      </div>
-    )
+  menuItems(options) {
+    return options.map((option) => (
+      <MenuItem
+        key={option.value}
+        insetChildren={true}
+        checked={this.state.values.indexOf(option.value) > -1}
+        value={option.value}
+        primaryText={option.name}
+      />
+    ));
   }
 
   render() {
-    const { selectedOptions } = this.state;
-    const {options} = this.props;
+    const{options} = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <MultiSelect
-          options={options}
-          selected={selectedOptions}
-          ItemRenderer={this.renderOption}
-          valueRenderer={this.renderSelected}
-          onSelectedChanged={this.handleSelectedChanged}
-        />
+        <SelectField
+          style={{width:"100%"}}
+          multiple={true}
+          hintText="Công việc thuộc ngành nghề"
+          value={this.state.values}
+          onChange={this.handleChange}
+          selectionRenderer={this.selectionRenderer}
+        >
+          {this.menuItems(options)}
+        </SelectField>
       </MuiThemeProvider>
     );
   }

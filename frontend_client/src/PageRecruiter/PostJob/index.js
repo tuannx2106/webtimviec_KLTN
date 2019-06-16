@@ -27,7 +27,6 @@ class PostJob extends Component {
 
   componentWillMount() {
     const token = localStorage.getItem("currentRecruiter");
-    console.log(token)
     if (!token) {
       this.props.history.push("/login-recruiter")
     }
