@@ -1,0 +1,50 @@
+﻿CHƯƠNG I. TỔNG QUAN
+	1. Đặt vấn đề
+	2. Ý nghĩa thực tiễn
+	3. Mục tiêu và nhiệm vụ của đề tài
+		3.1. Mục tiêu
+		3.2. Nhiệm vụ
+CHƯƠNG II. CƠ SỞ LÝ THUYẾT
+	1. Kiến thức cơ bản
+	2. Spring Boot
+		2.1. Khái niệm về Spring Boot
+		2.2. Ưu điểm và nhược điểm của Spring Boot
+	3. Mô hình MVC
+		3.1. Khái niệm mô hình MVC
+		3.2. Ưu điểm và nhược điểm của mô hình MVC
+	4. ReactJs
+		4.1.  ...
+		4.2.  ...
+	5. RESTFUL API
+		5.1. Giới thiệu
+		5.2. Restful, Restful API là gì?
+		5.3. Kiến trúc của Restful
+		5.4. Ưu điểm và nhược điểm cảu Restful
+	6. GitHub
+		6.1. GitHub là gì?
+		6.2. Tại sao nên sử dụng Git?
+CHƯƠNG III. PHÂN TÍCH THIẾT KẾ HỆ THỐNG
+	1. Xác định yêu cầu, khảo sát nghiệp vụ
+		1.1. Xác định yêu cầu
+		1.2. Khảo sát nghiệp vụ
+	2. Xác định các Actor và Usecase
+		2.1. Các tác nhân tham gia vào hệ thống
+		2.2. Biểu đồ các Actor và Usecase
+		2.3. Đặc tả Usecase
+	3. Biểu đồ tuần tự
+		3.1. Biểu đồ tuần tự dành cho người tìm việc
+		3.2. Biểu đồ tuần tự dành cho nhà tuyển dụng
+		3.3. Biểu đồ tuần tụ dành cho admin
+	4. Biểu đồ lớp
+	5. Biểu đồ hoạt động
+	6. Biểu đồ thực thể liên kết
+	7. Thiết kế cơ sở dữ liệu
+	8. Thiết kế giao diện
+CHƯƠNG IV. CÀI ĐẶT VÀ KIỂM THỬ
+	1. Cài đặt
+	2. Kiểm thử
+CHƯƠNG V. TỔNG KẾT
+	1. Kết quả đạt được
+	2. Hạn chế
+	3. Hướng phát triển
+DANH MỤC TÀI LIỆU THAM KHẢO
