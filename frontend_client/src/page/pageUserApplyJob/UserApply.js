@@ -8,7 +8,7 @@ class UserApply extends Component {
       <Fragment>
         {userAddJob && userAddJob.map(item => (
           <div className="d-block d-md-flex listing border">
-            <div className="img d-block" style={{textAlign:"center"}} >
+            <div className="img d-block" style={{ textAlign: "center" }} >
               <img className="img-JobUser" src={item.users.avatar} alt="" />
             </div>
             <div className="lh-content">

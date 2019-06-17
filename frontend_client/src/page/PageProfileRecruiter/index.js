@@ -42,12 +42,12 @@ class index extends Component {
               </div>
             </div>
             <div className="col-sm-9">
-              <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#profilerecruiter" role="tab" data-toggle="tab">Hồ sơ công ty</a>
+              <ul className="nav nav-tabs" role="tablist">
+                <li className="nav-item">
+                  <a className="nav-link active" href="#profilerecruiter" role="tab" data-toggle="tab">Hồ sơ công ty</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#myjobrecruiter" role="tab" data-toggle="tab">Công việc đã đăng</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="#myjobrecruiter" role="tab" data-toggle="tab">Công việc đã đăng</a>
                 </li>
               </ul>
 

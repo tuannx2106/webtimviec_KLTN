@@ -11,18 +11,22 @@ class RecruiterInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        recruiter: {},
+      recruiter: {},
+      listJobRecruiter: []
     }
   }
 
-  componentDidMount() {
-    fetch(`/admin/api/recruiter/${this.props.match.params.id}`)
-      .then(response => response.json())
-      .then(data => this.setState({ recruiter: data }));
+  async componentDidMount() {
+    let rec = await fetch(`/admin/api/recruiter/${this.props.match.params.id}`).then(response => response.json())
+    let list = await fetch(`/admin/api/job/recruiter/${this.props.match.params.id}`).then(response => response.json())
+    this.setState({
+      recruiter: rec,
+      listJobRecruiter: list
+    })
   }
 
   render() {
-    const { recruiter } = this.state;
+    const { recruiter, listJobRecruiter } = this.state;
     return (
       <div className="site-wrap">
         <div className="site-mobile-menu">
@@ -45,9 +49,9 @@ class RecruiterInfo extends Component {
           <div className="container">
             <Infomation recruiter={recruiter} />
             <h4 className="text-center">Giới thiệu về công ty</h4>
-            <DescriptionRecruiter recruiter={recruiter}/>
-            <h4 className="text-center">Việc làm {recruiter ? recruiter.companyName:""} tuyển dụng</h4>
-            <JobOfRecruiter />
+            <DescriptionRecruiter recruiter={recruiter} />
+            <h4 className="text-center">Việc làm {recruiter ? recruiter.companyName : ""} tuyển dụng</h4>
+              <JobOfRecruiter listJobRecruiter={listJobRecruiter} />
           </div>
         </div>
         <div className="newsletter bg-primary py-5">
