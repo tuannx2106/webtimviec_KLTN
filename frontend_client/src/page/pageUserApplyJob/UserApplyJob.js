@@ -13,18 +13,19 @@ class UserApplyjob extends Component {
 
   async componentDidMount() {
     const curRecruiter = await JSON.parse(localStorage.getItem('currentRecruiter'));
-    // let data = await fetch(`/admin/api/userjob/job/` + curRecruiter.id).then(response => response.json())
-    let data = await fetch(`/admin/api/userjob/job/1`).then(response => response.json())
+    const data = await JSON.parse(localStorage.getItem('userAddJob'));
 
+    let userAddJobRec = await fetch(`/admin/api/userjob/job/` + data).then(response => response.json())
     this.setState({
       curentRecruiter: curRecruiter,
-      userAddJob: data,
+      userAddJob: userAddJobRec,
     })
   }
   render() {
     const { curentRecruiter, userAddJob } = this.state;
+    console.log(userAddJob)
     if (!curentRecruiter)
-      return <div>Loading ...</div>
+      return <div>Đang tải ...</div>
     return (
       <Fragment>
         <div className="site-navbar container py-0 " style={{ backgroundImage: 'url(images/hero-1.jpg)' }} role="banner">

@@ -15,6 +15,7 @@ class Menu extends Component {
 
   logOut = () => {
     localStorage.removeItem("currentRecruiter");
+    localStorage.removeItem("userAddJob");
     this.setState({ curentRecruiter: null })
     this.props.history.push('/trang-nha-tuyen-dung');
   }
