@@ -92,7 +92,7 @@ class NewPost extends Component {
 
     //add profession Job to that job
     await jrpjList.map(async jrpj => {
-      const jrpjAfterAdd = await fetch('/admin/api/jobrequireprofession', {
+    await fetch('/admin/api/jobrequireprofession', {
         method: "POST",
         headers: {
           Accept: "application/json",
