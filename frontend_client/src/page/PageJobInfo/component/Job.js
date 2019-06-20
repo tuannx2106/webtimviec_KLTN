@@ -17,32 +17,40 @@ class Job extends Component {
     const curUser = await JSON.parse(localStorage.getItem('currentUser'));
     this.setState({ curentUser: curUser });
 
-    if(curUser){
-    let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
-    this.setState({
-      jobUsers: data,
-    })}
+    if (curUser) {
+      let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
+      this.setState({
+        jobUsers: data,
+      })
+    }
   }
 
-  handleApply = async (id) => {
+  handleOpenModel = () => {
     if (!localStorage.getItem("currentUser")) {
       this.props.history.push("/login")
     }
-    else {
-      fetch(`/admin/api/userjob/`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          "job": { "id": id },
-          "users": { "id": this.state.curentUser.id }
-        })
-      })
-      this.setState({ isOpenModal: true })
-    }
+    this.setState({ isOpenModal: true })
   }
+
+  // handleApply = async (id) => {
+  //   if (!localStorage.getItem("currentUser")) {
+  //     this.props.history.push("/login")
+  //   }
+  //   else {
+  //     fetch(`/admin/api/userjob/`, {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //         "job": { "id": id },
+  //         "users": { "id": this.state.curentUser.id }
+  //       })
+  //     })
+  //     this.setState({ isOpenModal: true })
+  //   }
+  // }
   handleClose = () => {
     this.setState({ isOpenModal: false });
     this.props.history.push("/tatcacongviec")
@@ -50,12 +58,13 @@ class Job extends Component {
 
   render() {
     const { job } = this.props
-    const { isOpenModal, jobUsers } = this.state;
-
+    const { isOpenModal, jobUsers, curentUser } = this.state;
     return (
       <Fragment>
         {isOpenModal && (
           <Modal
+            curentUser={curentUser}
+            job={job}
             isOpenModal={isOpenModal}
             handleClose={this.handleClose}
           />
@@ -74,7 +83,7 @@ class Job extends Component {
                   ?
                   <button className="btn btn-primary rounded py-2 px-4 text-white " disabled >NỘP ĐƠN</button>
                   :
-                  <button className="btn btn-primary rounded py-2 px-4 text-white " onClick={() => this.handleApply(job.id)}>NỘP ĐƠN</button>
+                  <button className="btn btn-primary rounded py-2 px-4 text-white " onClick={this.handleOpenModel}>NỘP ĐƠN</button>
                 }
               </div>
             </div>
