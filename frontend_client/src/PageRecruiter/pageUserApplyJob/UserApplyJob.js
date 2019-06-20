@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import Menu from "../../PageRecruiter/ComponentRecruiter/Header/Menu";
+import Menu from "../ComponentRecruiter/Header/Menu";
 import UserApply from "./UserApply";
 
 class UserApplyjob extends Component {

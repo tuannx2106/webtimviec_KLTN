@@ -11,7 +11,7 @@ import ProfileUser from './page/PageProfileUser/index';
 import ProfileRecruiter from "./page/PageProfileRecruiter/index";
 import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
 import PostJob from "./PageRecruiter/PostJob/index";
-import UserApplyJob from "./page/pageUserApplyJob/UserApplyJob";
+import UserApplyJob from "./PageRecruiter/pageUserApplyJob/UserApplyJob";
 import PageNotFound from "./PageNotFound/index";
 
 const routes = [
