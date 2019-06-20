@@ -3,13 +3,20 @@ import ReactQuill from "react-quill";
 import SelectField from "./SelectField";
 import "react-quill/dist/quill.snow.css";
 
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = mm + '/' + dd + '/' + yyyy;
+
 class NewPost extends Component {
+
   emptyItem = {
     expired: "",
     title: "",
     description: "",
     experience: "",
-    date: "",
+    date: this.today,
     recruiter: this.props.curentRecruiter,
     city: "",
     status: "",
@@ -123,6 +130,7 @@ class NewPost extends Component {
   // };
 
   render() {
+
     const { item } = this.state;
     const { profession } = this.props;
     const statusOptionList = this.props.status.map(tus => {
@@ -150,8 +158,7 @@ class NewPost extends Component {
           <div className="row form-group mb-5">
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Ngày đăng tuyển</label>
-              <input type="date" className="form-control" value={item.date} onChange={this.handleChange}
-                name="date" />
+              <input disabled type="text" className="form-control" value={today} name="date" />
             </div>
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Ngày hết hạn</label>
