@@ -1,13 +1,23 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 class FormDialog extends React.Component {
+  constructor(props) {
+    super(props)
+    this.file = null
+    this.emailContent = "You have a new job request"
+  }
 
   handleApply = async (id) => {
+    const data = new FormData();
+    data.append('file', this.file);
+    data.append('destination', this.props.job.recruiter.email)
+    data.append('content', this.emailContent)
+
     fetch(`/admin/api/userjob/`, {
       method: "POST",
       headers: {
@@ -18,10 +28,24 @@ class FormDialog extends React.Component {
         "job": { "id": id },
         "users": { "id": this.props.curentUser.id }
       })
+    }).then(res => {
+      fetch(`/api/job/sendfile`, {
+        method: "POST",
+        body: data
+      })
     })
     this.props.history.push("/tatcacongviec")
+
   }
 
+  onInputFileChange = event => {
+    this.file = event.target.files[0]
+  }
+
+  onTextAreaChange = event => {
+    this.emailContent = event.target.value
+    console.log(this.props.job.recruiter.email)
+  }
 
   render() {
     const { isOpenModal, handleClose, job, curentUser } = this.props;
@@ -41,11 +65,11 @@ class FormDialog extends React.Component {
             <h5>Tên của bạn: {curentUser.name}</h5>
             <div style={{ display: "flex", margin: "30px 0px 30px" }}>
               <h5>CV của bạn:  </h5>
-              <input type="file" />
+              <input id="inputFile" type="file" onChange={this.onInputFileChange} />
             </div>
             <div>
               <h5>Nội dung gửi đến nhà tuyển dụng:  </h5>
-              <textarea style={{width:"100%"}} />
+              <textarea style={{ width: "100%" }} onChange={this.onTextAreaChange} />
             </div>
           </DialogContent>
           <div className="text-center">
