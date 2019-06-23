@@ -13,7 +13,7 @@ class Job extends Component {
               <div className="img d-block"> <img className="img-alljob" src={item.recruiter.logo} alt=""/> </div>
               <div className="lh-content txt-lhcontent">
                 <Link to={"/job/" + item.id}><h6> {item.title}</h6></Link>
-                <a href="/" className="bookmark"><span class="icon-heart"></span></a>
+                <a href="#" className="bookmark"><span class="icon-heart"></span></a>
                 <h3>Nhà tuyển dụng:{item.recruiter.companyName}</h3>
                 <address className="addre">Địa chỉ: {item.city.name}</address>
                 <p className="mb-0">

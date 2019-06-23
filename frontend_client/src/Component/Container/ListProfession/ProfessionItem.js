@@ -12,7 +12,6 @@ class ProfessionItem extends Component {
             {/* <div  class="icon" ><img src = {professions.logo} /></div> */}
             <span class="icon"><span class="flaticon-car"></span></span>
             <span class="caption mb-2 d-block">{item.professionJobName}</span>
-            <span class="number">1,921 công việc</span>
           </Link>
         </div>
         ))}
