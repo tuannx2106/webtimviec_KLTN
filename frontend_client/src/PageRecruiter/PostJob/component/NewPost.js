@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import ReactQuill from "react-quill";
 import SelectField from "./SelectField";
 import "react-quill/dist/quill.snow.css";
+import Modal from "./Modal";
+import { withRouter } from "react-router";
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -27,6 +29,7 @@ class NewPost extends Component {
     super(props);
     this.state = {
       jobRequireProfessionJobList: [],
+      isOpenModal: false,
       item: this.emptyItem,
     };
   }
@@ -108,8 +111,13 @@ class NewPost extends Component {
         body: JSON.stringify(jrpj)
       }).then(res => res.json())
     })
+    this.setState({ isOpenModal: true });
   };
 
+  handleClose = () => {
+    this.setState({ isOpenModal: false });
+    this.props.history.push("/trang-nha-tuyen-dung")
+  };
   // onCreateJob = async () => {
   //   const { item } = this.state;
   //   fetch(`/admin/api/job`, {
@@ -131,7 +139,7 @@ class NewPost extends Component {
 
   render() {
 
-    const { item } = this.state;
+    const { item, isOpenModal } = this.state;
     const { profession } = this.props;
     const statusOptionList = this.props.status.map(tus => {
       return (
@@ -147,6 +155,12 @@ class NewPost extends Component {
 
     return (
       <Fragment>
+        {isOpenModal && (
+          <Modal
+            isOpenModal={isOpenModal}
+            handleClose={this.handleClose}
+          />
+        )}
         <div className="p-5 bg-white">
           <div className="row form-group">
             <div className="col-md-12 mb-3 mb-md-0">
@@ -270,4 +284,4 @@ NewPost.modules = {
     matchVisual: false
   }
 };
-export default NewPost;
+export default withRouter(NewPost);
