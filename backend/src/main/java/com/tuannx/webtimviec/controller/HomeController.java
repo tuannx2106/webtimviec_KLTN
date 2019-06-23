@@ -8,9 +8,18 @@ import com.tuannx.webtimviec.service.JobRequireProfessionJobService;
 import com.tuannx.webtimviec.service.JobService;
 import com.tuannx.webtimviec.service.ProfessionJobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +33,9 @@ public class HomeController {
 
     @Autowired
     ProfessionJobService professionJobService;
+
+    @Autowired
+    public JavaMailSender emailSender;
 
     //show List
     @RequestMapping(value = "/list",
@@ -106,4 +118,46 @@ public class HomeController {
         jobService.deleteJob(Integer.valueOf(jobId));
     }
 
+
+    @ResponseBody
+    @RequestMapping("/sendSimpleEmail")
+    public String sendSimpleEmail() throws MessagingException {
+
+        MimeMessage message = emailSender.createMimeMessage();
+
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setTo("supernija21@gmail.com");
+        helper.setSubject("Test email with attachments");
+
+        helper.setText("Hello, Im testing email with attachments!");
+
+//        helper.addAttachment("Txt file", file1);
+        emailSender.send(message);
+
+        return "Email Sent!";
+    }
+
+    @RequestMapping(value= "/sendfile", method = RequestMethod.POST)
+    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+                                   @RequestParam("destination") String destination,
+                                   @RequestParam("content") String content) throws MessagingException{
+
+        System.out.printf("File name=%s, size=%s\n", file.getOriginalFilename(),file.getSize());
+
+        MimeMessage message = emailSender.createMimeMessage();
+
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setTo(destination);
+        helper.setSubject("You have a new applicant !!!");
+
+        helper.setText(content);
+
+        helper.addAttachment(file.getOriginalFilename(), file);
+        emailSender.send(message);
+
+        //everything was OK, return HTTP OK status (200) to the client
+        return file.getOriginalFilename();
+    }
 }
