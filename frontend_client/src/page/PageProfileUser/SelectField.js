@@ -25,9 +25,9 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
       case 0:
         return '';
       case 1:
-        return this.props.options[values[0]-1].name;
+        return this.props.options[values[0]].name;
       default:
-        return `${values.length} mục được chọn`;
+        return `${values.length} Kỹ năng được chọn`;
     }
   }
 
@@ -48,9 +48,8 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <SelectField
-           style={{width:"100%",border: "1px solid #ccc", borderRadius:"5px"}}
+          style={{width:"100%",border: "1px solid #ccc", borderRadius:"5px"}}
           multiple={true}
-          // hintText="Công việc thuộc ngành nghề"
           value={this.state.values}
           onChange={this.handleChange}
           selectionRenderer={this.selectionRenderer}

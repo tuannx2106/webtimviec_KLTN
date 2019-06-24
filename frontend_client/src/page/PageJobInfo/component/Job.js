@@ -81,9 +81,9 @@ class Job extends Component {
               <div className=" submit-bt">
                 {(jobUsers.map(item => (item.job.id))).indexOf(job.id) > -1
                   ?
-                  <button className="btn btn-primary rounded py-2 px-4 text-white " disabled >NỘP ĐƠN</button>
+                  <button className="btn btn-primary rounded py-2 px-4 text-white " disabled >ĐÃ ỨNG TUYỂN</button>
                   :
-                  <button className="btn btn-primary rounded py-2 px-4 text-white " onClick={this.handleOpenModel}>NỘP ĐƠN</button>
+                  <button className="btn btn-primary rounded py-2 px-4 text-white " onClick={this.handleOpenModel}>ỨNG TUYỂN</button>
                 }
               </div>
             </div>

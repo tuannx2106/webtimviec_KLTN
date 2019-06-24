@@ -13,6 +13,7 @@ const getInitialState = () => {
     status: [],
     recruiter: [],
     profession: [],
+    skills:[],
     curentRecruiter: null,
   };
   return initialState;
@@ -42,7 +43,6 @@ class PostJob extends Component {
     fetch("/admin/api/city/list")
       .then(response => response.json())
       .then(data => this.setState({ cities: data, isLoading: false }));
-
     fetch("/admin/api/status/list")
       .then(response => response.json())
       .then(data => this.setState({ status: data, isLoading: false }));
@@ -52,10 +52,13 @@ class PostJob extends Component {
     fetch("/admin/api/profession/list")
       .then(response => response.json())
       .then(data => this.setState({ profession: data, isLoading: false }));
+      fetch("/admin/api/skill/list")
+      .then(response => response.json())
+      .then(data => this.setState({ skills: data, isLoading: false }));
   };
 
   render() {
-    const { cities, status, curentRecruiter, profession } = this.state;
+    const { cities, status, curentRecruiter, profession,skills } = this.state;
     if (!curentRecruiter)
       return <div>Loading ...</div>
     return (
@@ -81,7 +84,7 @@ class PostJob extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 col-lg-8 mb-5">
-                <NewPost curentRecruiter={curentRecruiter} cities={cities} status={status} profession={profession} />
+                <NewPost curentRecruiter={curentRecruiter} skills={skills} cities={cities} status={status} profession={profession} />
               </div>
               <div className="col-lg-4">
                 <InfoRecruiter curentRecruiter={curentRecruiter} />
