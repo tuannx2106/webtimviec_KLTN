@@ -57,8 +57,7 @@ class FormDialog extends React.Component {
           style={{ fontFamily: "Roboto", color: "#3A3A3A" }}
         >
           <DialogTitle id="form-dialog-title" className="text-center" >
-            <h3>Nộp hồ sơ</h3>
-            <h3>--------------</h3>
+            <h3 style={{borderBottom: "2px solid",paddingBottom: "10px"}}>Nộp hồ sơ</h3>
           </DialogTitle>
           <DialogContent style={{ padding: "10px 50px" }}>
             <h5 className="text-center" style={{ marginBottom: "40px", fontSize: "25px" }}>{job.title}</h5>
