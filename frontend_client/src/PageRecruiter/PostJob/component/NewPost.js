@@ -67,7 +67,7 @@ class NewPost extends Component {
       id: value
     };
     this.setState({ item: item });
-    console.log(value)
+    // console.log(value)
   };
 
   onRecruiterPostJob = async () => {
@@ -140,7 +140,7 @@ class NewPost extends Component {
   render() {
 
     const { item, isOpenModal } = this.state;
-    const { profession } = this.props;
+    const { profession,skills } = this.props;
     const statusOptionList = this.props.status.map(tus => {
       return (
         <option key={tus.id} value={tus.id}>
@@ -214,12 +214,22 @@ class NewPost extends Component {
               </select>
             </div>
           </div>
-          <div className="row form-group mb-4">
+          <div className="row form-group mb-3">
             <div className="col-md-12 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Thuộc Ngành nghề</label>
               <SelectField
                 options={profession ? profession.map(el => ({ name: el.professionJobName, value: el.id })) : []}
                 type="jobRequireProfessionJobList"
+                onChange={this.handleChangeSelectField}
+              />
+            </div>
+          </div>
+          <div className="row form-group mb-4">
+            <div className="col-md-12 mb-3 mb-md-0">
+              <label className="font-weight-bold" htmlFor="fullname">Chọn kỹ năng</label>
+              <SelectField
+                options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
+                // type="jobRequireProfessionJobList"
                 onChange={this.handleChangeSelectField}
               />
             </div>

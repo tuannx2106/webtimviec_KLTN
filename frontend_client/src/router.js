@@ -13,6 +13,7 @@ import PageHomeRecruiter from "./PageRecruiter/HomePage/index";
 import PostJob from "./PageRecruiter/PostJob/index";
 import UserApplyJob from "./PageRecruiter/pageUserApplyJob/UserApplyJob";
 import PageNotFound from "./PageNotFound/index";
+import SuggestJob from "./page/SuggestJob/Suggest";
 
 const routes = [
     {
@@ -89,6 +90,11 @@ const routes = [
         path: '/user-apply-job',
         exact: false,
         main:  UserApplyJob
+    },
+    {
+        path: '/goi-y-cong-viec',
+        exact: false,
+        main:  SuggestJob
     },
 ];
 

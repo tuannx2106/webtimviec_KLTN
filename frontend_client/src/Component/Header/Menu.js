@@ -46,6 +46,7 @@ class Menu extends Component {
                       </Link>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/profile-user">Quản lý hồ sơ</Link>
+                        <Link className="dropdown-item" to="/goi-y-cong-viec">Việc làm được gợi ý</Link>
                         <span> <Link to="#" className="dropdown-item" onClick={this.logOut}>Đăng xuất</Link></span>
                       </div>
                     </li>
