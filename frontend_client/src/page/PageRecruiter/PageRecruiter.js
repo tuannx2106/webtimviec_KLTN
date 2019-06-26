@@ -6,37 +6,60 @@ import InputEmail from '../../Component/Container/InputEmail/InputEmail';
 import Recruiter from './component/Recruiter';
 import Pagination from "../../Component/Pagination/Pagination";
 
-const getInitialState = () => {
-  const initialState = {
-    recruiters: [],
-    cities: [],
-    pageOfItems: []
-  };
-  return initialState;
-};
-
 class PageRecruiter extends Component {
   constructor(props) {
     super(props);
-    this.state = getInitialState();
+    this.state = {
+      recruiters: [],
+      cities: [],
+      pageOfItems: [],
+      valueInput: "",
+      selectedCity: 0,
+    };
+    this.allRecruiter = [{
+      city: {},
+      title: ""
+    }];
   }
 
-  componentDidMount() {
-    this.getList();
+  async componentDidMount() {
+    const { selectedCity, valueInput } = this.state
+    this.allRecruiter = await fetch("/admin/api/recruiter/list").then(response => response.json())
+    let cityList = await fetch("/admin/api/city/list").then(response => response.json())
+    let RecruitersResult = this.RecSearchResult(this.allRecruiter, valueInput, parseInt(selectedCity))
+
+    if (RecruitersResult.length !== 0) {
+      this.setState({
+        recruiters: RecruitersResult,
+        cities: cityList
+      })
+    } else {
+      this.setState({
+        recruiters:  this.allRecruiter,
+        cities: cityList
+      })
+    }
+
   }
 
-  getList = () => {
-    fetch("/admin/api/recruiter/list")
-      .then(response => response.json())
-      .then(data => this.setState({ recruiters: data, isLoading: false }));
-    fetch("/admin/api/city/list")
-      .then(response => response.json())
-      .then(data => this.setState({ cities: data, isLoading: false }));
-  };
+  RecSearchResult = (RecruiterList, inputSearch, cityId) => {
+    return RecruiterList.filter(rec => {
+      return rec.city.id === cityId
+        && rec.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
+    })
+  }
 
   onChangePage = (pageOfItems) => {
     // update state with new page of items
     this.setState({ pageOfItems: pageOfItems });
+  }
+
+  handleData = (valueInput, selectedCity) => {
+    this.setState({
+      valueInput: valueInput,
+      selectedCity: selectedCity
+    });
+    console.log(selectedCity)
   }
 
   render() {
@@ -56,7 +79,7 @@ class PageRecruiter extends Component {
         </div>
         <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(images/hero_2.jpg)' }} data-aos="fade" data-stellar-background-ratio="0.5">
           <div className="container">
-            <Header cities={cities}/>
+            <Header cities={cities} handlerFromParant={this.handleData} />
           </div>
         </div>
         <div className="site-section bg-light">

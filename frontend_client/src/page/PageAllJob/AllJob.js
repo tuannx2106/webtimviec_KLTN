@@ -47,7 +47,6 @@ class AllJob extends Component {
         cities: cityList
       })
     }
-
   }
 
   jobsSearchResult = (jobList, inputSearch, cityId, professionId) => {
@@ -61,12 +60,10 @@ class AllJob extends Component {
   jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id === cityId))
 
   jobsFilterByProf = (jobList, profId) => (jobList.filter(job => {
-    console.log(job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length)
     return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length !== 0 ? job : null
   }))
 
   onChangePage = (pageOfItems) => {
-    // update state with new page of items
     this.setState({ pageOfItems: pageOfItems });
   }
 
@@ -104,7 +101,7 @@ class AllJob extends Component {
           <div className="container">
             <div className="row">
               <div className="title-list-job">
-                <h5 style={{ lineHeight: "1", margin: "0", fontFamily: "Roboto, Verdana", fontSize: "17px" }}>CÔNG VIỆC TÌM THẤY</h5>
+                <h5 style={{ lineHeight: "1", margin: "0", fontFamily: "Roboto, Verdana", fontSize: "17px" }}>TẤT CẢ CÔNG VIỆC TÌM THẤY</h5>
               </div>
               <div className="col-lg-9">
                 <div className="row">
