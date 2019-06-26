@@ -15,15 +15,19 @@ class PageRecruiter extends Component {
       pageOfItems: [],
       valueInput: "",
       selectedCity: 0,
+      RecruiterList:[{
+        city: {id:-1},
+      }]
     };
     this.allRecruiter = [{
       city: {},
       title: ""
     }];
+    
   }
 
   async componentDidMount() {
-    const { selectedCity, valueInput } = this.state
+    const { selectedCity, valueInput } = this.state;
     this.allRecruiter = await fetch("/admin/api/recruiter/list").then(response => response.json())
     let cityList = await fetch("/admin/api/city/list").then(response => response.json())
     let RecruitersResult = this.RecSearchResult(this.allRecruiter, valueInput, parseInt(selectedCity))
