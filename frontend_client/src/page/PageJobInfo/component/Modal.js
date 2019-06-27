@@ -54,7 +54,6 @@ class FormDialog extends React.Component {
         <Dialog
           open={isOpenModal}
           fullWidth={true}
-          style={{ fontFamily: "Roboto", color: "#3A3A3A" }}
         >
           <DialogTitle id="form-dialog-title" className="text-center" >
             <h3 style={{borderBottom: "2px solid",paddingBottom: "10px"}}>Nộp hồ sơ</h3>
