@@ -8,6 +8,8 @@ import styles from "./styles";
 import JobPage from "./Component";
 import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
+import { toast } from "react-toastify";
+import ModalConfirm from "../../Common/components/ModalDelete/index";
 
 const { getTxt } = Helper;
 
@@ -15,6 +17,8 @@ const getInitialState = () => {
   const initialState = {
     jobs: [],
     isLoading: true,
+    modalDelete: false,
+    idDelte: "",
     row: {},
     isOpenModal: false,
     citys: [],
@@ -110,26 +114,20 @@ class JobPageContainer extends React.Component {
     this.getListJob();
   }
 
-  getListJob = () => {
-    fetch(`/admin/api/job/list`)
-      .then(response => response.json())
-      .then(data => this.setState({ jobs: data, isLoading: false }));
-
-    fetch(`/admin/api/city/list`)
-      .then(response => response.json())
-      .then(data => this.setState({ citys: data }));
-
-    fetch(`/admin/api/status/list`)
-      .then(response => response.json())
-      .then(data => this.setState({ statuss: data }));
-
-    fetch(`/admin/api/recruiter/list`)
-      .then(response => response.json())
-      .then(data => this.setState({ recruiters: data }));
-
-    fetch(`/admin/api/profession/list`)
-      .then(response => response.json())
-      .then(data => this.setState({ professions: data }));
+  async getListJob() {
+    let ListJob = await fetch(`/admin/api/job/list`).then(response => response.json())
+    let ListCity = await fetch(`/admin/api/city/list`).then(response => response.json())
+    let ListStatus = await fetch(`/admin/api/status/list`).then(response => response.json())
+    let ListRecruiter = await fetch(`/admin/api/recruiter/list`).then(response => response.json())
+    let ListProf = await fetch(`/admin/api/profession/list`).then(response => response.json())
+     
+    this.setState({
+      jobs: ListJob,
+      citys: ListCity,
+      statuss: ListStatus,
+      recruiters: ListRecruiter,
+      professions: ListProf
+    })
   };
 
   handleAdd = () => {
@@ -140,17 +138,32 @@ class JobPageContainer extends React.Component {
     this.setState({ isOpenModal: false });
   };
 
-  handleDelete = id => {
-    fetch(`/admin/api/job/${id}`, {
+  handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
+
+  handleCloseModalDelete = () => {
+    this.setState({
+      row: {},
+      modalDelete: false
+    });
+  };
+
+  onhandleDelete = () => {
+    const { idDelte } = this.state;
+    fetch(`/admin/api/job/${idDelte}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
     }).then(() => {
-      let updatedJob = [...this.state.jobs].filter(i => i.id !== id);
-      this.setState({ jobs: updatedJob });
-    });
+      this.getListJob();
+      toast.success('Xoá công việc thành công')
+    }).catch(err => {
+      if (err) {
+        toast.error('Xoá công việc không thành công');
+      }
+    })
+  this.setState({ modalDelete: false })
   };
 
   onChangeValue = (key, value) => {
@@ -201,7 +214,7 @@ class JobPageContainer extends React.Component {
 
     //add profession Job to that job
     await jrpjList.map(async jrpj => {
-      const jrpjAfterAdd = await fetch('/admin/api/jobrequireprofession', {
+      await fetch('/admin/api/jobrequireprofession', {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -211,12 +224,17 @@ class JobPageContainer extends React.Component {
       }).then(res => res.json())
         .then(data => {
           if (data) {
+            toast.success('Thêm mới công việc thành công')
             this.getListJob();
           }
-        });
+        }).catch(err => {
+          if (err) {
+            toast.error('Thêm mới công việc không thành công');
+          }
+        })
+        this.setState({ isOpenModal: false });
     })
-
-    this.setState({ isOpenModal: false });
+   
   };
 
   handleUpdate = row => {
@@ -242,9 +260,14 @@ class JobPageContainer extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
+          toast.success('Cập nhật công việc thành công')
           this.getListJob();
         }
-      });
+      }).catch(err => {
+        if (err) {
+          toast.error('Cập nhật công việc không thành công');
+        }
+      })
     this.setState({ isOpenModal: false });
   };
 
@@ -264,6 +287,7 @@ class JobPageContainer extends React.Component {
       city,
       recruiter,
       status,
+      modalDelete
     } = this.state;
     return (
       <Fragment>
@@ -290,6 +314,14 @@ class JobPageContainer extends React.Component {
           onCreateJob={this.onCreateJob}
           onUpdateJob={this.onUpdateJob}
         />
+          {modalDelete && (
+          <ModalConfirm
+            modalDelete={modalDelete}
+            title="Xoá công việc ?"
+            onConfirm={this.onhandleDelete}
+            handleClose={this.handleCloseModalDelete}
+          />
+        )}
       </Fragment>
     );
   }

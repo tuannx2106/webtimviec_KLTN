@@ -11,6 +11,8 @@ import { Helper } from "../../../utils";
 import RecruiterPage from "./Component";
 import Modal from "./component/Modal";
 import axios from "axios";
+import { toast } from "react-toastify";
+import ModalConfirm from "../../Common/components/ModalDelete/index";
 
 const { getTxt } = Helper;
 
@@ -18,13 +20,15 @@ const getInitialState = () => {
   const initialState = {
     type: "",
     isOpenModal: false,
+    modalDelete: false,
+    idDelte: "",
     row: {},
     isLoading: true,
     recruiters: [],
     citys: [],
-    city:"",
+    city: "",
     form: {
-      // id: null,
+      id: null,
       companyName: "",
       email: "",
       description: "",
@@ -59,7 +63,11 @@ class RecruiterPageContainer extends React.Component {
       .then(response => {
         this.setState({ citys: response.data, isLoading: false });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error(err);
+        }
+      });
   };
 
   handleAdd = () => this.setState({ isOpenModal: true, type: "" });
@@ -68,22 +76,34 @@ class RecruiterPageContainer extends React.Component {
     this.setState({ isOpenModal: false });
   };
 
-  handleDelete = id => {
-    // console.log(id)
+  handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
+
+  handleCloseModalDelete = () => {
+    this.setState({
+      row: {},
+      modalDelete: false
+    });
+  };
+
+  onhandleDelete = () => {
+    const { idDelte } = this.state;
     axios
-      .delete(`/admin/api/recruiter/${id}`, {
+      .delete(`/admin/api/recruiter/${idDelte}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         }
       })
       .then(() => {
-        let updatedRecruiter = [...this.state.recruiters].filter(
-          i => i.id !== id
-        );
-        this.setState({ recruiters: updatedRecruiter });
+        this.getListRecruiter();
+        toast.success('Xoá nhà tuyển dụng thành công')
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Xoá nhà tuyển dụng không thành công');
+        }
+      })
+    this.setState({ modalDelete: false })
   };
 
   onChangeValue = (key, value) => {
@@ -93,16 +113,16 @@ class RecruiterPageContainer extends React.Component {
   };
 
   handleChangeSelect = (key, value) => {
-    let {form} = this.state;
+    let { form } = this.state;
     form[key] = {
       id: value
     };
     this.setState({ form: form });
     console.log(value);
   };
-  
 
-  onCreateRecruiter = async () => {
+
+  onCreateRecruiter =  () => {
     const { form } = this.state;
     fetch("/admin/api/recruiter", {
       method: "POST",
@@ -115,10 +135,15 @@ class RecruiterPageContainer extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
+          toast.success('Thêm mới nhà tuyển dụng thành công')
           this.getListRecruiter();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Thêm mới nhà tuyển dụng không thành công');
+        }
+      })
     this.setState({ isOpenModal: false });
   };
 
@@ -145,16 +170,21 @@ class RecruiterPageContainer extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
+          toast.success('Cập nhật thông tin nhà tuyển dụng thành công')
           this.getListRecruiter();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Cập nhật thông tin nhà tuyển dụng không thành công');
+        }
+      })
     this.setState({ isOpenModal: false });
   }
 
   render() {
     const { classes } = this.props;
-    const { recruiters, isOpenModal, row, type, citys, city } = this.state;
+    const { recruiters, isOpenModal, row, type, citys, city, modalDelete } = this.state;
 
     const columns = [
       {
@@ -225,6 +255,14 @@ class RecruiterPageContainer extends React.Component {
             onUpdateRecruiter={this.onUpdateRecruiter}
             row={row}
             type={type}
+          />
+        )}
+         {modalDelete && (
+          <ModalConfirm
+            modalDelete={modalDelete}
+            title="Xoá nhà tuyển dụng ?"
+            onConfirm={this.onhandleDelete}
+            handleClose={this.handleCloseModalDelete}
           />
         )}
       </Fragment>
