@@ -14,7 +14,7 @@ import * as PATH from "./url";
 const dashboardRoutes = [
   {
     path: PATH.DASHBOARD_URL,
-    name: "Dashboard",
+    name: "Thống kê",
     icon: Dashboard,
     component: DashboardPage,
     layout: "/admin"
