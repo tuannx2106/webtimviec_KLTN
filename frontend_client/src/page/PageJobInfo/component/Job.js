@@ -51,9 +51,9 @@ class Job extends Component {
   //     this.setState({ isOpenModal: true })
   //   }
   // }
+  
   handleClose = () => {
     this.setState({ isOpenModal: false });
-    this.props.history.push("/tatcacongviec")
   };
 
   render() {

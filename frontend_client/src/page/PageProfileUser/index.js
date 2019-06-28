@@ -90,7 +90,6 @@ class index extends Component {
                   onChange={this.handleChange}
                   className="center-block file-upload"
                 />
-                {/* <button className="btn btn-primary mt-3" onClick={this.onUpdateAvarta}>Cập nhật hình đại diện</button> */}
               </div>
             </div>
             <div className="col-sm-9">

@@ -36,7 +36,7 @@ class Menu extends Component {
                 curentUser ?
                   <>
                     <li className="nav-item">
-                      <span className="border-left pl-xl-4 " > <img src={curentUser.avatar} alt="avatar" className="avatar-rounded img-style"></img> </span>
+                      <span className="border-left pl-xl-4 " > <img src={curentUser.avatar ? curentUser.avatar :  "https://www.ekahiornish.com/wp-content/uploads/2018/07/default-avatar-profile-icon-vector-18942381.jpg"} alt="avatar" className="avatar-rounded img-style"></img> </span>
                     </li>
                     <li className="nav-item dropdown">
                       <Link className="nav-link dropdown-toggle" to="#" id="navbardrop" data-toggle="dropdown">

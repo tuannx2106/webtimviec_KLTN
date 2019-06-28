@@ -36,7 +36,7 @@ class PageRegister extends Component {
       },
       body: JSON.stringify(item),
     });
-    this.props.history.push('/login');
+    this.props.history.push('/login-recruiter');
   }
   render() {
     return (

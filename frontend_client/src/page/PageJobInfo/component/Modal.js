@@ -35,7 +35,6 @@ class FormDialog extends React.Component {
       })
     })
     this.props.history.push("/tatcacongviec")
-
   }
 
   onInputFileChange = event => {
@@ -56,10 +55,10 @@ class FormDialog extends React.Component {
           fullWidth={true}
         >
           <DialogTitle id="form-dialog-title" className="text-center" >
-            <h3 style={{borderBottom: "2px solid",paddingBottom: "10px"}}>Nộp hồ sơ</h3>
+            <h3 style={{borderBottom: "2px dashed",paddingBottom: "10px"}}>Nộp hồ sơ</h3>
           </DialogTitle>
           <DialogContent style={{ padding: "10px 50px" }}>
-            <h5 className="text-center" style={{ marginBottom: "40px", fontSize: "25px" }}>{job.title}</h5>
+            <h5 className="text-center" style={{ marginBottom: "40px", fontSize: "25px", color:"blue" }}>{job.title}</h5>
             <h5>Tên của bạn: {curentUser.name}</h5>
             <div style={{ display: "flex", margin: "30px 0px 30px" }}>
               <h5>CV của bạn:  </h5>

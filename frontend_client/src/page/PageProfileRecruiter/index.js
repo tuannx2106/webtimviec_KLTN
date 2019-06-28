@@ -61,7 +61,15 @@ class index extends Component {
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-3">
               <div className="text-center">
-                <img src={curentRecruiter.logo} className="avatar img-thumbnail" alt="avatar" />
+                {curentRecruiter.logo && (
+                  <div className="img-select">
+                    <img
+                      src={curentRecruiter.logo}
+                      className="avatar img-circle img-thumbnail"
+                      alt="avatar"
+                    />
+                  </div>
+                )}
                 <h6 className="txt-img">Dán link ảnh vào đây để cập nhật logo công ty</h6>
                 <input type="text" className="center-block file-upload"
                   name="logo"
