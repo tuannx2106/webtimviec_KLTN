@@ -125,8 +125,8 @@ class index extends Component {
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="password2"><h4>Nhập lại mật khẩu</h4></label>
-                        <input type="password" className="form-control input-form" value={curentRecruiter.password ? curentRecruiter.password : ""} name="password" onChange={this.handleChange} />
+                        <label htmlFor="password2"><h4>Thuộc thành phố</h4></label>
+                        <input type="text" className="form-control input-form" value={curentRecruiter.password ? curentRecruiter.password : ""} name="password" onChange={this.handleChange} />
                       </div>
                     </div>
                     <div className="form-btn">

@@ -67,13 +67,13 @@ class PageLogin extends Component {
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label htmlFor="email">Tài khoản</label>
-                    <input type="email" className="form-control" name="email" value={loginInfo.email || ''} onChange={this.handleChange} />
+                    <input type="email" className="form-control" name="email" value={loginInfo.email || ''} onChange={this.handleChange} required/>
                   </div>
                 </div>
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label htmlFor="subject">Mật khẩu</label>
-                    <input type="password" className="form-control" name="password" value={loginInfo.password || ''} onChange={this.handleChange} />
+                    <input type="password" className="form-control" name="password" value={loginInfo.password || ''} onChange={this.handleChange} required/>
                   </div>
                 </div>
                 <div className="row form-group text-center mt-5">
