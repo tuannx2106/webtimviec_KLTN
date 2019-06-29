@@ -29,21 +29,21 @@ class HomePageRcruiter extends Component {
         </div>
         <div className="bg-light" data-aos="fade">
           <div className="row product-list">
-            <div className="product-list-box">
+            <a href="#dangtuyen" className="product-list-box">
               <img className="product-list__numberEMRank" src='logo/logo1.png' alt="" ></img>
               <a href="#dangtuyen" className="product-list__textNew">Đăng tuyển công việc</a>
               <div className="product-list__benefit">Giúp đẩy mạnh, quảng bá thương hiệu tuyển dụng</div>
-            </div>
-            <div className="product-list-box">
+            </a>
+            <a href="#lochoso"  className="product-list-box">
               <img className="product-list__numberEMRank" src="logo/logo2.png" alt="" />
               <a href="#lochoso" className="product-list__textNew">Lọc hồ sơ ứng viên </a>
               <div className="product-list__benefit">Giúp đẩy mạnh, quảng bá thương hiệu tuyển dụng</div>
-            </div>
-            <div className="product-list-box">
+            </a>
+            <a href="#quangcao" className="product-list-box">
               <img className="product-list__numberEMRank" src="logo/logo3.png" alt="" />
               <a href="#quangcao" className="product-list__textNew">Quảng bá tuyển dụng</a>
               <div className="product-list__benefit">Giúp đẩy mạnh, quảng bá thương hiệu tuyển dụng</div>
-            </div>
+            </a>
           </div>
         </div>
         <div className="row list-pro" id="dangtuyen" >

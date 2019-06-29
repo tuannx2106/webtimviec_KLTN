@@ -45,7 +45,7 @@ class Header extends Component {
                 <div className="select-wrap">
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
                   <select className="form-control rounded" onChange={this.handleOnChangeSelectedProfession}>
-                    <option selected>Nghề nghiệp ...</option>
+                    <option selected>Ngành nghề ...</option>
                     {professions && professions.map(item => (
                       <option value={item.id} >
                         {item.professionJobName}

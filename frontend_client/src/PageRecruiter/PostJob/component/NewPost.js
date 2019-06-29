@@ -22,13 +22,15 @@ class NewPost extends Component {
     recruiter: this.props.curentRecruiter,
     city: "",
     status: "",
-    jobRequireProfessionJobList: ""
+    jobRequireProfessionJobList: "",
+    jobRequireSkillList:""
   };
 
   constructor(props) {
     super(props);
     this.state = {
       jobRequireProfessionJobList: [],
+      jobRequireSkillList:[],
       isOpenModal: false,
       item: this.emptyItem,
     };
@@ -67,12 +69,11 @@ class NewPost extends Component {
       id: value
     };
     this.setState({ item: item });
-    // console.log(value)
   };
 
   onRecruiterPostJob = async () => {
     const { item } = this.state;
-    const { title, description, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList } = item;
+    const { title, description, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList,jobRequireSkillList } = item;
 
     const jobItem = {
       title,
@@ -99,6 +100,10 @@ class NewPost extends Component {
       job: { id: newJob.id },
       professionJob: { id: profId }
     }))]
+    const SkillUserList = [...jobRequireSkillList.id.map(skilluser => ({
+      job: { id: newJob.id },
+      skill: { id: skilluser }
+    }))]
 
     //add profession Job to that job
     await jrpjList.map(async jrpj => {
@@ -111,6 +116,18 @@ class NewPost extends Component {
         body: JSON.stringify(jrpj)
       }).then(res => res.json())
     })
+    //add skill Job to that job
+    await SkillUserList.map(async Listskiluser => {
+      await fetch('/admin/api/jobrequireskill', {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Listskiluser)
+      }).then(res => res.json())
+    })
+
     this.setState({ isOpenModal: true });
   };
 
@@ -228,8 +245,8 @@ class NewPost extends Component {
             <div className="col-md-12 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Chọn kỹ năng</label>
               <SelectField
-                options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
-                // type="jobRequireProfessionJobList"
+                options={skills ? skills.map(sk => ({ name: sk.skillName, value: sk.id })) : []}
+                type="jobRequireSkillList"
                 onChange={this.handleChangeSelectField}
               />
             </div>

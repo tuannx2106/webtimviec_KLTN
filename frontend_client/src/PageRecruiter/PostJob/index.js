@@ -13,7 +13,7 @@ const getInitialState = () => {
     status: [],
     recruiter: [],
     profession: [],
-    skills:[],
+    skills: [],
     curentRecruiter: null,
   };
   return initialState;
@@ -39,26 +39,27 @@ class PostJob extends Component {
     this.setState({ curentRecruiter: curRecruiter });
   }
 
-  getList = () => {
-    fetch("/admin/api/city/list")
-      .then(response => response.json())
-      .then(data => this.setState({ cities: data, isLoading: false }));
-    fetch("/admin/api/status/list")
-      .then(response => response.json())
-      .then(data => this.setState({ status: data, isLoading: false }));
-    fetch("/admin/api/recruiter/list")
-      .then(response => response.json())
-      .then(data => this.setState({ recruiter: data, isLoading: false }));
-    fetch("/admin/api/profession/list")
-      .then(response => response.json())
-      .then(data => this.setState({ profession: data, isLoading: false }));
-      fetch("/admin/api/skill/list")
-      .then(response => response.json())
-      .then(data => this.setState({ skills: data, isLoading: false }));
+  getList = async () => {
+    let Lcity = await fetch("/admin/api/city/list").then(response => response.json())
+    let Lstatus = await fetch("/admin/api/status/list").then(response => response.json())
+    
+    let Lrecruiter = await fetch("/admin/api/recruiter/list").then(response => response.json())
+   
+    let LProfession = await fetch("/admin/api/profession/list").then(response => response.json())
+    
+    let LSkill = await fetch("/admin/api/skill/list").then(response => response.json())
+      
+    this.setState({
+      cities: Lcity,
+      status: Lstatus,
+      recruiter: Lrecruiter,
+      profession: LProfession,
+      skills: LSkill
+    })
   };
 
   render() {
-    const { cities, status, curentRecruiter, profession,skills } = this.state;
+    const { cities, status, curentRecruiter, profession, skills } = this.state;
     if (!curentRecruiter)
       return <div>Loading ...</div>
     return (

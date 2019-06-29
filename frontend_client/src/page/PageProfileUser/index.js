@@ -1,17 +1,24 @@
 import React, { Component, Fragment } from 'react';
 import Menu from "../../Component/Header/Menu";
 import "./style.css"
-// import Profile from './ProfileUser';
 import Myjob from './myJob';
 import SelectField from "./SelectField";
 
 class index extends Component {
+  emptyItem = {
+    jobRequireSkillList: ""
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       curentUser: null,
+      jobRequireSkillList: [],
       jobUsers: [],
-      skills: []
+      skills: [],
+      item: this.emptyItem,
+      listSkill: [],
+      ListItemUser: null
     };
   }
 
@@ -19,10 +26,14 @@ class index extends Component {
     const curUser = await JSON.parse(localStorage.getItem('currentUser'));
     let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
     let skill = await fetch("/admin/api/skill/list").then(response => response.json())
+    let itemUser = await fetch("/admin/api/users/" + curUser.id).then(response => response.json())
+    const list = await itemUser.usersSkillList.map(item => item.skill.skillName)
     this.setState({
       curentUser: curUser,
       jobUsers: data,
-      skills: skill
+      skills: skill,
+      listSkill: list,
+      ListItemUser: itemUser
     })
   }
 
@@ -32,12 +43,13 @@ class index extends Component {
     this.setState({ curentUser: { ...curentUser } })
   };
 
+
   handleChangeSelectField = (key, value) => {
-    let { curentUser } = this.state;
-    curentUser[key] = {
+    let { item } = this.state;
+    item[key] = {
       id: value
     };
-    this.setState({ curentUser: curentUser });
+    this.setState({ item: item });
     console.log(value)
   };
 
@@ -59,9 +71,33 @@ class index extends Component {
       })
   };
 
+  onUpdateSkillUser = () => {
+    const { item, curentUser } = this.state;
+    const { jobRequireSkillList } = item;
+    const ListSkillUsers = [...jobRequireSkillList.id.map(skiluser => ({
+      users: { id: curentUser.id },
+      skill: { id: skiluser }
+    }))]
+    ListSkillUsers.map(async Listskiluser => {
+      await fetch(`/admin/api/usersskill`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Listskiluser)
+      }).then(res => res.json())
+      alert("Thêm kỹ năng thành công !")
+      await window.location.reload();
+      await localStorage.removeItem("currentUser");
+      await localStorage.setItem('currentUser', JSON.stringify(this.state.ListItemUser));
+    })
+  };
+
 
   render() {
-    const { curentUser, jobUsers, skills } = this.state;
+    const { curentUser, jobUsers, skills, listSkill } = this.state;
+    console.log(this.state.ListItemUser)
     if (!curentUser)
       return <div>Đang tải ...</div>
     return (
@@ -71,7 +107,7 @@ class index extends Component {
         </div>
         <div className="container bootstrap snippet" data-aos="fade" data-stellar-background-ratio="0.5">
           <div className="row" style={{ marginTop: "135px" }}>
-            <div className="col-sm-3">
+            <div className="col-sm-4">
               <div className="text-center">
                 {curentUser.avatar && (
                   <div className="img-select">
@@ -91,8 +127,24 @@ class index extends Component {
                   className="center-block file-upload"
                 />
               </div>
+
+              <div className="form-group">
+                <div className="col-xs-12">
+                  <label className="mt-4 mb-0">Thêm kỹ năng</label>
+                  <SelectField
+                    options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
+                    type="jobRequireSkillList"
+                    onChange={this.handleChangeSelectField}
+                  />
+                </div>
+              </div>
+              <div className="form-btn">
+                <div className="col-xs-12">
+                  <button className="btn btn-primary" onClick={this.onUpdateSkillUser}>Lưu</button>
+                </div>
+              </div>
             </div>
-            <div className="col-sm-9">
+            <div className="col-sm-8">
               <ul className="nav nav-tabs">
                 <li className="nav-item">
                   <a className="nav-link active" href="#profile" role="tab" data-toggle="tab">Hồ sơ</a>
@@ -156,13 +208,9 @@ class index extends Component {
                       </div>
                     </div>
                     <div className="form-group">
-                      <div className="col-xs-6">
-                        <label className="mt-4 mb-0">Chọn kỹ năng</label>
-                        <SelectField
-                          options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
-                          type="jobRequireProfessionJobList"
-                          onChange={this.handleChangeSelectField}
-                        />
+                      <div className="col-xs-6 mt-3">
+                        <label htmlFor="birthday"><h4>Kỹ năng của bạn</h4></label>
+                        <input type="text" className="form-control input-form" disabled value={listSkill} />
                       </div>
                     </div>
                     <div className="form-btn">

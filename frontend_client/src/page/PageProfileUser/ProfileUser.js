@@ -2,10 +2,12 @@ import React from 'react';
 import SelectField from "./SelectField";
 
 class ProfileUser extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      skills: []
+      skills: [],
+      jobRequireSkill:""
     };
   }
 
@@ -110,7 +112,7 @@ class ProfileUser extends React.Component {
             <label className="font-weight-bold" htmlFor="fullname">Chọn kỹ năng</label>
             <SelectField
               options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
-              type="jobRequireProfessionJobList"
+              type="jobRequireSkill"
               onChange={this.handleChangeSelectField}
             />
           </div>

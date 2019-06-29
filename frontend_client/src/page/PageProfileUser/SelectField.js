@@ -17,15 +17,14 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
     if (values) {
       onChange(type, values);
     }
-    console.log(values)
   }
 
   selectionRenderer = (values) => {
     switch (values.length) {
       case 0:
         return '';
-      case 1:
-        return this.props.options[values[0]-1].name;
+      // case 1:
+      //   return this.props.options[values[0]];
       default:
         return `${values.length} Kỹ năng được chọn`;
     }
@@ -44,11 +43,11 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
   }
 
   render() {
-    const{options} = this.props;
+    const { options } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <SelectField
-          style={{width:"100%",border: "1px solid #ccc", borderRadius:"5px"}}
+          style={{ width: "100%", border: "1px solid #ccc", borderRadius: "5px" }}
           multiple={true}
           value={this.state.values}
           onChange={this.handleChange}
