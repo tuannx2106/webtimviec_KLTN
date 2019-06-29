@@ -27,28 +27,29 @@ class PageRecruiter extends Component {
   }
 
   async componentDidMount() {
-    const { selectedCity, valueInput } = this.state;
+    console.log("componentDidMount ")
     this.allRecruiter = await fetch("/admin/api/recruiter/list").then(response => response.json())
     let cityList = await fetch("/admin/api/city/list").then(response => response.json())
-    let RecruitersResult = this.RecSearchResult(this.allRecruiter, valueInput, parseInt(selectedCity))
-
-    if (RecruitersResult.length !== 0) {
-      this.setState({
-        recruiters: RecruitersResult,
-        cities: cityList
-      })
-    } else {
+    // let RecruitersResult = this.RecSearchResult(this.allRecruiter, valueInput, parseInt(selectedCity))
       this.setState({
         recruiters:  this.allRecruiter,
         cities: cityList
       })
-    }
-
   }
+
+  componentWillUpdate (){
+  
+  }
+  // onRecruitersResult = () => {
+  //   const {valueInput, selectedCity} = this.state;
+  //   let RecruitersResult = this.RecSearchResult(this.allRecruiter, valueInput, parseInt(selectedCity))
+  //   return RecruitersResult
+
+  // }
 
   RecSearchResult = (RecruiterList, inputSearch, cityId) => {
     return RecruiterList.filter(rec => {
-      return rec.city.id === cityId
+      return 1 === cityId
         && rec.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
     })
   }
@@ -63,11 +64,12 @@ class PageRecruiter extends Component {
       valueInput: valueInput,
       selectedCity: selectedCity
     });
-    console.log(selectedCity)
+    console.log(valueInput,selectedCity)
   }
 
   render() {
     const { recruiters, cities } = this.state;
+    console.log("reder")
     return (
       <div className="site-wrap">
         <div className="site-mobile-menu">
