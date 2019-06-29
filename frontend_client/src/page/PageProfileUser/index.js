@@ -3,7 +3,7 @@ import Menu from "../../Component/Header/Menu";
 import "./style.css"
 // import Profile from './ProfileUser';
 import Myjob from './myJob';
-
+import SelectField from "./SelectField";
 
 class index extends Component {
   constructor(props) {
@@ -11,15 +11,18 @@ class index extends Component {
     this.state = {
       curentUser: null,
       jobUsers: [],
+      skills: []
     };
   }
 
   async componentDidMount() {
     const curUser = await JSON.parse(localStorage.getItem('currentUser'));
     let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
+    let skill = await fetch("/admin/api/skill/list").then(response => response.json())
     this.setState({
       curentUser: curUser,
       jobUsers: data,
+      skills: skill
     })
   }
 
@@ -27,6 +30,15 @@ class index extends Component {
     const { curentUser } = this.state
     curentUser[event.target.name] = event.target.value
     this.setState({ curentUser: { ...curentUser } })
+  };
+
+  handleChangeSelectField = (key, value) => {
+    let { curentUser } = this.state;
+    curentUser[key] = {
+      id: value
+    };
+    this.setState({ curentUser: curentUser });
+    console.log(value)
   };
 
   onUpdateUser = () => {
@@ -49,7 +61,7 @@ class index extends Component {
 
 
   render() {
-    const { curentUser, jobUsers } = this.state;
+    const { curentUser, jobUsers, skills } = this.state;
     if (!curentUser)
       return <div>Đang tải ...</div>
     return (
@@ -78,7 +90,6 @@ class index extends Component {
                   onChange={this.handleChange}
                   className="center-block file-upload"
                 />
-                {/* <button className="btn btn-primary mt-3" onClick={this.onUpdateAvarta}>Cập nhật hình đại diện</button> */}
               </div>
             </div>
             <div className="col-sm-9">
@@ -146,8 +157,12 @@ class index extends Component {
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="password2"><h4>Nhập lại mật khẩu</h4></label>
-                        <input type="password" className="form-control input-form" id="password" value={curentUser.password ? curentUser.password : ""} name="password" onChange={this.handleChange} />
+                        <label className="mt-4 mb-0">Chọn kỹ năng</label>
+                        <SelectField
+                          options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
+                          type="jobRequireProfessionJobList"
+                          onChange={this.handleChangeSelectField}
+                        />
                       </div>
                     </div>
                     <div className="form-btn">

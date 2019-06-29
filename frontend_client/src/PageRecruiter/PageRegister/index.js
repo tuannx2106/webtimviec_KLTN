@@ -6,6 +6,7 @@ class PageRegister extends Component {
     companyName: "",
     email: "",
     password: "",
+    confirmPassword: ""
   };
 
   constructor(props) {
@@ -28,15 +29,20 @@ class PageRegister extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { item } = this.state;
-    fetch('/admin/api/recruiter', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(item),
-    });
-    this.props.history.push('/login');
+    if (item.password !== item.confirmPassword) {
+      alert("Mật khẩu không trùng nhau !");
+    } else {
+      fetch('/admin/api/recruiter', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item),
+      });
+      this.props.history.push('/login-recruiter');
+    }
+
   }
   render() {
     return (
@@ -49,25 +55,25 @@ class PageRegister extends Component {
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label >Tên nhà tuyển dụng</label>
-                    <input type="text" className="form-control" onChange={this.handleChange} name="companyName" />
+                    <input type="text" className="form-control" onChange={this.handleChange} name="companyName" required />
                   </div>
                 </div>
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label htmlFor="email">Tài khoản email</label>
-                    <input type="email" className="form-control" onChange={this.handleChange} name="email" />
+                    <input type="email" className="form-control" onChange={this.handleChange} name="email" required />
                   </div>
                 </div>
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label htmlFor="subject">Mật khẩu</label>
-                    <input type="password" className="form-control" onChange={this.handleChange} name="password" />
+                    <input type="password" className="form-control" onChange={this.handleChange} name="password" required />
                   </div>
                 </div>
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label htmlFor="subject">Nhập lại mật khẩu</label>
-                    <input type="password" id="subject" className="form-control" />
+                    <input type="password"  className="form-control" onChange={this.handleChange} name="confirmPassword" required />
                   </div>
                 </div>
                 <div className="row form-group text-center mt-5">

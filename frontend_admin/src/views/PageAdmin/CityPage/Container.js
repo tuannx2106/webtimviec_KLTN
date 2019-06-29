@@ -8,10 +8,13 @@ import { Tooltip } from "@material-ui/core";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
 // core components
 import styles from "./styles";
+import { toast } from "react-toastify";
 import CityPage from "./Component";
 import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
+import ModalConfirm from "../../Common/components/ModalDelete/index";
+
 
 const { getTxt } = Helper;
 
@@ -19,9 +22,11 @@ const getInitialState = () => {
   const initialState = {
     type: "",
     isOpenModal: false,
+    modalDelete: false,
     row: {},
     isLoading: true,
     cities: [],
+    idDelte: "",
     form: {
       id: null,
       name: ""
@@ -48,42 +53,39 @@ class CityPageContainer extends React.Component {
           cities: response.data,
           isLoading: false
         });
-      })
-      .catch(err => console.log(err));
+      }).catch(err => {
+        if (err) {
+          toast.error(err);
+        }
+      });
   };
 
-  async handleDelete(id) {
+  handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
+
+  onhandleDelete = () => {
+    const { idDelte } = this.state;
     axios
-      .delete(`/admin/api/city/${id}`, {
+      .delete(`/admin/api/city/${idDelte}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         }
       })
       .then(() => {
-        let updatedCitys = [...this.state.cities].filter(i => i.id !== id);
-        this.setState({ cities: updatedCitys });
+        this.getListCity();
+        toast.success('Xoá thành phố thành công')
+      }).catch(err => {
+        if (err) {
+          toast.error('Xoá thành phố không thành công');
+        }
       })
-      .catch(err => console.log(err));
+    this.setState({ modalDelete: false })
   }
 
-  handleAdd = () => this.setState({ isOpenModal: true, type:"" });
+  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
 
   handleClose = () => {
     this.setState({ isOpenModal: false });
-  };
-
-  handleDelete = id => {
-    fetch(`/admin/api/city/${id}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    }).then(() => {
-      let updatedCitys = [...this.state.cities].filter(i => i.id !== id);
-      this.setState({ cities: updatedCitys });
-    });
   };
 
   onChangeValue = (key, value) => {
@@ -93,7 +95,6 @@ class CityPageContainer extends React.Component {
 
   onCreateCity = async () => {
     const { form } = this.state;
-    // console.log(history)
     fetch("/admin/api/city", {
       method: "POST",
       headers: {
@@ -105,11 +106,22 @@ class CityPageContainer extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
+          toast.success('Thêm mới thành phố thành công')
           this.getListCity();
         }
+      }).catch(err => {
+        if (err) {
+          toast.error('Thêm mới thành phố không thành công');
+        }
       })
-      .catch(err => console.log(err));
     this.setState({ isOpenModal: false });
+  };
+
+  handleCloseModalDelete = () => {
+    this.setState({
+      row: {},
+      modalDelete: false
+    });
   };
 
   onUpdateCity = async id => {
@@ -129,11 +141,16 @@ class CityPageContainer extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
+        // data = res.data
         if (data) {
+          toast.success('Cập nhật thành phố thành công')
           this.getListCity();
         }
+      }).catch(err => {
+        if (err) {
+          toast.error('Cập nhật thành phố không thành công');
+        }
       })
-      .catch(err => console.log(err));
     this.setState({ isOpenModal: false });
   };
 
@@ -147,7 +164,7 @@ class CityPageContainer extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { cities, isOpenModal, row, type } = this.state;
+    const { cities, isOpenModal, row, type, modalDelete } = this.state;
 
     const columns = [
       {
@@ -195,6 +212,14 @@ class CityPageContainer extends React.Component {
             onUpdateCity={this.onUpdateCity}
             row={row}
             type={type}
+          />
+        )}
+          {modalDelete && (
+          <ModalConfirm
+            modalDelete={modalDelete}
+            title="Xoá thành phố ?"
+            onConfirm={this.onhandleDelete}
+            handleClose={this.handleCloseModalDelete}
           />
         )}
       </Fragment>

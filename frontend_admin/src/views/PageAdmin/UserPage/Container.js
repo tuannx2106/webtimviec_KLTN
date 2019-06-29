@@ -12,6 +12,8 @@ import UsersPage from "./Component";
 import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
+import { toast } from "react-toastify";
+import ModalConfirm from "../../Common/components/ModalDelete/index";
 
 const { getTxt } = Helper;
 
@@ -19,11 +21,14 @@ const getInitialState = () => {
   const initialState = {
     type: "",
     isOpenModal: false,
+    modalDelete: false,
+    idDelte: "",
     row: {},
     isLoading: true,
     users: [],
     isAdmin: "",
     form: {
+      id: null,
       name: "",
       email: "",
       sdt: "",
@@ -51,28 +56,46 @@ class UsersPageContainer extends React.Component {
       .then(response => {
         this.setState({ users: response.data, isLoading: false });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error(err);
+        }
+      });
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true, type:"" });
+  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
 
   handleClose = () => this.setState({ isOpenModal: false });
 
-  handleDelete = id => {
-    // console.log(id)
+  handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
+
+  handleCloseModalDelete = () => {
+    this.setState({
+      row: {},
+      modalDelete: false
+    });
+  };
+
+  onhandleDelete = () => {
+    const { idDelte } = this.state;
     axios
-      .delete(`/admin/api/users/${id}`, {
+      .delete(`/admin/api/users/${idDelte}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         }
       })
       .then(() => {
-        let updatedUser = [...this.state.users].filter(i => i.id !== id);
-        this.setState({ users: updatedUser });
+        this.getListUsers();
+        toast.success('Xoá người dùng thành công')
+      }).catch(err => {
+        if (err) {
+          toast.error('Xoá người dùng không thành công');
+        }
       })
-      .catch(err => console.log(err));
+    this.setState({ modalDelete: false })
   };
+
   onChangeValue = (key, value) => {
     // eslint-disable-next-line react/no-direct-mutation-state
     this.state.form[key] = value;
@@ -93,10 +116,15 @@ class UsersPageContainer extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
+          toast.success('Thêm mới người dùng thành công')
           this.getListUsers();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Thêm mới người dùng không thành công');
+        }
+        })
     this.setState({ isOpenModal: false });
   };
 
@@ -123,16 +151,21 @@ class UsersPageContainer extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
+          toast.success('Cập nhật người dùng thành công')
           this.getListUsers();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Cập nhật người dùng không thành công');
+        }
+      })
     this.setState({ isOpenModal: false });
   };
 
   render() {
     const { classes } = this.props;
-    const { users, isOpenModal, isAdmin, row, type } = this.state;
+    const { users, isOpenModal, isAdmin, row, type,modalDelete } = this.state;
 
     const columns = [
       {
@@ -206,6 +239,14 @@ class UsersPageContainer extends React.Component {
             type={type}
             row={row}
             isAdmin={isAdmin}
+          />
+        )}
+        {modalDelete && (
+          <ModalConfirm
+            modalDelete={modalDelete}
+            title="Xoá người dùng ?"
+            onConfirm={this.onhandleDelete}
+            handleClose={this.handleCloseModalDelete}
           />
         )}
       </Fragment>

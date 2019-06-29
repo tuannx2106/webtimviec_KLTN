@@ -25,7 +25,7 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
       case 0:
         return '';
       case 1:
-        return this.props.options[values[0]].name;
+        return this.props.options[values[0]-1].name;
       default:
         return `${values.length} ngành nghề được chọn`;
     }

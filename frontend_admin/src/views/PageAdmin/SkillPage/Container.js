@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Tooltip } from "@material-ui/core";
+import { toast } from "react-toastify";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
 // core components
 import styles from "./styles";
@@ -13,6 +14,7 @@ import SkillPage from "./Component";
 import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
+import ModalConfirm from "../../Common/components/ModalDelete/index";
 
 const { getTxt } = Helper;
 
@@ -20,9 +22,11 @@ const getInitialState = () => {
   const initialState = {
     type: "",
     isOpenModal: false,
+    modalDelete: false,
     row: {},
     isLoading: true,
     skills: [],
+    idDelte: "",
     form: {
       id: null,
       skillName: ""
@@ -46,30 +50,45 @@ class SkillPageContainer extends React.Component {
       .get("/admin/api/skill/list")
       .then(response => {
         this.setState({ skills: response.data, isLoading: false });
-      })
-      .catch(err => console.log(err));
+      }).catch(err => {
+        if (err) {
+          toast.error(err);
+        }
+      });
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true, type:""});
+  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
 
   handleClose = () => {
     this.setState({ isOpenModal: false });
   };
 
-  handleDelete = id => {
-    // console.log(id)
+  handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
+
+  handleCloseModalDelete = () => {
+    this.setState({
+      row: {},
+      modalDelete: false
+    });
+  };
+
+  onhandleDelete = () => {
+    const { idDelte } = this.state;
     axios
-      .delete(`/admin/api/skill/${id}`, {
+      .delete(`/admin/api/skill/${idDelte}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         }
+      }).then(() => {
+        this.getListSkill();
+        toast.success('Xoá kỹ năng thành công')
+      }).catch(err => {
+        if (err) {
+          toast.error('Xoá kỹ năng không thành công');
+        }
       })
-      .then(() => {
-        let updatedSkills = [...this.state.skills].filter(i => i.id !== id);
-        this.setState({ skills: updatedSkills });
-      })
-      .catch(err => console.log(err));
+    this.setState({ modalDelete: false })
   };
 
   onChangeValue = (key, value) => {
@@ -77,7 +96,7 @@ class SkillPageContainer extends React.Component {
     this.state.form[key] = value;
   };
 
-  onCreateSkill = async () => {
+  onCreateSkill = () => {
     const { form } = this.state;
     fetch("/admin/api/skill", {
       method: "POST",
@@ -91,10 +110,14 @@ class SkillPageContainer extends React.Component {
       .then(data => {
         // data = res.data
         if (data) {
+          toast.success('Thêm mới kỹ năng thành công')
           this.getListSkill();
         }
+      }).catch(err => {
+        if (err) {
+          toast.error('Thêm mới kỹ năng không thành công');
+        }
       })
-      .catch(err => console.log(err));
     this.setState({ isOpenModal: false });
   };
 
@@ -117,10 +140,14 @@ class SkillPageContainer extends React.Component {
       .then(data => {
         // data = res.data
         if (data) {
+          toast.success('Cập nhật kỹ năng thành công')
           this.getListSkill();
         }
+      }).catch(err => {
+        if (err) {
+          toast.error('Cập nhật kỹ năng không thành công');
+        }
       })
-      .catch(err => console.log(err));
     this.setState({ isOpenModal: false });
   };
 
@@ -135,7 +162,7 @@ class SkillPageContainer extends React.Component {
   render() {
     // eslint-disable-next-line react/prop-types
     const { classes } = this.props;
-    const { skills, isOpenModal, row, type } = this.state;
+    const { skills, isOpenModal, row, type, modalDelete } = this.state;
 
     const columns = [
       {
@@ -184,6 +211,14 @@ class SkillPageContainer extends React.Component {
             onUpdateSkill={this.onUpdateSkill}
             row={row}
             type={type}
+          />
+        )}
+        {modalDelete && (
+          <ModalConfirm
+            modalDelete={modalDelete}
+            title="Xoá kỹ năng ?"
+            onConfirm={this.onhandleDelete}
+            handleClose={this.handleCloseModalDelete}
           />
         )}
       </Fragment>

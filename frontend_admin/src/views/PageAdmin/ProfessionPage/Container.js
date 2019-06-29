@@ -11,6 +11,8 @@ import ProfessionPage from "./Component";
 import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
+import { toast } from "react-toastify";
+import ModalConfirm from "../../Common/components/ModalDelete/index";
 
 const { getTxt } = Helper;
 
@@ -20,6 +22,8 @@ const getInitialState = () => {
     isOpenModal: false,
     row: {},
     isLoading: true,
+    modalDelete: false,
+    idDelte: "",
     skills: [],
     form: {
       id: null,
@@ -45,31 +49,47 @@ class ProfessionPageContainer extends React.Component {
       .then(response => {
         this.setState({ professions: response.data, isLoading: false })
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error(err);
+        }
+      });
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true, type:"" });
+  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
 
   handleClose = () => {
     this.setState({ isOpenModal: false });
   };
 
-  handleDelete = id => {
-    // console.log(id)
+  handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
+
+  handleCloseModalDelete = () => {
+    this.setState({
+      row: {},
+      modalDelete: false
+    });
+  };
+
+  onhandleDelete = () => {
+    const { idDelte } = this.state;
     axios
-      .delete(`/admin/api/profession/${id}`, {
+      .delete(`/admin/api/profession/${idDelte}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         }
       })
       .then(() => {
-        let updatedProfession = [...this.state.professions].filter(
-          i => i.id !== id
-        );
-        this.setState({ professions: updatedProfession });
+        this.getListProfession();
+        toast.success('Xoá ngành nghề thành công')
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Xoá ngành nghề không thành công');
+        }
+      })
+    this.setState({ modalDelete: false })
   };
 
   onChangeValue = (key, value) => {
@@ -91,10 +111,15 @@ class ProfessionPageContainer extends React.Component {
       .then(data => {
         // data = res.data
         if (data) {
+          toast.success('Thêm mới ngành nghề thành công')
           this.getListProfession();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Thêm mới ngành nghề không thành công');
+        }
+      })
     this.setState({ isOpenModal: false });
   };
 
@@ -124,16 +149,21 @@ class ProfessionPageContainer extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
+          toast.success('Cập nhật ngành nghề thành công')
           this.getListProfession();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err) {
+          toast.error('Cập nhật ngành nghề không thành công');
+        }
+      })
     this.setState({ isOpenModal: false });
   };
 
   render() {
     const { classes } = this.props;
-    const { professions, isOpenModal, row, type } = this.state;
+    const { professions, isOpenModal, row, type, modalDelete } = this.state;
 
     const columns = [
       {
@@ -181,6 +211,14 @@ class ProfessionPageContainer extends React.Component {
             onUpdateProfession={this.onUpdateProfession}
             row={row}
             type={type}
+          />
+        )}
+        {modalDelete && (
+          <ModalConfirm
+            modalDelete={modalDelete}
+            title="Xoá ngành nghề ?"
+            onConfirm={this.onhandleDelete}
+            handleClose={this.handleCloseModalDelete}
           />
         )}
       </Fragment>

@@ -4,9 +4,9 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Tooltip } from "@material-ui/core";
 // @material-ui/icons
-import { ExitToApp as LogoutIcon, Search } from "@material-ui/icons";
+import { ExitToApp as LogoutIcon } from "@material-ui/icons";
 // core components
-import CustomInput from "../../components/CustomInput/CustomInput";
+// import CustomInput from "../../components/CustomInput/CustomInput";
 import Button from "../../components/CustomButtons/Button";
 import { Link } from "react-router-dom";
 import headerLinksStyle from "../../assets/jss/material-dashboard-react/components/headerLinksStyle";
@@ -34,7 +34,7 @@ class HeaderLinks extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <div className={classes.searchWrapper}>
+        {/* <div className={classes.searchWrapper}>
           <CustomInput
             formControlProps={{
               className: classes.margin + " " + classes.search
@@ -49,7 +49,7 @@ class HeaderLinks extends React.Component {
           <Button color="white" aria-label="edit" justIcon round>
             <Search />
           </Button>
-        </div>
+        </div> */}
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
           justIcon={window.innerWidth > 959}

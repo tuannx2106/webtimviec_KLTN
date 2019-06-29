@@ -37,7 +37,7 @@ class Menu extends Component {
                 curentRecruiter ?
                   <>
                     <li className="nav-item">
-                      <span className="border-left pl-xl-4 " > <img src={curentRecruiter.logo} alt="avatar" className="avatar-rounded img-style"></img> </span>
+                      <span className="border-left pl-xl-4 " > <img src={curentRecruiter.logo ? curentRecruiter.logo : "https://banner2.kisspng.com/20180329/pgw/kisspng-computer-icons-download-housing-community-5abd0c854eee55.5671391815223389493233.jpg"} alt="Chưa có logo" className="avatar-rounded img-style"></img> </span>
                     </li>
                     <li className="nav-item dropdown">
                       <Link className="nav-link dropdown-toggle" to="#" id="navbardrop" data-toggle="dropdown">

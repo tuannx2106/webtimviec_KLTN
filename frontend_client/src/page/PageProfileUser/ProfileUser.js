@@ -1,6 +1,23 @@
 import React from 'react';
+import SelectField from "./SelectField";
 
 class ProfileUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      skills: []
+    };
+  }
+
+  componentDidMount() {
+    this.getList();
+  }
+
+  getList = () => {
+    fetch("/admin/api/skill/list")
+      .then(response => response.json())
+      .then(data => this.setState({ skills: data }));
+  };
 
   handleChange = event => {
     const { curentUser } = this.props
@@ -18,19 +35,20 @@ class ProfileUser extends React.Component {
       },
       body: JSON.stringify(curentUser)
     })
-    .then(response => response.json())
-    .then(data => {
-      this.setState({ curentUser: data, })
-      localStorage.setItem('currentUser', JSON.stringify(data));
-      alert("Cập nhật thông tin thành công !")
-    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ curentUser: data, })
+        localStorage.setItem('currentUser', JSON.stringify(data));
+        alert("Cập nhật thông tin thành công !")
+      })
   };
 
   render() {
+    const { skills } = this.state;
+    console.log(skills)
     const { curentUser } = this.props;
     if (!curentUser)
       return <div>Loading ...</div>
-    // console.log(curentUser)
     return (
       <div className="form">
         <div className="form-group form-style">
@@ -85,6 +103,16 @@ class ProfileUser extends React.Component {
           <div className="col-xs-6">
             <label htmlFor="password2"><h4>Nhập lại mật khẩu</h4></label>
             <input type="password" className="form-control input-form" id="password" value={curentUser.password ? curentUser.password : ""} name="password" onChange={this.handleChange} />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-xs-6">
+            <label className="font-weight-bold" htmlFor="fullname">Chọn kỹ năng</label>
+            <SelectField
+              options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
+              type="jobRequireProfessionJobList"
+              onChange={this.handleChangeSelectField}
+            />
           </div>
         </div>
         <div className="form-btn">

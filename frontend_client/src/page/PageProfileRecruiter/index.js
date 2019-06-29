@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Menu from "../../PageRecruiter/ComponentRecruiter/Header/Menu";
 import "./style.css"
-// import ProfileRecruiter from './ProfileRecruiter';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import JobRecruiter from "./myJobRecruiter";
 
 class index extends Component {
@@ -9,7 +10,8 @@ class index extends Component {
     super(props);
     this.state = {
       curentRecruiter: null,
-      listJobRecruiter: []
+      listJobRecruiter: [],
+      cities: []
     };
   }
 
@@ -17,9 +19,11 @@ class index extends Component {
     const curRecruiter = await JSON.parse(localStorage.getItem('currentRecruiter'));
 
     let data = await fetch(`/admin/api/job/recruiter/` + curRecruiter.id).then(response => response.json())
+    let city = await fetch(`/admin/api/city/list`).then(response => response.json())
     this.setState({
       curentRecruiter: curRecruiter,
       listJobRecruiter: data,
+      cities: city
     })
   }
 
@@ -27,6 +31,23 @@ class index extends Component {
     const { curentRecruiter } = this.state
     curentRecruiter[event.target.name] = event.target.value
     this.setState({ curentRecruiter: { ...curentRecruiter } })
+  };
+
+  handleChangeSelect = event => {
+    const { curentRecruiter } = this.state
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    curentRecruiter[name] = {
+      id: value
+    };
+    this.setState({ curentRecruiter: { ...curentRecruiter } });
+  };
+
+  onChangeValueEditor = (key, value) => {
+    // eslint-disable-next-line react/no-direct-mutation-state
+    this.state.curentRecruiter[key] = value;
+    console.log(value);
   };
 
   onUpdateRecruiter = () => {
@@ -49,7 +70,10 @@ class index extends Component {
   };
 
   render() {
-    const { curentRecruiter, listJobRecruiter } = this.state;
+    const { curentRecruiter, listJobRecruiter, cities } = this.state;
+    const cityOptionList = cities.map(city => {
+      return <option value={city.id}>{city.name}</option>;
+    });
     if (!curentRecruiter)
       return <div>Đang tải ...</div>
     return (
@@ -61,7 +85,15 @@ class index extends Component {
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-3">
               <div className="text-center">
-                <img src={curentRecruiter.logo} className="avatar img-thumbnail" alt="avatar" />
+                {curentRecruiter.logo && (
+                  <div className="img-select">
+                    <img
+                      src={curentRecruiter.logo}
+                      className="avatar img-circle img-thumbnail"
+                      alt="avatar"
+                    />
+                  </div>
+                )}
                 <h6 className="txt-img">Dán link ảnh vào đây để cập nhật logo công ty</h6>
                 <input type="text" className="center-block file-upload"
                   name="logo"
@@ -117,13 +149,42 @@ class index extends Component {
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
-                        <label htmlFor="password2"><h4>Nhập lại mật khẩu</h4></label>
-                        <input type="password" className="form-control input-form" value={curentRecruiter.password ? curentRecruiter.password : ""} name="password" onChange={this.handleChange} />
+                        <label className="" style={{ margin: "13px 0px 0px" }}>Thành phố</label>
+                        <select
+                          className="form-control"
+                          style={{ height: "35px", borderRadius: "5px" }}
+                          value={curentRecruiter.city.name}
+                          name="city"
+                          onChange={this.handleChangeSelect}
+                        >
+                          <option selected>Thành phố...</option>
+                          {cityOptionList}
+                        </select>
                       </div>
                     </div>
-                    <div className="form-btn">
+                    <div className="form-group" >
+                    <div className="col-xs-12">
+                      <label className="font-weight-bold" style={{ margin: "15px 0px 0px",fontSize:"20px" }} >Giới thiệu công ty</label>
+                      <ReactQuill
+                        name="description"
+                        value={curentRecruiter.description}
+                        onChange={value =>
+                          this.onChangeValueEditor("description", value)
+                        }
+                        theme="snow"
+                        modules={index.modules}
+                        formats={index.formats}
+                        placeholder={"Viết nội dung vào đây..."}
+                        ref={el => {
+                          this.reactQuill = el;
+                        }}
+                        style={{ height: "200px" }}
+                      />
+                      </div>
+                    </div>
+                    <div className="form-btn mt-5">
                       <div className="col-xs-12">
-                        <button className="btn btn-lg btn-primary mt-5" onClick={this.onUpdateRecruiter}> Cập nhật</button>
+                        <button className="btn btn-lg btn-primary mt-5 " onClick={this.onUpdateRecruiter}> Cập nhật</button>
                       </div>
                     </div>
                   </div>
@@ -143,5 +204,34 @@ class index extends Component {
     );
   }
 }
+index.formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image"
+];
 
+index.modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+    ["link", "image"],
+    ["clean"]
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false
+  }
+};
 export default index;

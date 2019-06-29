@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import ReactQuill from "react-quill";
 import SelectField from "./SelectField";
 import "react-quill/dist/quill.snow.css";
+import Modal from "./Modal";
+import { withRouter } from "react-router";
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -27,6 +29,7 @@ class NewPost extends Component {
     super(props);
     this.state = {
       jobRequireProfessionJobList: [],
+      isOpenModal: false,
       item: this.emptyItem,
     };
   }
@@ -64,7 +67,7 @@ class NewPost extends Component {
       id: value
     };
     this.setState({ item: item });
-    console.log(value)
+    // console.log(value)
   };
 
   onRecruiterPostJob = async () => {
@@ -108,8 +111,13 @@ class NewPost extends Component {
         body: JSON.stringify(jrpj)
       }).then(res => res.json())
     })
+    this.setState({ isOpenModal: true });
   };
 
+  handleClose = () => {
+    this.setState({ isOpenModal: false });
+    this.props.history.push("/trang-nha-tuyen-dung")
+  };
   // onCreateJob = async () => {
   //   const { item } = this.state;
   //   fetch(`/admin/api/job`, {
@@ -131,8 +139,8 @@ class NewPost extends Component {
 
   render() {
 
-    const { item } = this.state;
-    const { profession } = this.props;
+    const { item, isOpenModal } = this.state;
+    const { profession,skills } = this.props;
     const statusOptionList = this.props.status.map(tus => {
       return (
         <option key={tus.id} value={tus.id}>
@@ -147,6 +155,12 @@ class NewPost extends Component {
 
     return (
       <Fragment>
+        {isOpenModal && (
+          <Modal
+            isOpenModal={isOpenModal}
+            handleClose={this.handleClose}
+          />
+        )}
         <div className="p-5 bg-white">
           <div className="row form-group">
             <div className="col-md-12 mb-3 mb-md-0">
@@ -200,12 +214,22 @@ class NewPost extends Component {
               </select>
             </div>
           </div>
-          <div className="row form-group mb-4">
+          <div className="row form-group mb-3">
             <div className="col-md-12 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Thuộc Ngành nghề</label>
               <SelectField
                 options={profession ? profession.map(el => ({ name: el.professionJobName, value: el.id })) : []}
                 type="jobRequireProfessionJobList"
+                onChange={this.handleChangeSelectField}
+              />
+            </div>
+          </div>
+          <div className="row form-group mb-4">
+            <div className="col-md-12 mb-3 mb-md-0">
+              <label className="font-weight-bold" htmlFor="fullname">Chọn kỹ năng</label>
+              <SelectField
+                options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
+                // type="jobRequireProfessionJobList"
                 onChange={this.handleChangeSelectField}
               />
             </div>
@@ -270,4 +294,4 @@ NewPost.modules = {
     matchVisual: false
   }
 };
-export default NewPost;
+export default withRouter(NewPost);

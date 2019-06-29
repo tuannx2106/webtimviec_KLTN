@@ -28,11 +28,11 @@ const switchRoutes = (
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
-           
           />
         );
       }
     })}
+    <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
 );
 

@@ -26,7 +26,7 @@ class HomePage extends Component {
   async componentDidMount() {
     let jobList = await fetch('/admin/api/job/list').then(response => response.json())
     let cityList = await fetch('/admin/api/city/list').then(response => response.json())
-    let profList = await fetch('admin/api/profession/list').then(response => response.json())
+    let profList = await fetch('/admin/api/profession/list').then(response => response.json())
     let recruiterList = await fetch('/admin/api/recruiter/list').then(response => response.json())
 
     this.setState({
