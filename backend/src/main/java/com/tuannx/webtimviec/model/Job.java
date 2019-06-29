@@ -54,8 +54,7 @@ public class Job implements Serializable {
     @OneToMany(mappedBy = "job")
     private List<UsersJob> userJobList;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "job")
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobRequireSkill> jobRequireSkillList;
 
     @JsonIgnore

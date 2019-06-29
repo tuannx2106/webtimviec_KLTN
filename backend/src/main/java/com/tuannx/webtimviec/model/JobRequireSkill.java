@@ -1,5 +1,7 @@
 package com.tuannx.webtimviec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tuannx.webtimviec.model.Identity.JobRequireSkillId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +10,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -27,4 +28,29 @@ public class JobRequireSkill {
     @JoinColumn(name = "skill_id")
     private Skill skill;
 
+    public JobRequireSkillId getJobRequireSkillIdentity() {
+        return jobRequireSkillIdentity;
+    }
+
+    public void setJobRequireSkillIdentity(JobRequireSkillId jobRequireSkillIdentity) {
+        this.jobRequireSkillIdentity = jobRequireSkillIdentity;
+    }
+
+    @JsonIgnore
+    public Job getJob() {
+        return job;
+    }
+
+    @JsonProperty
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
 }

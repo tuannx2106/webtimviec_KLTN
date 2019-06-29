@@ -61,7 +61,6 @@ public class Users implements Serializable {
     @OneToMany(mappedBy = "users")
     private List<UsersJob> usersJobList;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<UsersSkill> usersSkillList;
 }
