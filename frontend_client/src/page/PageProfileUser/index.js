@@ -75,7 +75,7 @@ class index extends Component {
       users: { id: curentUser.id },
       skill: { id: skiluser }
     }))]
-    await ListSkillUsers.map(async Listskiluser => {
+    let skillList = await ListSkillUsers.map(async Listskiluser => {
       await fetch(`/admin/api/usersskill`, {
         method: "POST",
         headers: {
@@ -83,12 +83,17 @@ class index extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(Listskiluser)
-      }).then(res => res.json())
+      }).then(res => {
+        fetch("/admin/api/users/" + JSON.parse(localStorage.getItem('currentUser')).id)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            localStorage.setItem('currentUser', JSON.stringify(data));
+          })
+      })
+      alert("Thêm kỹ năng thành công !")
       window.location.reload()
     })
-    let updatedUser = await fetch("/admin/api/users/" + JSON.parse(localStorage.getItem('currentUser')).id).then(response => response.json())
-    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-    alert("Thêm kỹ năng thành công !")
   };
 
 

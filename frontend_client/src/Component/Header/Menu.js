@@ -5,11 +5,12 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      curentUser: null,
+      curentUser: {},
     };
   }
   componentDidMount() {
-    const curUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userFromLocalStore = localStorage.getItem('currentUser')
+    const curUser = userFromLocalStore ? JSON.parse(userFromLocalStore) : {};
     this.setState({ curentUser: curUser });
   }
 
