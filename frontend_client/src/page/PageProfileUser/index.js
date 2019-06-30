@@ -18,12 +18,11 @@ class index extends Component {
       skills: [],
       item: this.emptyItem,
       listSkill: [],
-      ListItemUser: null
     };
   }
 
   async componentDidMount() {
-    const curUser = await JSON.parse(localStorage.getItem('currentUser'));
+    const curUser = JSON.parse(localStorage.getItem('currentUser'));
     let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
     let skill = await fetch("/admin/api/skill/list").then(response => response.json())
     let itemUser = await fetch("/admin/api/users/" + curUser.id).then(response => response.json())
@@ -33,7 +32,6 @@ class index extends Component {
       jobUsers: data,
       skills: skill,
       listSkill: list,
-      ListItemUser: itemUser
     })
   }
 
@@ -50,7 +48,6 @@ class index extends Component {
       id: value
     };
     this.setState({ item: item });
-    console.log(value)
   };
 
   onUpdateUser = () => {
@@ -71,14 +68,14 @@ class index extends Component {
       })
   };
 
-  onUpdateSkillUser = () => {
+  onUpdateSkillUser = async () => {
     const { item, curentUser } = this.state;
     const { jobRequireSkillList } = item;
     const ListSkillUsers = [...jobRequireSkillList.id.map(skiluser => ({
       users: { id: curentUser.id },
       skill: { id: skiluser }
     }))]
-    ListSkillUsers.map(async Listskiluser => {
+    await ListSkillUsers.map(async Listskiluser => {
       await fetch(`/admin/api/usersskill`, {
         method: "POST",
         headers: {
@@ -87,17 +84,16 @@ class index extends Component {
         },
         body: JSON.stringify(Listskiluser)
       }).then(res => res.json())
-      alert("Thêm kỹ năng thành công !")
-      await window.location.reload();
-      await localStorage.removeItem("currentUser");
-      await localStorage.setItem('currentUser', JSON.stringify(this.state.ListItemUser));
+      window.location.reload()
     })
+    let updatedUser = await fetch("/admin/api/users/" + JSON.parse(localStorage.getItem('currentUser')).id).then(response => response.json())
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+    alert("Thêm kỹ năng thành công !")
   };
 
 
   render() {
     const { curentUser, jobUsers, skills, listSkill } = this.state;
-    console.log(this.state.ListItemUser)
     if (!curentUser)
       return <div>Đang tải ...</div>
     return (
