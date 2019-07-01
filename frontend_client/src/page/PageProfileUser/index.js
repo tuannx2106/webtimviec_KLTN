@@ -51,7 +51,6 @@ class index extends Component {
 
   handleChangeClose = (id) => {
     const{curentUser} = this.state;
-    console.log(curentUser.id)
     fetch(`/admin/api/usersskill/${curentUser.id}/${id}`, {
       method: "DELETE",
       headers: {
@@ -103,10 +102,10 @@ class index extends Component {
           .then(data => {
             console.log(data)
             localStorage.setItem('currentUser', JSON.stringify(data));
-          })
+            return 'tmp'
+          }).then(a => {window.location.reload()})
       })
       // alert("Thêm kỹ năng thành công !")
-      window.location.reload()
     })
   };
 
