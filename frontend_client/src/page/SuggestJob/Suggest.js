@@ -22,11 +22,16 @@ class SuggestJob extends Component {
   async componentDidMount() {
     const curUser = await JSON.parse(localStorage.getItem('currentUser'));
     let jobList = await fetch('/admin/api/job/list').then(response => response.json())
+
     this.setState({
       curentUser: curUser,
-      jobs: jobList
+      jobs: jobList.filter(job => this.hasCommonElement(curUser.usersSkillList.map(item => item.skill.id),job.jobRequireSkillList.map(item => item.skill.id)))
     })
   }
+
+  hasCommonElement = (usersSkillList, jobSkillList) => { 
+    return usersSkillList.some(item => jobSkillList.includes(item)) 
+  } 
 
   render() {
     const { curentUser, jobs } = this.state;
