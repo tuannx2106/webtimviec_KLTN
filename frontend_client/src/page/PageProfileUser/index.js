@@ -26,12 +26,11 @@ class index extends Component {
     let data = await fetch(`/admin/api/userjob/user/` + curUser.id).then(response => response.json())
     let skill = await fetch("/admin/api/skill/list").then(response => response.json())
     let itemUser = await fetch("/admin/api/users/" + curUser.id).then(response => response.json())
-    const list = await itemUser.usersSkillList.map(item => item.skill.skillName)
     this.setState({
       curentUser: curUser,
       jobUsers: data,
       skills: skill,
-      listSkill: list,
+      listSkill: itemUser,
     })
   }
 
@@ -49,6 +48,21 @@ class index extends Component {
     };
     this.setState({ item: item });
   };
+
+  handleChangeClose = (id) => {
+    const{curentUser} = this.state;
+    console.log(curentUser.id)
+    fetch(`/admin/api/usersskill/${curentUser.id}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+    })
+      .then(() => {
+        window.location.reload()
+      })
+  }
 
   onUpdateUser = () => {
     const { curentUser } = this.state;
@@ -75,7 +89,7 @@ class index extends Component {
       users: { id: curentUser.id },
       skill: { id: skiluser }
     }))]
-    let skillList = await ListSkillUsers.map(async Listskiluser => {
+    await ListSkillUsers.map(async Listskiluser => {
       await fetch(`/admin/api/usersskill`, {
         method: "POST",
         headers: {
@@ -91,7 +105,7 @@ class index extends Component {
             localStorage.setItem('currentUser', JSON.stringify(data));
           })
       })
-      alert("Thêm kỹ năng thành công !")
+      // alert("Thêm kỹ năng thành công !")
       window.location.reload()
     })
   };
@@ -209,9 +223,19 @@ class index extends Component {
                       </div>
                     </div>
                     <div className="form-group">
-                      <div className="col-xs-6 mt-3">
+                      <div className="col-xs-12 mt-3">
                         <label htmlFor="birthday"><h4>Kỹ năng của bạn</h4></label>
-                        <input type="text" className="form-control input-form" disabled value={listSkill} />
+                        {/* <input type="text" className="form-control input-form" disabled value={listSkill} /> */}
+                        <div className="e-input-group">
+                          {listSkill.usersSkillList.map(item => (
+                            <span className="e-chips">
+                              <span className="e-chipcontent">{item.skill.skillName}</span>
+                              <button type="button" className="close" aria-label="Close" onClick={() => this.handleChangeClose(item.skill.id)}>
+                                <span aria-hidden="true" >&times;</span>
+                              </button>
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                     <div className="form-btn">

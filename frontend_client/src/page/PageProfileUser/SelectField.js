@@ -9,6 +9,8 @@ const muiTheme = getMuiTheme({});
 export default class SelectFieldExampleSelectionRenderer extends Component {
   state = {
     values: [],
+    curentUser: null,
+    listSkill: [],
   };
 
   handleChange = (event, index, values) => {
@@ -29,8 +31,19 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
         return `${values.length} Kỹ năng được chọn`;
     }
   }
+  
+  async componentDidMount() {
+    const curUser = JSON.parse(localStorage.getItem('currentUser'));
+    const list =  curUser.usersSkillList.map(item => item.skill.id)
+    this.setState({
+      curentUser: curUser,
+      listSkill: list,
+    })
+  }
 
   menuItems(options) {
+    const dissable = options.map(item => item.value)
+    console.log(dissable)
     return options.map((option) => (
       <MenuItem
         key={option.value}
@@ -44,6 +57,7 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
 
   render() {
     const { options } = this.props;
+    console.log(this.state.listSkill)
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <SelectField
