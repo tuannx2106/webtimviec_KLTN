@@ -49,18 +49,19 @@ class index extends Component {
     this.setState({ item: item });
   };
 
-  handleChangeClose = (id) => {
+  handleChangeClose = async (id) => {
     const{curentUser} = this.state;
     console.log(curentUser.id)
-    fetch(`/admin/api/usersskill/${curentUser.id}/${id}`, {
+    await fetch(`/admin/api/usersskill/${curentUser.id}/${id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
     })
-      .then(() => {
-        window.location.reload()
+      .then(async () => {
+        let itemUser = await fetch("/admin/api/users/" + curentUser.id).then(response => response.json())
+        this.setState({listSkill: itemUser})
       })
   }
 
@@ -227,7 +228,7 @@ class index extends Component {
                         <label htmlFor="birthday"><h4>Kỹ năng của bạn</h4></label>
                         {/* <input type="text" className="form-control input-form" disabled value={listSkill} /> */}
                         <div className="e-input-group">
-                          {listSkill.usersSkillList.map(item => (
+                          {listSkill.usersSkillList && listSkill.usersSkillList.map(item => (
                             <span className="e-chips">
                               <span className="e-chipcontent">{item.skill.skillName}</span>
                               <button type="button" className="close" aria-label="Close" onClick={() => this.handleChangeClose(item.skill.id)}>
