@@ -42,12 +42,11 @@ class AllJob extends Component {
       })
     } else {
       this.setState({
-        jobs: this.allJob,
+        jobs: this.jobSortByDate(this.allJob),
         professions: profList,
         cities: cityList
       })
     }
-
   }
 
   jobsSearchResult = (jobList, inputSearch, cityId, professionId) => {
@@ -65,17 +64,19 @@ class AllJob extends Component {
     return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length !== 0 ? job : null
   }))
 
+  jobSortByDate = (jobList) => (jobList.sort((a,b) => Date.parse(a.date) < Date.parse(b.date)))
+
   onChangePage = (pageOfItems) => {
     // update state with new page of items
     this.setState({ pageOfItems: pageOfItems });
   }
 
   onClickCity = e => {
-    this.setState({ jobs: this.jobsFilterByCity(this.state.jobs, parseInt(e.target.dataset.id)) })
+    this.setState({ jobs: this.jobSortByDate(this.jobsFilterByCity(this.state.jobs, parseInt(e.target.dataset.id))) })
   }
 
   onClickProf = e => {
-    this.setState({ jobs: this.jobsFilterByProf(this.state.jobs, parseInt(e.target.dataset.id)) })
+    this.setState({ jobs: this.jobSortByDate(this.jobsFilterByProf(this.state.jobs, parseInt(e.target.dataset.id))) })
   }
 
   render() {

@@ -43,7 +43,6 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
 
   menuItems(options) {
     const dissable = options.map(item => item.value)
-    console.log(dissable)
     return options.map((option) => (
       <MenuItem
         key={option.value}
@@ -57,7 +56,6 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
 
   render() {
     const { options } = this.props;
-    console.log(this.state.listSkill)
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <SelectField
