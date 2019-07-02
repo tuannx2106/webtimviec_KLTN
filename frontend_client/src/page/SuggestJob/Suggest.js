@@ -47,7 +47,7 @@ class SuggestJob extends Component {
             <div className="col-sm-4">
               <div class="page-dashboard__user-profile-info">
                 <div class="avatar img-circle">
-                  <img style={{ height: "100px", width: "100px", borderRadius: "100%" }} src={curentUser.avatar} alt="avatar"></img>
+                  <img style={{ height: "100px", width: "100px", borderRadius: "100%" }} src={curentUser.avatar} alt=""></img>
                 </div>
                 <a href="##"><h3 class="full-name">{curentUser.name}</h3></a>
                 <ul class="list-group user-info m-b-sm text-left">
