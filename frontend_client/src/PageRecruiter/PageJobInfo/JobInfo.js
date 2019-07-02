@@ -43,7 +43,7 @@ class JobInfo extends Component {
           <Menu />
         </div>
         <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(images/bg-2.jpg)'}} data-aos="fade" data-stellar-background-ratio="0.5">
-          <Job job ={job}/>
+          <Job job ={job} />
           <div className="container">
             <Header />
           </div>

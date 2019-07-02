@@ -18,7 +18,6 @@ class Job extends Component {
   }
 
   getList = async () => {
-
     let Lcity = await fetch("/admin/api/city/list").then(response => response.json())
     let Lstatus = await fetch("/admin/api/status/list").then(response => response.json())
 

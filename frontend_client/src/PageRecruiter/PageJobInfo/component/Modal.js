@@ -34,7 +34,7 @@ class FormDialog extends React.Component {
     console.log(target.value);
   };
 
-  onUpdateJob = ()=> {
+  onUpdateJob = () => {
     let { job } = this.props;
     job = { ...job };
     fetch(`/admin/api/job/`, {
@@ -45,7 +45,7 @@ class FormDialog extends React.Component {
       },
       body: JSON.stringify(job)
     })
-        this.props.handleClose();
+    this.props.handleClose();
   };
 
   render() {
@@ -67,7 +67,7 @@ class FormDialog extends React.Component {
         <Dialog
           open={isOpenModal}
           fullWidth={true}
-          style={{color: "#3A3A3A" }}
+          style={{ color: "#3A3A3A" }}
         >
           <DialogTitle id="form-dialog-title" className="text-center" >
             <h5>Chỉnh sửa thông tin công việc</h5>
