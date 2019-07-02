@@ -188,8 +188,8 @@ class JobPageContainer extends React.Component {
   };
 
   onCreateJob = async () => {
-    const { item } = this.state;
-    const { title, description, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList, jobRequireSkillList } = item;
+    const { form } = this.state;
+    const { title, description, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList, jobRequireSkillList } = form;
 
     const jobItem = {
       title,
@@ -242,18 +242,19 @@ class JobPageContainer extends React.Component {
         },
         body: JSON.stringify(Listskiluser)
       }).then(res => res.json())
+        .then(data => {
+          if (data) {
+            toast.success('Thêm mới công việc thành công')
+            this.getListJob();
+          }
+        })
+        .catch(err => {
+          if (err) {
+            toast.error('Thêm mới công việc không thành công');
+          }
+        })
+     
     })
-      .then(data => {
-        if (data) {
-          toast.success('Thêm mới công việc thành công')
-          this.getListJob();
-        }
-      })
-      .catch(err => {
-        if (err) {
-          toast.error('Thêm mới công việc không thành công');
-        }
-      })
     this.setState({ isOpenModal: false });
   };
 
