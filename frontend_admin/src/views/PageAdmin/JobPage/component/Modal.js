@@ -38,6 +38,7 @@ const FormDialog = (props: Props) => {
     status,
     recruiter,
     city,
+    skills,
     onCreateJob,
     onUpdateJob,
   } = props;
@@ -149,11 +150,19 @@ const FormDialog = (props: Props) => {
                 onChange={handleChangeSelect}
               />
             </GridItem>
-            <GridItem xs={11} md={10} style={{ margin: "55px 0px 25px 0px" }}>
+            <GridItem xs={11} md={10} style={{ margin: "55px 0px 0px 0px" }}>
               <InputLabel>Ngành nghề</InputLabel>
               <SelectField
                  options={professions ? professions.map(el => ({ name: el.professionJobName, value: el.id })) : []}
                  type="jobRequireProfessionJobList"
+                 onChange={handleChangeSelect}
+               /> 
+            </GridItem>
+            <GridItem xs={11} md={10} style={{ margin: "55px 0px 25px 0px" }}>
+              <InputLabel>Kỹ năng</InputLabel>
+              <SelectField
+                 options={skills ? skills.map(el => ({ name: el.skillName, value: el.id })) : []}
+                 type="jobRequireSkillList"
                  onChange={handleChangeSelect}
                /> 
             </GridItem>

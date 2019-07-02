@@ -42,7 +42,6 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
   }
 
   menuItems(options) {
-    const dissable = options.map(item => item.value)
     return options.map((option) => (
       <MenuItem
         key={option.value}

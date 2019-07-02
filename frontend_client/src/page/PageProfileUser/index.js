@@ -50,7 +50,7 @@ class index extends Component {
   };
 
   handleChangeClose = async (id) => {
-    const{curentUser} = this.state;
+    const { curentUser } = this.state;
     console.log(curentUser.id)
     await fetch(`/admin/api/usersskill/${curentUser.id}/${id}`, {
       method: "DELETE",
@@ -61,7 +61,14 @@ class index extends Component {
     })
       .then(async () => {
         let itemUser = await fetch("/admin/api/users/" + curentUser.id).then(response => response.json())
-        this.setState({listSkill: itemUser})
+        this.setState({ listSkill: itemUser })
+        await fetch("/admin/api/users/" + JSON.parse(localStorage.getItem('currentUser')).id)
+          .then(response => response.json())
+          .then(data => {
+            this.setState({ curentUser: data, })
+            localStorage.setItem('currentUser', JSON.stringify(data));
+            return 'tmp'
+          })
       })
   }
 
@@ -98,16 +105,18 @@ class index extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(Listskiluser)
-      }).then(res => {
-        fetch("/admin/api/users/" + JSON.parse(localStorage.getItem('currentUser')).id)
+      })
+      .then(async () => {
+        let itemUser = await fetch("/admin/api/users/" + curentUser.id).then(response => response.json())
+        this.setState({ listSkill: itemUser })
+        await fetch("/admin/api/users/" + JSON.parse(localStorage.getItem('currentUser')).id)
           .then(response => response.json())
           .then(data => {
-            console.log(data)
+            this.setState({currentUser: data})
             localStorage.setItem('currentUser', JSON.stringify(data));
             return 'tmp'
-          }).then(a => {window.location.reload()})
+          })
       })
-      // alert("Thêm kỹ năng thành công !")
     })
   };
 

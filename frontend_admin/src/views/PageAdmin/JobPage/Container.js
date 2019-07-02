@@ -23,9 +23,11 @@ const getInitialState = () => {
     isOpenModal: false,
     citys: [],
     statuss: [],
+    skills: [],
     professions: [],
     recruiters: [],
     jobRequireProfessionJobList: [],
+    jobRequireSkillList: [],
     status: "",
     recruiter: "",
     city: "",
@@ -38,7 +40,8 @@ const getInitialState = () => {
       status: "",
       recruiter: "",
       city: "",
-      jobRequireProfessionJobList: ""
+      jobRequireProfessionJobList: "",
+      jobRequireSkillList: ""
     }
   };
   return initialState;
@@ -120,13 +123,15 @@ class JobPageContainer extends React.Component {
     let ListStatus = await fetch(`/admin/api/status/list`).then(response => response.json())
     let ListRecruiter = await fetch(`/admin/api/recruiter/list`).then(response => response.json())
     let ListProf = await fetch(`/admin/api/profession/list`).then(response => response.json())
-     
+    let ListSkill = await fetch(`/admin/api/skill/list`).then(response => response.json())
+
     this.setState({
       jobs: ListJob,
       citys: ListCity,
       statuss: ListStatus,
       recruiters: ListRecruiter,
-      professions: ListProf
+      professions: ListProf,
+      skills: ListSkill
     })
   };
 
@@ -163,7 +168,7 @@ class JobPageContainer extends React.Component {
         toast.error('Xoá công việc không thành công');
       }
     })
-  this.setState({ modalDelete: false })
+    this.setState({ modalDelete: false })
   };
 
   onChangeValue = (key, value) => {
@@ -183,8 +188,8 @@ class JobPageContainer extends React.Component {
   };
 
   onCreateJob = async () => {
-    const { form } = this.state;
-    const { title, description, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList } = form
+    const { item } = this.state;
+    const { title, description, expired, experience, date, status, recruiter, city, jobRequireProfessionJobList, jobRequireSkillList } = item;
 
     const jobItem = {
       title,
@@ -211,6 +216,10 @@ class JobPageContainer extends React.Component {
       job: { id: newJob.id },
       professionJob: { id: profId }
     }))]
+    const SkillUserList = [...jobRequireSkillList.id.map(skilluser => ({
+      job: { id: newJob.id },
+      skill: { id: skilluser }
+    }))]
 
     //add profession Job to that job
     await jrpjList.map(async jrpj => {
@@ -222,19 +231,30 @@ class JobPageContainer extends React.Component {
         },
         body: JSON.stringify(jrpj)
       }).then(res => res.json())
-        .then(data => {
-          if (data) {
-            toast.success('Thêm mới công việc thành công')
-            this.getListJob();
-          }
-        }).catch(err => {
-          if (err) {
-            toast.error('Thêm mới công việc không thành công');
-          }
-        })
-        this.setState({ isOpenModal: false });
     })
-   
+    //add skill Job to that job
+    await SkillUserList.map(async Listskiluser => {
+      await fetch('/admin/api/jobrequireskill', {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Listskiluser)
+      }).then(res => res.json())
+    })
+      .then(data => {
+        if (data) {
+          toast.success('Thêm mới công việc thành công')
+          this.getListJob();
+        }
+      })
+      .catch(err => {
+        if (err) {
+          toast.error('Thêm mới công việc không thành công');
+        }
+      })
+    this.setState({ isOpenModal: false });
   };
 
   handleUpdate = row => {
@@ -287,7 +307,8 @@ class JobPageContainer extends React.Component {
       city,
       recruiter,
       status,
-      modalDelete
+      modalDelete,
+      skills
     } = this.state;
     return (
       <Fragment>
@@ -306,6 +327,7 @@ class JobPageContainer extends React.Component {
           city={city}
           status={status}
           citys={citys}
+          skills={skills}
           professions={professions}
           recruiters={recruiters}
           statuss={statuss}
@@ -314,7 +336,7 @@ class JobPageContainer extends React.Component {
           onCreateJob={this.onCreateJob}
           onUpdateJob={this.onUpdateJob}
         />
-          {modalDelete && (
+        {modalDelete && (
           <ModalConfirm
             modalDelete={modalDelete}
             title="Xoá công việc ?"

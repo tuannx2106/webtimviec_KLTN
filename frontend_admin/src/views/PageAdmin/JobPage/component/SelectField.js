@@ -24,10 +24,10 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
     switch (values.length) {
       case 0:
         return '';
-      case 1:
-        return this.props.options[values[0]-1].name;
+      // case 1:
+      //   return this.props.options[values[0]-1].name;
       default:
-        return `${values.length} ngành nghề được chọn`;
+        return `${values.length} mục được chọn`;
     }
   }
 
@@ -50,7 +50,7 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
         <SelectField
           style={{width:"100%"}}
           multiple={true}
-          hintText="Công việc thuộc ngành nghề"
+          // hintText="Công việc thuộc ngành nghề"
           value={this.state.values}
           onChange={this.handleChange}
           selectionRenderer={this.selectionRenderer}

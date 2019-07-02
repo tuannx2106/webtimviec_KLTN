@@ -15,8 +15,9 @@ class Menu extends Component {
   }
 
   logOut = () => {
-    localStorage.removeItem("currentUser");
     this.setState({ curentUser: null })
+    localStorage.removeItem("currentUser");
+    
     this.props.history.push('/');
   }
 
@@ -54,9 +55,7 @@ class Menu extends Component {
                   </>
                   :
                   <li className="ml-xl-3 login"><span className="border-left pl-xl-4" /><Link to="/login">Đăng Nhập</Link><Link to="/register">Đăng Ký</Link></li>
-
               }
-
               <li><Link to="/trang-nha-tuyen-dung" className="cta"><span className="bg-primary text-white rounded">Nhà tuyển dụng</span></Link></li>
             </ul>
           </nav>
