@@ -16,7 +16,7 @@ class myJobRecruiter extends Component {
               <img className="img-JobUser" src={item.recruiter.logo} alt="" />
             </div>
             <div className="lh-content" >
-              <Link to="#"><h4> {item.title}</h4></Link>
+              <Link to={"/job-recruiter/"+item.id}><h6> {item.title}</h6></Link>
               <Link to="/user-apply-job" className="btn btn-warning btn-apply" onClick={() => this.handClick(item.id)}>Hồ sơ đã ứng tuyển</Link>
               <h3>Nhà tuyển dụng:<Link to="#"> {curentRecruiter.companyName}</Link></h3>
               <address className="addre">Địa chỉ: {item.city.name}</address>

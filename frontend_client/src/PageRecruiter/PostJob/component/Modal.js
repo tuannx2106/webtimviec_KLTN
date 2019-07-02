@@ -14,7 +14,7 @@ class FormDialog extends React.Component {
         <Dialog
           open={isOpenModal}
           fullWidth={true}
-          style={{ fontFamily: "Roboto", color: "#3A3A3A" }}
+          style={{color: "#3A3A3A" }}
         >
           <DialogTitle id="form-dialog-title" className="text-center" >
             <h3>Thông báo</h3>
@@ -27,7 +27,6 @@ class FormDialog extends React.Component {
             <button className="btn btn-primary" onClick={handleClose} style={{ width: "20%", margin: "20px" }}>Đóng</button>
           </div>
         </Dialog>
-        ))}
       </div>
     );
   }

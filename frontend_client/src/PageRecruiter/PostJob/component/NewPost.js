@@ -183,23 +183,23 @@ class NewPost extends Component {
             <div className="col-md-12 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Tên công việc</label>
               <input type="text" className="form-control" onChange={this.handleChange}
-                name="title" value={item.title} placeholder="Nhập vào tên công việc..." />
+                name="title" value={item.title} placeholder="Nhập vào tên công việc..." required/>
             </div>
           </div>
           <div className="row form-group mb-5">
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Ngày đăng tuyển</label>
-              <input disabled type="text" className="form-control" value={today} name="date" />
+              <input disabled type="text" className="form-control" value={today} name="date" required/>
             </div>
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Ngày hết hạn</label>
               <input type="date" className="form-control" value={item.expired} onChange={this.handleChange}
-                name="expired" />
+                name="expired" required/>
             </div>
             <div className="col-md-4 mb-3 mb-md-0">
               <label className="font-weight-bold" htmlFor="fullname">Kinh nghiệm</label>
               <input type="number" className="form-control" value={item.experience} onChange={this.handleChange}
-                name="experience" />
+                name="experience" required/>
             </div>
           </div>
           <div className="row form-group mb-4">
@@ -210,6 +210,7 @@ class NewPost extends Component {
                 className="form-control"
                 name="city"
                 onChange={this.handleChangeSelect}
+                required
               >
                 <option selected>Thành phố...</option>
                 {cityOptionList}
@@ -225,6 +226,7 @@ class NewPost extends Component {
                 className="form-control"
                 name="status"
                 onChange={this.handleChangeSelect}
+                required
               >
                 <option selected>Trạng thái...</option>
                 {statusOptionList}
@@ -238,6 +240,7 @@ class NewPost extends Component {
                 options={profession ? profession.map(el => ({ name: el.professionJobName, value: el.id })) : []}
                 type="jobRequireProfessionJobList"
                 onChange={this.handleChangeSelectField}
+                required
               />
             </div>
           </div>
@@ -248,6 +251,7 @@ class NewPost extends Component {
                 options={skills ? skills.map(sk => ({ name: sk.skillName, value: sk.id })) : []}
                 type="jobRequireSkillList"
                 onChange={this.handleChangeSelectField}
+                required
               />
             </div>
           </div>
@@ -260,6 +264,7 @@ class NewPost extends Component {
                 onChange={value =>
                   this.onChangeValueEditor("description", value)
                 }
+                required
                 theme="snow"
                 modules={NewPost.modules}
                 formats={NewPost.formats}

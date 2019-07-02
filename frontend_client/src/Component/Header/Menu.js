@@ -33,7 +33,7 @@ class Menu extends Component {
             <ul className="site-menu js-clone-nav mr-auto d-none d-lg-block">
               <li><NavLink exact activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/">Trang chủ</NavLink></li>
               <li><NavLink activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/tatcacongviec">Tất cả công việc</NavLink></li>
-              <li><NavLink activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/nhatuyendung">Nhà tuyển dụng</NavLink></li>
+              <li><NavLink activeStyle={{ fontWeight: "bold", color: "#7643ea" }} to="/nhatuyendung">Công ty</NavLink></li>
               {
                 curentUser ?
                   <>

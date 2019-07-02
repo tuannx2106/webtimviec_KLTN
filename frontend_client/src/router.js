@@ -3,6 +3,7 @@ import AllJob from './page/PageAllJob/AllJob';
 import PageRecruiter from "./page/PageRecruiter/PageRecruiter";
 import RecruiterInfo from './page/PageRecruiterInfo/RecruiterInfo';
 import JobInfo from './page/PageJobInfo/JobInfo';
+import JoInfoRecruiter from './PageRecruiter/PageJobInfo/JobInfo'
 import PageLogin from "./page/PageLogin/index";
 import PageRegister from './page/PageRegister';
 import PageLoginRecruiter from "./PageRecruiter/PageLogin/index";
@@ -35,6 +36,11 @@ const routes = [
         path: '/job/:id',
         exact: false,
         main: JobInfo
+    },
+    {
+        path: '/job-recruiter/:id',
+        exact: false,
+        main: JoInfoRecruiter
     },
     {
         path: '/recruiter/:id',

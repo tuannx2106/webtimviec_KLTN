@@ -153,7 +153,7 @@ class index extends Component {
                         <select
                           className="form-control"
                           style={{ height: "35px", borderRadius: "5px" }}
-                          value={curentRecruiter.city.name}
+                          defaultValue={curentRecruiter.city.id}
                           name="city"
                           onChange={this.handleChangeSelect}
                         >

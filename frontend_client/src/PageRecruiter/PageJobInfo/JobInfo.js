@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Menu from '../../Component/Header/Menu';
+import Menu from "../ComponentRecruiter/Header/Menu"
 import Header from './component/Header';
 import Infomation from './component/Info';
-import InputEmail from '../../Component/Container/InputEmail/InputEmail';
-import Footer from '../../Component/Footer/Footer';
+import Footer from '../ComponentRecruiter/Footer/Footer';
 import Job from "./component/Job";
 
 class JobInfo extends Component {
@@ -19,14 +18,17 @@ class JobInfo extends Component {
   }
 
   componentDidMount() {
-    fetch(`/admin/api/job/${this.props.match.params.id}`)
-      .then(response => response.json())
-      .then(data => this.setState({ job: data }));
+    this.getList();
   }
 
+  getList = () => {
+    fetch(`/admin/api/job/${this.props.match.params.id}`)
+    .then(response => response.json())
+    .then(data => this.setState({ job: data }));
+  }
+  
   render() {
     const {job} = this.state;
-    console.log(job)
     return (
       <div className="site-wrap bg-light">
         <div className="site-mobile-menu">
@@ -50,11 +52,7 @@ class JobInfo extends Component {
           <div className="container">
             <Infomation job ={job}/>
           </div>
-        </div>
-        <div className="newsletter bg-primary py-5">
-          <div className="container">
-            <InputEmail />
-          </div>
+         
         </div>
         <div className="site-footer">
           <Footer />
