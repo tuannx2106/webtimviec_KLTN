@@ -1980,13 +1980,9 @@ figure figcaption {
   max-width:163px;
   width: auto;
 }
-.item-fil{
-  height: 35px;
-  margin-bottom: 2px;
-  font-family: Roboto, Verdana;
-}
+
 .item-fil:hover{
-  background: #F7941D;
+  border-bottom: 1px solid #F7941D;
 }
 .font{
   font-family: Roboto, Verdana;
