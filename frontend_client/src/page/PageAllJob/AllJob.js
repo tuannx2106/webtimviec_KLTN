@@ -131,7 +131,7 @@ class AllJob extends Component {
                 <h5 style={{ lineHeight: "1", margin: "0px 0px 0px 30px", fontSize: "20px" }}>TẤT CẢ CÔNG VIỆC TÌM THẤY</h5>
               </div>
               <div className="col-lg-9">
-                <h2 id="not-found-title" style={{ marginBottom: "16px", display: "none" }}>Không tìm thấy công việc phù hợp</h2>
+                <h5 id="not-found-title" style={{ marginBottom: "16px", display: "none", textAlign:"center" }}>Không tìm thấy công việc phù hợp</h5>
                 <div id="job-list" className="row">
                   <Job jobs={this.state.pageOfItems} />
                 </div>
