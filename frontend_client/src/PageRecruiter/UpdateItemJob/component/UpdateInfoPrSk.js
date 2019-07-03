@@ -36,15 +36,15 @@ class UpdateInfoPrSk extends Component {
     const { job } = this.props;
     const { jobRequireSkillList, jobRequireProfessionJobList } = item;
 
-    const ListSkillJob = [...jobRequireSkillList.id.map(skiluser => ({
+    const ListSkillJob = jobRequireSkillList ? [...jobRequireSkillList.id.map(skiluser => ({
       job: { id: job.id },
       skill: { id: skiluser }
-    }))]
-    
-    const jrpjList = [...jobRequireProfessionJobList.id.map(profId => ({
+    }))] : []
+
+    const jrpjList = jobRequireProfessionJobList ? [...jobRequireProfessionJobList.id.map(profId => ({
       job: { id: job.id },
       professionJob: { id: profId }
-    }))]
+    }))] : []
 
     await ListSkillJob.map(async listUpdate => {
       await fetch(`/admin/api/jobrequireskill`, {
@@ -54,6 +54,10 @@ class UpdateInfoPrSk extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(listUpdate)
+      })
+      .then(async () => {
+        let itemjob = await fetch(`/admin/api/job/${job.id}`).then(response => response.json())
+        this.setState({ jobs: itemjob })
       })
     })
 
@@ -120,7 +124,7 @@ class UpdateInfoPrSk extends Component {
                 required
               />
             </div>
-           
+
           </div>
           <div className="row form-group mb-3">
             <div className="col-md-12 mb-3 mb-md-0">
@@ -134,8 +138,8 @@ class UpdateInfoPrSk extends Component {
             </div>
           </div>
           <div className="col-md-12 text-center">
-              <button className="btn btn-primary " onClick={this.handAddPrefSkill}> Lưu</button>
-            </div>
+            <button className="btn btn-primary " onClick={this.handAddPrefSkill}> Lưu</button>
+          </div>
         </div>
 
         <div className="p-4 mb-3 bg-white">
