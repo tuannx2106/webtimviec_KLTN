@@ -28,7 +28,7 @@ class AllJob extends Component {
 
   async componentDidMount() {
     const { selectedCity, selectedProf, searchInput } = this.props.location.state ? this.props.location.state : { selectedCity: 0 }
-
+    console.log( this.props.location.state)
     this.allJob = await fetch('/admin/api/job/list').then(response => response.json())
     let cityList = await fetch('/admin/api/city/list').then(response => response.json())
     let profList = await fetch('admin/api/profession/list').then(response => response.json())
@@ -68,16 +68,21 @@ class AllJob extends Component {
   filterJobList = () => {
     let jobsResult = this.allJob
     let jobsResultTitle = document.querySelector('#not-found-title')
+    let jobListDOM = document.querySelector('#job-list')
 
     this.filterByProfessionList.map(profession => {
       jobsResult = this.jobsFilterByProf(jobsResult, profession)
     })
-    if(this.filterByCity !== -1) jobsResult = this.jobsFilterByCity(jobsResult, this.filterByCity)
-  
+    if (this.filterByCity !== -1) jobsResult = this.jobsFilterByCity(jobsResult, this.filterByCity)
+
     if (jobsResult.length) {
-      this.setState({jobs: jobsResult})
+      this.setState({ jobs: jobsResult })
       jobsResultTitle.style.display = "none"
-    } else jobsResultTitle.style.display = "block"
+      jobListDOM.style.display = "block"
+    } else {
+      jobsResultTitle.style.display = "block"
+      jobListDOM.style.display = "none"
+    }
   }
 
   onChangePage = (pageOfItems) => {
@@ -126,8 +131,8 @@ class AllJob extends Component {
                 <h5 style={{ lineHeight: "1", margin: "0px 0px 0px 30px", fontSize: "20px" }}>TẤT CẢ CÔNG VIỆC TÌM THẤY</h5>
               </div>
               <div className="col-lg-9">
-                <div className="row">
-                  <h2 id="not-found-title" style={{margin: "0 0 16px 16px", display: "none"}}>Không tìm thấy công việc phù hợp</h2>
+                <h2 id="not-found-title" style={{ marginBottom: "16px", display: "none" }}>Không tìm thấy công việc phù hợp</h2>
+                <div id="job-list" className="row">
                   <Job jobs={this.state.pageOfItems} />
                 </div>
                 <div className='pagination-controls' style={{ display: "flex", float: "right", marginRight: "11px" }}>

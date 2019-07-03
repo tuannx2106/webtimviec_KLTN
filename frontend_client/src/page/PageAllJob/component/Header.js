@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom"
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCity: 0,
+      selectedProf: 0,
+      searchInput: ""
+    };
+  };
+
+  handleOnChangeInput = (e) => {
+    this.setState({ searchInput: e.target.value });
+  }
+
+  handleOnChangeSelectedCity = (e) => {
+    this.setState({ selectedCity: e.target.value });
+  }
+
+  handleOnChangeSelectedProfession = (e) => {
+    this.setState({ selectedProf: e.target.value });
+  }
+
   render() {
     const { cities,professions } = this.props;
+    const { selectedCity, selectedProf, searchInput } = this.state
     return (
       <div className="row align-items-center justify-content-center text-center">
         <div className="col-md-10" data-aos="fade-up" data-aos-delay={400}>
@@ -16,12 +39,12 @@ class Header extends Component {
           <form method="post">
             <div className="row align-items-center">
               <div className="col-lg-12 mb-4 mb-xl-0 col-xl-4">
-                <input type="text" className="form-control rounded" placeholder="Tìm công việc..." />
+                <input type="text" className="form-control rounded" placeholder="Tìm công việc..." onChange={this.handleOnChangeInput} />
               </div>
               <div className="col-lg-12 mb-4 mb-xl-0 col-xl-3">
                 <div className="select-wrap">
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
-                  <select className="form-control rounded">
+                  <select className="form-control rounded" onChange={this.handleOnChangeSelectedProfession}>
                   <option selected>Ngành nghề ...</option>
                     {professions && professions.map(item => (
                       <option value={item.id} >{item.professionJobName}</option>
@@ -32,7 +55,7 @@ class Header extends Component {
               <div className="col-lg-12 mb-4 mb-xl-0 col-xl-3">
                 <div className="select-wrap">
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
-                  <select className="form-control rounded">
+                  <select className="form-control rounded" onChange={this.handleOnChangeSelectedCity}>
                   <option selected>Thành phố ...</option>
                     {cities && cities.map(item => (
                       <option value={item.id} >{item.name}</option>
@@ -41,7 +64,14 @@ class Header extends Component {
                 </div>
               </div>
               <div className="col-lg-12 col-xl-2 ml-auto text-center">
-                <button className="btn btn-primary btn-block rounded padding8" >Tìm kiếm</button>
+              <Link to={{
+                  pathname: '/tatcacongviec',
+                  state: {
+                    selectedCity,
+                    selectedProf,
+                    searchInput
+                  }
+                }} className="btn btn-primary rounded py-2 px-4 text-white">Tìm kiếm </Link>
               </div>
             </div>
           </form>
