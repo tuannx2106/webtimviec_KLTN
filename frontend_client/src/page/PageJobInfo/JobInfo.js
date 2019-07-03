@@ -40,7 +40,7 @@ class JobInfo extends Component {
         <div className="site-navbar container py-0 " role="banner">
           <Menu />
         </div>
-        <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(images/bg-2.jpg)'}} data-aos="fade" data-stellar-background-ratio="0.5">
+        <div className="site-blocks-cover inner-page-cover overlay" style={{ backgroundImage: 'url(https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2017/12/14100649/pexels-photo-327540.jpeg)'}} data-aos="fade" data-stellar-background-ratio="0.5">
           <Job job ={job}/>
           <div className="container">
             <Header />

@@ -59,7 +59,12 @@ class Job extends Component {
               <address className="mb-0" style={{ width: "70%" }}>Địa chỉ: {job.recruiter.address} </address>
               <span className="review mb-0">Hạn nộp hồ sơ: {job.expired}</span>
               <div className=" submit-bt">
-                <button className="btn btn-primary rounded py-2 px-4 text-white " onClick={this.handleOpenModel}>Chỉnh sửa</button>
+              <Link to={{
+                  pathname: '/chinh-sua-cong-viec',
+                  state: {
+                   job
+                  }
+                }}  className="btn btn-primary rounded py-2 px-4 text-white " >Chỉnh sửa</Link>
               </div>
             </div>
           </div>

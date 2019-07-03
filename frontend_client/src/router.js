@@ -15,6 +15,7 @@ import PostJob from "./PageRecruiter/PostJob/index";
 import UserApplyJob from "./PageRecruiter/pageUserApplyJob/UserApplyJob";
 import PageNotFound from "./PageNotFound/index";
 import SuggestJob from "./page/SuggestJob/Suggest";
+import UpdateJobItem from "./PageRecruiter/UpdateItemJob/index"
 
 const routes = [
     {
@@ -102,6 +103,11 @@ const routes = [
         exact: false,
         main:  SuggestJob
     },
+    {
+        path: '/chinh-sua-cong-viec',
+        exact: false,
+        main: UpdateJobItem
+    }
 ];
 
 export default routes;

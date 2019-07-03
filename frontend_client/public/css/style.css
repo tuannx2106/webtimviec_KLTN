@@ -1961,7 +1961,7 @@ figure figcaption {
 }
 .img-job{
   height: 35px;
-  width: auto;
+  width: 35px;
 }
 .img-recruiter{
   max-height: 150px;
@@ -2437,6 +2437,13 @@ text-align: left;
   width: 100%;
   position: relative;
 }
+.e-input-group1{
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+}
 .e-chips{
   background-color: #e6e6e6;
   border-radius: 4px;
@@ -2473,4 +2480,26 @@ text-align: left;
   height: 30px;
   margin: 0 0 0;
   width: 30px;
+}
+.super-search-filter{
+  float: left;
+  width: 100%;
+  padding: 5px 0;
+  font-size: 14px;
+}
+.lable-filter{
+  float: left;
+  width: 100%;
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+.ipt_check{
+  float: left;
+  margin: 5px 5px 0 0;
+}
+.super-search-filter .value{
+  float: left;
+  width: 82%;
+  padding-left: 5px;
 }

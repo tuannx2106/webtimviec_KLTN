@@ -105,7 +105,7 @@ class AllJob extends Component {
           <div className="container">
             <div className="row">
               <div className="title-list-job">
-                <h5 style={{ lineHeight: "1", margin: "0", fontFamily: "Roboto, Verdana", fontSize: "17px" }}>CÔNG VIỆC TÌM THẤY</h5>
+                <h5 style={{ lineHeight: "1", margin: "0px 0px 0px 30px", fontSize: "20px" }}>TẤT CẢ CÔNG VIỆC TÌM THẤY</h5>
               </div>
               <div className="col-lg-9">
                 <div className="row">
