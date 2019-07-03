@@ -10,7 +10,7 @@ class Menu extends Component {
   }
   componentDidMount() {
     const userFromLocalStore = localStorage.getItem('currentUser')
-    const curUser = userFromLocalStore ? JSON.parse(userFromLocalStore) : {};
+    const curUser = userFromLocalStore ? JSON.parse(userFromLocalStore) : localStorage.removeItem("currentUser");
     this.setState({ curentUser: curUser });
   }
 
