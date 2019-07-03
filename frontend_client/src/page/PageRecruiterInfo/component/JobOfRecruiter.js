@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 class JobOfRecruiter extends Component {
   render() {
     const { listJobRecruiter } = this.props;
+    // console.log(listJobRecruiter)
     return (
       <div className="info-employer col-xs-12" style={{ padding: "15px 23px" }}>
         {listJobRecruiter && listJobRecruiter.map(item => (
@@ -12,7 +13,9 @@ class JobOfRecruiter extends Component {
               <span className="icon-detail-company" style={{ padding: "10px 20px 0px 0px" }}><img className="icon3" src={"/images/icon5.png"} alt=""></img></span>
               <div>
                 <Link to={"/job/" + item.id}><h6> {item.title}</h6></Link>
-                <address className="addre">Kĩ năng: </address>
+                <p className="addre" style={{ fontWeight: "bold" }}>
+                  Kĩ năng: {item.jobRequireSkillList ? item.jobRequireSkillList.map(jobskil => { return jobskil.skill.skillName + ', ' }) : ""}
+                </p>
               </div>
             </div>
 
