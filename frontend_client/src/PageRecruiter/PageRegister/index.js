@@ -6,6 +6,7 @@ class PageRegister extends Component {
     companyName: "",
     email: "",
     password: "",
+    city:{id:1},
     confirmPassword: ""
   };
 
