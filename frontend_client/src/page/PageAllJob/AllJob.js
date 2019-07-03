@@ -16,14 +16,14 @@ class AllJob extends Component {
       cities: [],
       professions: [],
       pageOfItems: [],
-      filterCity: 0,
-      filterProf: 0
     };
     this.allJob = [{
       city: {},
       jobRequireProfessionJobList: [{ professionJob: {} }],
       title: ""
     }];
+    this.filterByCity = -1;
+    this.filterByProfessionList = [];
   }
 
   async componentDidMount() {
@@ -60,11 +60,25 @@ class AllJob extends Component {
   jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id === cityId))
 
   jobsFilterByProf = (jobList, profId) => (jobList.filter(job => {
-    console.log(job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length)
     return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length !== 0 ? job : null
   }))
 
-  jobSortByDate = (jobList) => (jobList.sort((a,b) => Date.parse(a.date) < Date.parse(b.date)))
+  jobSortByDate = (jobList) => (jobList.sort((a, b) => Date.parse(a.date) < Date.parse(b.date)))
+
+  filterJobList = () => {
+    let jobsResult = this.allJob
+    let jobsResultTitle = document.querySelector('#not-found-title')
+
+    this.filterByProfessionList.map(profession => {
+      jobsResult = this.jobsFilterByProf(jobsResult, profession)
+    })
+    if(this.filterByCity !== -1) jobsResult = this.jobsFilterByCity(jobsResult, this.filterByCity)
+  
+    if (jobsResult.length) {
+      this.setState({jobs: jobsResult})
+      jobsResultTitle.style.display = "none"
+    } else jobsResultTitle.style.display = "block"
+  }
 
   onChangePage = (pageOfItems) => {
     // update state with new page of items
@@ -72,11 +86,15 @@ class AllJob extends Component {
   }
 
   onClickCity = e => {
-    this.setState({ jobs: this.jobSortByDate(this.jobsFilterByCity(this.state.jobs, parseInt(e.target.dataset.id))) })
+    this.filterByCity = parseInt(e.target.dataset.id)
+    this.filterJobList()
   }
 
-  onClickProf = e => {
-    this.setState({ jobs: this.jobSortByDate(this.jobsFilterByProf(this.state.jobs, parseInt(e.target.dataset.id))) })
+  onCheckboxProfessionChange = e => {
+    let targetProfession = parseInt(e.target.dataset.id)
+    if (e.target.checked) this.filterByProfessionList.push(targetProfession)
+    else this.filterByProfessionList = this.filterByProfessionList.filter(city => city !== targetProfession)
+    this.filterJobList()
   }
 
   render() {
@@ -109,6 +127,7 @@ class AllJob extends Component {
               </div>
               <div className="col-lg-9">
                 <div className="row">
+                  <h2 id="not-found-title" style={{margin: "0 0 16px 16px", display: "none"}}>Không tìm thấy công việc phù hợp</h2>
                   <Job jobs={this.state.pageOfItems} />
                 </div>
                 <div className='pagination-controls' style={{ display: "flex", float: "right", marginRight: "11px" }}>
@@ -119,7 +138,7 @@ class AllJob extends Component {
                 <Filter cities={cities}
                   onClickCity={this.onClickCity}
                   professions={professions}
-                  onClickProf={this.onClickProf} />
+                  onCheckboxProfessionChange={this.onCheckboxProfessionChange} />
               </div>
 
             </div>
