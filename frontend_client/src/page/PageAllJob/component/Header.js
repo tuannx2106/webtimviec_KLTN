@@ -23,8 +23,14 @@ class Header extends Component {
     this.setState({ selectedProf: e.target.value });
   }
 
+  onSearch = e => {
+    e.preventDefault()
+    const { searchInput, selectedCity, selectedProf } = this.state
+    this.props.onClickSearch(searchInput, selectedCity, selectedProf)
+  }
+
   render() {
-    const { cities,professions } = this.props;
+    const { cities, professions, onClickSearch } = this.props;
     const { selectedCity, selectedProf, searchInput } = this.state
     return (
       <div className="row align-items-center justify-content-center text-center">
@@ -35,7 +41,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <div className="form-search-wrap mb-3" style={{width:"85%"}} data-aos="fade-up" data-aos-delay={200}>
+        <div className="form-search-wrap mb-3" style={{ width: "85%" }} data-aos="fade-up" data-aos-delay={200}>
           <form method="post">
             <div className="row align-items-center">
               <div className="col-lg-12 mb-4 mb-xl-0 col-xl-4">
@@ -45,7 +51,7 @@ class Header extends Component {
                 <div className="select-wrap">
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
                   <select className="form-control rounded" onChange={this.handleOnChangeSelectedProfession}>
-                  <option selected>Ngành nghề ...</option>
+                    <option selected>Ngành nghề ...</option>
                     {professions && professions.map(item => (
                       <option value={item.id} >{item.professionJobName}</option>
                     ))}
@@ -56,7 +62,7 @@ class Header extends Component {
                 <div className="select-wrap">
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
                   <select className="form-control rounded" onChange={this.handleOnChangeSelectedCity}>
-                  <option selected>Thành phố ...</option>
+                    <option selected>Thành phố ...</option>
                     {cities && cities.map(item => (
                       <option value={item.id} >{item.name}</option>
                     ))}
@@ -64,14 +70,7 @@ class Header extends Component {
                 </div>
               </div>
               <div className="col-lg-12 col-xl-2 ml-auto text-center">
-              <Link to={{
-                  pathname: '/tatcacongviec',
-                  state: {
-                    selectedCity,
-                    selectedProf,
-                    searchInput
-                  }
-                }} className="btn btn-primary rounded py-2 px-4 text-white">Tìm kiếm </Link>
+                <button className="btn btn-primary rounded py-2 px-4 text-white" onClick={this.onSearch}>Tìm kiếm </button>
               </div>
             </div>
           </form>

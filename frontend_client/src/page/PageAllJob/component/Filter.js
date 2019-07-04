@@ -6,11 +6,11 @@ class Filter extends Component {
   }
 
   render() {
-    const { cities, professions, onClickCity, onCheckboxProfessionChange, onClickClearAll } = this.props;
+    const { cities, professions, onClickCity, onCheckboxProfessionChange, onClickReset } = this.props;
 
     return (
       <Fragment>
-        <button className="btn btn-primary col-lg-12 mb-3" onClick={onClickClearAll}>Tất cả công việc</button>
+        <button className="btn btn-primary col-lg-12 mb-3" onClick={onClickReset}>Tất cả công việc</button>
         <div>
           <div className="mb-3 p-2 bord bg-w">
             <h6 className="font mb-3 text-center" style={{ borderBottom: "1px solid #c1c1c1", paddingBottom: "5px" }}>Địa điểm</h6>
