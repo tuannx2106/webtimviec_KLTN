@@ -13,7 +13,7 @@ class myJobRecruiter extends Component {
         {listJobRecruiter && listJobRecruiter.map(item => (
           <div className="d-block d-md-flex listing border">
             <div className="img d-block text-center">
-              <img className="img-JobUser" src={item.recruiter.logo} alt="" />
+              <Link to={"/job-recruiter/"+item.id}><img className="img-JobUser" src={item.recruiter.logo} alt="" /></Link>
             </div>
             <div className="lh-content" >
               <Link to={"/job-recruiter/"+item.id}><h6> {item.title}</h6></Link>

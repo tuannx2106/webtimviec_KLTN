@@ -11,7 +11,7 @@ class Myjob extends Component {
         {jobUsers && jobUsers.map(item => (
         <div className="d-block d-md-flex listing border">
           <div className="img d-block text-center">
-              <img className="img-JobUser" src={item.job.recruiter.logo} alt="" />
+          <Link to={"/job/"+ item.job.id}><img className="img-JobUser" src={item.job.recruiter.logo} alt="" /></Link>
             </div>
           <div className="lh-content" >
             <Link to={"/job/"+ item.job.id}><h6> {item.job.title}</h6></Link>

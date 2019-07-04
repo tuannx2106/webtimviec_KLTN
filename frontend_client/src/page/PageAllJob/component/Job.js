@@ -10,7 +10,9 @@ class Job extends Component {
         {jobs && jobs.map(item => (
           <div className="col-lg-12 ">
             <div className="d-block d-md-flex listing border list">
-              <div className="img d-block"> <img className="img-alljob" src={item.recruiter.logo} alt=""/> </div>
+              <div className="img d-block">
+              <Link to={"/job/" + item.id}> <img className="img-alljob" src={item.recruiter.logo} alt=""/> </Link>
+                 </div>
               <div className="lh-content txt-lhcontent">
                 <Link to={"/job/" + item.id}><h6> {item.title}</h6></Link>
                 <a href="##" className="bookmark"><span className="icon-heart"></span></a>
