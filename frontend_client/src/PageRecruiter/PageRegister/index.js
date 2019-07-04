@@ -6,7 +6,8 @@ class PageRegister extends Component {
     companyName: "",
     email: "",
     password: "",
-    city:{id:1},
+    cities: [],
+    city: "",
     confirmPassword: ""
   };
 
@@ -15,6 +16,13 @@ class PageRegister extends Component {
     this.state = {
       item: this.emptyItem
     };
+  }
+
+  async componentDidMount() {
+    let city = await fetch(`/admin/api/city/list`).then(response => response.json())
+    this.setState({
+      cities: city
+    })
   }
 
   handleChange = (event) => {
@@ -26,6 +34,18 @@ class PageRegister extends Component {
     this.setState({ item: item });
     console.log(target.value)
   }
+
+  handleChangeSelect = event => {
+    const { item } = this.state
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    item[name] = {
+      id: value
+    };
+    this.setState({ item: item });
+
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -46,6 +66,10 @@ class PageRegister extends Component {
 
   }
   render() {
+    const { cities } = this.state;
+    const cityOptionList = cities && cities.map(city => {
+      return <option value={city.id}>{city.name}</option>;
+    });
     return (
       <div className="site-blocks-cover fix-size" style={{ backgroundImage: 'url(images/hero_1.jpg)' }}>
         <div className="container">
@@ -65,6 +89,19 @@ class PageRegister extends Component {
                     <input type="email" className="form-control" onChange={this.handleChange} name="email" required />
                   </div>
                 </div>
+                <div className="form-group">
+                  <div className="col-xs-12 text-left">
+                    <label className="">Thành phố</label>
+                    <select
+                      className="form-control"
+                      name="city"
+                      onChange={this.handleChangeSelect}
+                    >
+                      <option selected>Thành phố...</option>
+                      {cityOptionList}
+                    </select>
+                  </div>
+                </div>
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label htmlFor="subject">Mật khẩu</label>
@@ -74,7 +111,7 @@ class PageRegister extends Component {
                 <div className="row form-group">
                   <div className="col-md-12">
                     <label htmlFor="subject">Nhập lại mật khẩu</label>
-                    <input type="password"  className="form-control" onChange={this.handleChange} name="confirmPassword" required />
+                    <input type="password" className="form-control" onChange={this.handleChange} name="confirmPassword" required />
                   </div>
                 </div>
                 <div className="row form-group text-center mt-5">
