@@ -27,7 +27,7 @@ export default class FormDialog extends React.Component {
           </DialogTitle>
           <DialogContent>
             <GridContainer justify="center" noMargin>
-              Bạn chắc chắn muốn mục này không !!!
+              Bạn chắc chắn muốn xoá mục này !!!
             </GridContainer>
           </DialogContent>
           <GridContainer

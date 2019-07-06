@@ -194,7 +194,6 @@ class IntegrationReactSelect extends React.Component {
 
   render() {
     const { classes, theme, data } = this.props;
-
     const selectStyles = {
       input: base => ({
         ...base,

@@ -11,28 +11,61 @@ import CardHeader from "../../Common/components/Card/CardHeader";
 import CardBody from "../../Common/components/Card/CardBody";
 
 class SkillPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: ""
+    }
+  }
+
+  handleFilter = (e) => {
+    this.setState({
+      search: e.target.value
+    })
+  };
+
   render() {
-    const { classes, skills, columns, handleAdd } = this.props;
+    const { classes, columns, handleAdd } = this.props;
+    let data = this.props.skills
+    if (this.state.search) {
+      data = data.filter(row => {
+        return row.skillName.includes(this.state.search)
+      })
+    }
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader>
+
               <CardIcon color="primary" className={classes.bgcolor}>
                 <h4 className={classes.cardTitleWhite}>Kỹ năng </h4>
               </CardIcon>
-              <Button
-                className={classes.bgcolor}
-                style={{ float: "right", color: "#fff" }}
-                onClick={handleAdd}
+              <div
+                style={{ display: "flex", flexDirection: "row", float: "right" }}
               >
-                Thêm mới
+                <div className="form-group mb-0" style={{ marginRight: "20px" }} >
+                  <input
+                    placeholder="Tìm kiếm..."
+                    className="form-control"
+                    value={this.state.search}
+                    onChange={this.handleFilter}
+                  />
+                </div>
+                <Button
+                  className={classes.bgcolor}
+                  style={{ float: "right", color: "#fff" }}
+                  onClick={handleAdd}
+                >
+                  Thêm mới
               </Button>
+              </div>
             </CardHeader>
             <CardBody>
+
               <ReactTable
                 style={{ textAlign: "center" }}
-                data={skills}
+                data={data}
                 columns={columns}
                 defaultPageSize={6}
                 sortable={false}

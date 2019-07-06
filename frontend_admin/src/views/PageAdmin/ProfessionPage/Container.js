@@ -8,13 +8,13 @@ import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
 // core components
 import styles from "./styles";
 import ProfessionPage from "./Component";
-import { Helper } from "../../../utils";
+// import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ModalConfirm from "../../Common/components/ModalDelete/index";
 
-const { getTxt } = Helper;
+// const { getTxt } = Helper;
 
 const getInitialState = () => {
   const initialState = {
@@ -56,10 +56,11 @@ class ProfessionPageContainer extends React.Component {
       });
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
+  handleAdd = () => this.setState({ isOpenModal: true});
 
   handleClose = () => {
-    this.setState({ isOpenModal: false });
+    this.setState(getInitialState());
+    this.getListProfession();
   };
 
   handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
@@ -169,7 +170,11 @@ class ProfessionPageContainer extends React.Component {
       {
         Header: "Ngành nghề",
         id: "name",
-        accessor: row => getTxt(row.professionJobName)
+        // accessor: row => getTxt(row.professionJobName)
+        accessor: row =>
+        <Tooltip title={row.professionJobName}>
+          <div style={{ textAlign: "center" }}>{row.professionJobName}</div>
+        </Tooltip>
       },
       {
         Header: "Chức năng",

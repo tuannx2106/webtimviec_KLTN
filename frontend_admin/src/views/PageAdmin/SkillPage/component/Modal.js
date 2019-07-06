@@ -29,14 +29,14 @@ export default class FormDialog extends React.Component {
           open={isOpenModal}
           // onClose={handleClose}
           fullWidth={true}
-          maxWidth="false"
+          maxWidth="true"
         >
           <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
             {title}
           </DialogTitle>
           <DialogContent>
             <GridContainer justify="center" noMargin>
-              <GridItem xs={11} md={10}>
+              <GridItem xs={11} md={6}>
                 <Input
                   labelText="Tên kỹ năng"
                   formControlProps={{

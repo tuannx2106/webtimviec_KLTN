@@ -9,8 +9,6 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Checkbox,
-  FormControlLabel
 } from "@material-ui/core";
 
 const styles = theme => ({
@@ -27,7 +25,6 @@ const styles = theme => ({
 export class FormDialog extends React.Component {
   render() {
     const {
-      classes,
       isOpenModal,
       handleClose,
       row,
@@ -58,7 +55,20 @@ export class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
+             
               <GridItem xs={11} md={5}>
+                <Input
+                  labelText="Địa chỉ"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    onChange: e => onChangeValue("address", e.target.value),
+                    defaultValue: row.address || ""
+                  }}
+                />
+              </GridItem>
+               <GridItem xs={11} md={4}>
                 <Input
                   labelText="Email"
                   formControlProps={{
@@ -70,15 +80,15 @@ export class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
-              <GridItem xs={11} md={4}>
+              <GridItem xs={11} md={3}>
                 <Input
-                  labelText="Địa chỉ"
+                  labelText="Mật khẩu"
                   formControlProps={{
-                    fullWidth: true
+                  fullWidth: true
                   }}
                   inputProps={{
-                    onChange: e => onChangeValue("address", e.target.value),
-                    defaultValue: row.address || ""
+                    onChange: e => onChangeValue("password", e.target.value),
+                    defaultValue: row.password || ""
                   }}
                 />
               </GridItem>
@@ -94,7 +104,21 @@ export class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
-              <GridItem xs={11} md={3}>
+              
+              <GridItem xs={11} md={5}>
+                <Input
+                  labelText="Ảnh (Dán link hình ảnh)"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    onChange: e => onChangeValue("avatar", e.target.value),
+                    defaultValue: row.avatar || ""
+
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={11} md={5}>
                 <Input
                   labelText="Ngày sinh (yyyy-mm-dd)"
                   formControlProps={{
@@ -105,32 +129,6 @@ export class FormDialog extends React.Component {
                       onChangeValue("birthday", e.target.value),
                     defaultValue: row.birthday || ""
                   }}
-                />
-              </GridItem>
-              <GridItem xs={11} md={4}>
-                <Input
-                  labelText="Ảnh"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                    onChange: e => onChangeValue("avatar", e.target.value),
-                    defaultValue: row.avatar || ""
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={11} md={6}>
-                <FormControlLabel
-                  className={classes.control}
-                  control={
-                    <Checkbox
-                      // checked={isAdmin}
-                      onChange={e => onChangeValue("isAdmin", e.target.checked)}
-                      value={row.isAdmin}
-                      color="primary"
-                    />
-                  }
-                  label="Quản trị viên"
                 />
               </GridItem>
             </GridContainer>

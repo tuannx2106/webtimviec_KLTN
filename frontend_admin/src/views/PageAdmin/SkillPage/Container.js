@@ -11,12 +11,12 @@ import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
 // core components
 import styles from "./styles";
 import SkillPage from "./Component";
-import { Helper } from "../../../utils";
+// import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
 import ModalConfirm from "../../Common/components/ModalDelete/index";
 
-const { getTxt } = Helper;
+// const { getTxt } = Helper;
 
 const getInitialState = () => {
   const initialState = {
@@ -29,7 +29,8 @@ const getInitialState = () => {
     idDelte: "",
     form: {
       id: null,
-      skillName: ""
+      skillName: "",
+      
     }
   };
   return initialState;
@@ -41,7 +42,7 @@ class SkillPageContainer extends React.Component {
     this.state = getInitialState();
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getListSkill();
   }
 
@@ -57,10 +58,19 @@ class SkillPageContainer extends React.Component {
       });
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
+  handleAdd = () => this.setState({ isOpenModal: true});
+
+  handleUpdate = value => {
+    this.setState({
+      isOpenModal: true,
+      type: "edit",
+      row: value
+    });
+  };
 
   handleClose = () => {
-    this.setState({ isOpenModal: false });
+    this.setState(getInitialState());
+    this.getListSkill();
   };
 
   handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
@@ -151,14 +161,6 @@ class SkillPageContainer extends React.Component {
     this.setState({ isOpenModal: false });
   };
 
-  handleUpdate = value => {
-    this.setState({
-      isOpenModal: true,
-      type: "edit",
-      row: value
-    });
-  };
-
   render() {
     // eslint-disable-next-line react/prop-types
     const { classes } = this.props;
@@ -166,9 +168,13 @@ class SkillPageContainer extends React.Component {
 
     const columns = [
       {
+        
         Header: "Kỹ năng",
         id: "name",
-        accessor: row => getTxt(row.skillName)
+        accessor: row =>
+        <Tooltip title={row.skillName}>
+          <div style={{ textAlign: "center" }}>{row.skillName}</div>
+        </Tooltip>
       },
       {
         Header: "Chức năng",
@@ -203,7 +209,6 @@ class SkillPageContainer extends React.Component {
         />
         {isOpenModal && (
           <Modal
-            row={row}
             isOpenModal={isOpenModal}
             handleClose={this.handleClose}
             onChangeValue={this.onChangeValue}

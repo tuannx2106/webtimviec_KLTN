@@ -26,20 +26,19 @@ const getInitialState = () => {
     row: {},
     isLoading: true,
     users: [],
-    isAdmin: "",
     form: {
       id: null,
       name: "",
       email: "",
       sdt: "",
       birthday: "",
-      isAdmin: "",
       address: "",
+      avatar:"",
+      password:""
     }
   };
   return initialState;
-};
-
+}
 class UsersPageContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -63,9 +62,12 @@ class UsersPageContainer extends React.Component {
       });
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
+  handleAdd = () => this.setState({ isOpenModal: true });
 
-  handleClose = () => this.setState({ isOpenModal: false });
+  handleClose = () => {
+    this.setState(getInitialState());
+    this.getListUsers();
+  }
 
   handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
 
@@ -171,32 +173,52 @@ class UsersPageContainer extends React.Component {
       {
         Header: "Họ tên",
         id: "name",
-        accessor: row => getTxt(row.name)
+        accessor: row =>
+        <Tooltip title={row.name}>
+          <div style={{ textAlign: "center" }}>{row.name}</div>
+        </Tooltip>
       },
       {
         Header: "Email",
         id: "email",
-        accessor: row => getTxt(row.email)
+        accessor: row =>
+        <Tooltip title={row.email}>
+          <div style={{ textAlign: "center" }}>{row.email}</div>
+        </Tooltip>
       },
       {
         Header: "Số điện thoại",
         id: "sdt",
-        accessor: row => getTxt(row.sdt)
+        accessor: row =>
+        <Tooltip title={row.sdt}>
+          <div style={{ textAlign: "center" }}>{row.sdt}</div>
+        </Tooltip>
       },
       {
         Header: "Địa chỉ",
         id: "address",
-        accessor: row => getTxt(row.address)
+        accessor: row =>
+        <Tooltip title={row.address}>
+          <div style={{ textAlign: "center" }}>{row.address}</div>
+        </Tooltip>
       },
       {
         Header: "Ngày sinh",
         id: "birthday",
-        accessor: row => getTxt(row.birthday)
+        accessor: row =>
+        <Tooltip title={row.birthday}>
+          <div style={{ textAlign: "center" }}>{row.birthday}</div>
+        </Tooltip>
       },
       {
-        Header: "Quản trị viên",
-        id: "isAdmin",
-        accessor: row => getTxt(row.isAdmin)
+        Header: "Kỹ năng",
+        id: "usersSkillList",
+        accessor: row =>
+        <Tooltip title={row.usersSkillList.map(item =>(<Fragment>{item.skill.skillName}, </Fragment>))}>
+        <div style={{ textAlign: "center" }}>{row.usersSkillList.map(item => (
+          <Fragment>{item.skill.skillName}, </Fragment>)
+          )}</div>
+      </Tooltip>
       },
       {
         Header: "Chức năng",

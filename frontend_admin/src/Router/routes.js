@@ -2,6 +2,9 @@
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LocationOn from "@material-ui/icons/LocationOn";
+import DateRange from "@material-ui/icons/DateRange";
+import Store from "@material-ui/icons/Store";
+import Code from "@material-ui/icons/Code";
 import DashboardPage from "../views/PageAdmin/Dashboard/Dashboard";
 import JobPageContainer from "../views/PageAdmin/JobPage/Container";
 import UsersPageContainer from "../views/PageAdmin/UserPage/Container";
@@ -27,6 +30,13 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
+    path: PATH.RECRUITER_PAGE_URL,
+    name: "Nhà tuyển dụng",
+    icon: Store,
+    component: RecruiterPageContainer,
+    layout: "/admin"
+  },
+  {
     path: PATH.JOB_PAGE_URL,
     name: "Công việc",
     icon: "content_paste",
@@ -34,16 +44,9 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: PATH.RECRUITER_PAGE_URL,
-    name: "Nhà tuyển dụng",
-    icon: "content_paste",
-    component: RecruiterPageContainer,
-    layout: "/admin"
-  },
-  {
     path: PATH.PROFESSION_PAGE_URL,
     name: "Ngành nghề",
-    icon: "content_paste",
+    icon: Code,
     component: ProfessionPageContainer,
     layout: "/admin"
   },
@@ -57,7 +60,7 @@ const dashboardRoutes = [
   {
     path: PATH.SKILL_PAGE_URL,
     name: "Kỹ năng",
-    icon: "content_paste",
+    icon: DateRange,
     component: SkillPageContainer,
     layout: "/admin"
   }

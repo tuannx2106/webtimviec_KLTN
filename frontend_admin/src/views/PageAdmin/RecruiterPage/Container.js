@@ -7,14 +7,14 @@ import { Tooltip } from "@material-ui/core";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
 // core components
 import styles from "./styles";
-import { Helper } from "../../../utils";
+// import { Helper } from "../../../utils";
 import RecruiterPage from "./Component";
 import Modal from "./component/Modal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ModalConfirm from "../../Common/components/ModalDelete/index";
 
-const { getTxt } = Helper;
+// const { getTxt } = Helper;
 
 const getInitialState = () => {
   const initialState = {
@@ -36,6 +36,7 @@ const getInitialState = () => {
       logo: "",
       phone: "",
       city: "",
+      password:""
     }
   };
   return initialState;
@@ -47,7 +48,7 @@ class RecruiterPageContainer extends React.Component {
     this.state = getInitialState();
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.getListRecruiter();
   }
 
@@ -70,11 +71,12 @@ class RecruiterPageContainer extends React.Component {
       });
   };
 
-  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
+  handleAdd = () => this.setState({ isOpenModal: true});
 
   handleClose = () => {
-    this.setState({ isOpenModal: false });
-  };
+    this.setState(getInitialState());
+    this.getListRecruiter();
+  }
 
   handleDelete = (idDelte) => this.setState({ idDelte, modalDelete: true });
 
@@ -152,7 +154,8 @@ class RecruiterPageContainer extends React.Component {
       isOpenModal: true,
       type: "edit",
       row,
-      form: row
+      form: row,
+      city: row.city.id
     });
   };
 
@@ -185,32 +188,47 @@ class RecruiterPageContainer extends React.Component {
   render() {
     const { classes } = this.props;
     const { recruiters, isOpenModal, row, type, citys, city, modalDelete } = this.state;
-
     const columns = [
       {
         Header: "Nhà tuyển dụng",
         id: "companyName",
-        accessor: row => getTxt(row.companyName)
+        accessor: row =>
+        <Tooltip title={row.companyName}>
+          <div style={{ textAlign: "center" }}>{row.companyName}</div>
+        </Tooltip>
       },
       {
         Header: "Email",
         id: "email",
-        accessor: row => getTxt(row.email)
+        accessor: row =>
+        <Tooltip title={row.email}>
+          <div style={{ textAlign: "center" }}>{row.email}</div>
+        </Tooltip>
       },
       {
         Header: "Địa chỉ",
         id: "address",
-        accessor: row => getTxt(row.address)
-      },
-      {
-        Header: "Ảnh",
-        id: "logo",
-        accessor: row => getTxt(row.logo)
+        accessor: row =>
+        <Tooltip title={row.address}>
+          <div style={{ textAlign: "center" }}>{row.address}</div>
+        </Tooltip>
       },
       {
         Header: "Số điện thoại",
         id: "phone",
-        accessor: row => getTxt(row.phone)
+        accessor: row =>
+        <Tooltip title={row.phone}>
+          <div style={{ textAlign: "center" }}>{row.phone}</div>
+        </Tooltip>
+      },
+      {
+        Header: "Thuộc thành phố",
+        id: "name",
+        accessor: row =>
+        <Tooltip title={row.city.name}>
+          <div style={{ textAlign: "center" }}>{row.city.name}</div>
+        </Tooltip>
+        //  accessor: "city.name"
       },
       {
         Header: "Chức năng",

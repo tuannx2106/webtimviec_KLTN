@@ -35,7 +35,7 @@ export default class FormDialog extends React.Component {
           </DialogTitle>
           <DialogContent>
             <GridContainer justify="center" noMargin>
-              <GridItem xs={11} md={10}>
+              <GridItem xs={11} md={6}>
                 <Input
                   labelText="Tên ngành nghề"
                   formControlProps={{

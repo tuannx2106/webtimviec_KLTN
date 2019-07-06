@@ -10,9 +10,29 @@ import CardHeader from "../../Common/components/Card/CardHeader";
 import CardBody from "../../Common/components/Card/CardBody";
 
 class UsersPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: ""
+    }
+  }
+
+  handleFilter = (e) => {
+    this.setState({
+      search: e.target.value
+    })
+  };
+
   render() {
     // eslint-disable-next-line react/prop-types
-    const { classes, users, columns, handleAdd } = this.props;
+    const { classes, columns, handleAdd } = this.props;
+    let data = this.props.users
+    if (this.state.search) {
+      data = data.filter(row => {
+        return row.name.includes(this.state.search)
+      })
+    }
+
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
@@ -21,18 +41,30 @@ class UsersPage extends Component {
               <CardIcon color="primary" className={classes.bgcolor}>
                 <h4 className={classes.cardTitleWhite}>Người dùng</h4>
               </CardIcon>
-              <Button
-                className={classes.bgcolor}
-                style={{ float: "right", color: "#fff" }}
-                onClick={handleAdd}
+              <div
+                style={{ display: "flex", flexDirection: "row", float: "right" }}
               >
-                Thêm mới
+                <div className="form-group mb-0" style={{ marginRight: "20px" }} >
+                  <input
+                    placeholder="Tìm kiếm..."
+                    className="form-control"
+                    value={this.state.search}
+                    onChange={this.handleFilter}
+                  />
+                </div>
+                <Button
+                  className={classes.bgcolor}
+                  style={{ float: "right", color: "#fff" }}
+                  onClick={handleAdd}
+                >
+                  Thêm mới
               </Button>
+              </div>
             </CardHeader>
             <CardBody>
               <ReactTable
                 style={{ textAlign: "center" }}
-                data={users}
+                data={data}
                 columns={columns}
                 defaultPageSize={6}
                 sortable={false}

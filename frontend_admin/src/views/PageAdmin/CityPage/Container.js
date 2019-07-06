@@ -10,13 +10,12 @@ import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
 import styles from "./styles";
 import { toast } from "react-toastify";
 import CityPage from "./Component";
-import { Helper } from "../../../utils";
+// import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
 import ModalConfirm from "../../Common/components/ModalDelete/index";
 
-
-const { getTxt } = Helper;
+// const { getTxt } = Helper;
 
 const getInitialState = () => {
   const initialState = {
@@ -82,10 +81,11 @@ class CityPageContainer extends React.Component {
     this.setState({ modalDelete: false })
   }
 
-  handleAdd = () => this.setState({ isOpenModal: true, type: "" });
+  handleAdd = () => this.setState({ isOpenModal: true});
 
   handleClose = () => {
-    this.setState({ isOpenModal: false });
+    this.setState(getInitialState());
+    this.getListCity();
   };
 
   onChangeValue = (key, value) => {
@@ -170,7 +170,10 @@ class CityPageContainer extends React.Component {
       {
         Header: "Thành phố",
         id: "name",
-        accessor: row => getTxt(row.name)
+        accessor: row =>
+        <Tooltip title={row.name}>
+          <div style={{ textAlign: "center" }}>{row.name}</div>
+        </Tooltip>
       },
       {
         Header: "Chức năng",

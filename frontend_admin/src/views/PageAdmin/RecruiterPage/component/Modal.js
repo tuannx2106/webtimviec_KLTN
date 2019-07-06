@@ -27,13 +27,11 @@ class FormDialog extends React.Component {
       onCreateRecruiter,
       onUpdateRecruiter
     } = this.props;
-
     const temp = citys ? citys.find(el => el.id === city) : {};
     const cities = {
       label: (temp || "").name,
       value: (temp || "").id
     };
-
 
     const title = type === "edit" ? "Sửa thông tin" : "Thêm mới";
     const onSave =
@@ -91,7 +89,7 @@ class FormDialog extends React.Component {
                   onChange={handleChangeSelect}
                 />
               </GridItem>
-              <GridItem xs={11} md={5}>
+              <GridItem xs={11} md={4}>
                 <Input
                   labelText="Ảnh"
                   formControlProps={{
@@ -100,10 +98,23 @@ class FormDialog extends React.Component {
                   inputProps={{
                     onChange: e => onChangeValue("logo", e.target.value),
                     defaultValue: row.logo || ""
+                    
                   }}
                 />
               </GridItem>
-              <GridItem xs={11} md={5}>
+              <GridItem xs={11} md={3}>
+                <Input
+                  labelText="Mật khẩu"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    onChange: e => onChangeValue("password", e.target.value),
+                    defaultValue: row.password || ""
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={11} md={3}>
                 <Input
                   labelText="Số điện thoại"
                   formControlProps={{
@@ -115,6 +126,7 @@ class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
+             
               <GridItem xs={12} md={10}>
                 <FormControl
                   style={{
