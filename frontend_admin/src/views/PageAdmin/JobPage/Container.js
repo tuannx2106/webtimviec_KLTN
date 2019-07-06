@@ -331,7 +331,7 @@ class JobPageContainer extends React.Component {
         // accessor: "status.statusName"
       },
       {
-        width: 150,
+        width: 200,
         Header: "Kỹ năng",
         id: "jobRequireSkillList",
         accessor: row =>
@@ -342,7 +342,7 @@ class JobPageContainer extends React.Component {
           </Tooltip>
       },
       {
-        width: 150,
+        width: 200,
         Header: "Ngành nghề",
         id: "jobRequireProfessionJobList",
         accessor: row =>
@@ -355,7 +355,7 @@ class JobPageContainer extends React.Component {
       {
         Header: "Chức năng",
         fixed: "right",
-        width: 150,
+        width: 120,
         sortable: false,
         Cell: row => (
           <div style={{ textAlign: "center" }}>

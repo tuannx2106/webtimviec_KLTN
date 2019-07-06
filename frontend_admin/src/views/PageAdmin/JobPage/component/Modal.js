@@ -15,7 +15,8 @@ import SelectField from "./SelectField";
 import { FormLabel, FormControl } from "@material-ui/core";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import ModalAdd from "./ModalAdd/ModalAdd";
+import ModalAddProfession from "./ModalAdd/ModalAddProfession";
+import ModalAddSkill from "./ModalAdd/ModalAddSkill";
 
 const styles = theme => ({
   textField: {
@@ -29,7 +30,6 @@ class FormDialog extends React.Component {
     super(props);
     this.state = {
       isOpenModalAdd: false,
-      check: ""
     };
   }
 
@@ -63,8 +63,7 @@ class FormDialog extends React.Component {
       jobRequireSkillList,
       jobRequireProfessionJobList
     } = this.props;
-
-    const { isOpenModalAdd, check } = this.state;
+    const { isOpenModalAdd } = this.state;
 
     const temp = citys ? citys.find(el => el.id === city) : {};
     const cities = {
@@ -94,10 +93,23 @@ class FormDialog extends React.Component {
     return (
       <div>
         {isOpenModalAdd && (
-          <ModalAdd
-            check={check}
+          <ModalAddProfession
+            row={row}
+            options={professions ? professions.map(el => ({ value: el.id, label: el.professionJobName })) : []}
             isOpenModalAdd={isOpenModalAdd}
             handleCloseAdd={this.handleCloseAdd}
+            handleClose={handleClose}
+            defaultValue={jobRequireProfessionJobList ? jobRequireProfessionJobList.map(item => ({ value: item.professionJob.id, label: item.professionJob.professionJobName })) : []}
+          />
+        )}
+        {isOpenModalAdd && (
+          <ModalAddSkill
+            row={row}
+            options={skills ? skills.map(el => ({ value: el.id, label: el.skillName })) : []}
+            isOpenModalAdd={isOpenModalAdd}
+            handleCloseAdd={this.handleCloseAdd}
+            handleClose={handleClose}
+            defaultValue={jobRequireSkillList ? jobRequireSkillList.map(item => ({ value: item.skill.id, label: item.skill.skillName })) : []}
           />
         )}
         <Dialog open={isOpenModal} fullWidth={true} maxWidth="false">
@@ -220,7 +232,6 @@ class FormDialog extends React.Component {
               </GridItem>
               {types ? <GridItem xs={11} md={1} style={{ lineHeight: "93px", maxHeight: "125px" }}>
                 <Button
-                  check="skill"
                   onClick={this.handleOpenAdd}
                   color="info"
                 >

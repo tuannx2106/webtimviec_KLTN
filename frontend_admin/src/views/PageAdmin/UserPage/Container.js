@@ -9,13 +9,13 @@ import { Edit as EditIcon, Delete as DeleteIcon } from "@material-ui/icons";
 // core components
 import styles from "./styles";
 import UsersPage from "./Component";
-import { Helper } from "../../../utils";
+// import { Helper } from "../../../utils";
 import Modal from "./component/Modal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ModalConfirm from "../../Common/components/ModalDelete/index";
 
-const { getTxt } = Helper;
+// const { getTxt } = Helper;
 
 const getInitialState = () => {
   const initialState = {

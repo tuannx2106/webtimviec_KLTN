@@ -5,6 +5,7 @@ import Input from "../../../Common/components/CustomInput/CustomInput";
 import GridContainer from "../../../Common/components/Grid/GridContainer";
 import GridItem from "../../../Common/components/Grid/GridItem";
 import { withStyles } from "@material-ui/core/styles";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
   Dialog,
   DialogContent,
@@ -23,6 +24,24 @@ const styles = theme => ({
 });
 
 export class FormDialog extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      controlledDate: null,
+    };
+  }
+
+  handleChange = (event, date) => {
+    const {type,onChangeValue} = this.props
+    this.setState({
+      controlledDate: date,
+    });
+    if(date){
+      onChangeValue(type, date)
+    }
+  };
+
   render() {
     const {
       isOpenModal,
@@ -42,6 +61,7 @@ export class FormDialog extends React.Component {
             {title}
           </DialogTitle>
           <DialogContent>
+            <MuiThemeProvider>
             <GridContainer justify="center" noMargin>
               <GridItem xs={11} md={5}>
                 <Input
@@ -55,7 +75,7 @@ export class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
-             
+
               <GridItem xs={11} md={5}>
                 <Input
                   labelText="Địa chỉ"
@@ -68,7 +88,7 @@ export class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
-               <GridItem xs={11} md={4}>
+              <GridItem xs={11} md={4}>
                 <Input
                   labelText="Email"
                   formControlProps={{
@@ -84,7 +104,7 @@ export class FormDialog extends React.Component {
                 <Input
                   labelText="Mật khẩu"
                   formControlProps={{
-                  fullWidth: true
+                    fullWidth: true
                   }}
                   inputProps={{
                     onChange: e => onChangeValue("password", e.target.value),
@@ -104,7 +124,7 @@ export class FormDialog extends React.Component {
                   }}
                 />
               </GridItem>
-              
+
               <GridItem xs={11} md={5}>
                 <Input
                   labelText="Ảnh (Dán link hình ảnh)"
@@ -132,6 +152,7 @@ export class FormDialog extends React.Component {
                 />
               </GridItem>
             </GridContainer>
+            </MuiThemeProvider>
           </DialogContent>
           <GridContainer
             style={{ height: "10%" }}
