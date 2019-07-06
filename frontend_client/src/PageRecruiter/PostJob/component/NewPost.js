@@ -21,7 +21,7 @@ class NewPost extends Component {
     date: this.today,
     recruiter: this.props.curentRecruiter,
     city: "",
-    status: "",
+    status: {id:1},
     jobRequireProfessionJobList: "",
     jobRequireSkillList:""
   };

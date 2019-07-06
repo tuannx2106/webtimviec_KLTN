@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 class Infomation extends Component {
   render() {
     const { job } = this.props
+    console.log(job)
     return (
       <div className="row" style={{ background: "#fff", padding: "30px", border: "1px solid #eee" }}>
         <div className="col-lg-8">

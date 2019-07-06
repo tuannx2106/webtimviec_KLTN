@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 
 class myJobRecruiter extends Component {
+  
   handClick = (id) => {
     localStorage.setItem('userAddJob', id);
   }
@@ -17,9 +18,10 @@ class myJobRecruiter extends Component {
             </div>
             <div className="lh-content" >
               <Link to={"/job-recruiter/"+item.id}><h6> {item.title}</h6></Link>
-              <Link to="/user-apply-job" className="btn btn-warning btn-apply" onClick={() => this.handClick(item.id)}>Hồ sơ đã ứng tuyển</Link>
+              <button className="btn btn-light" style={{float:"right", position:"absolute", right:"25px", top:"10px"}}>{item.status.statusName}</button>
+              <Link to="/user-apply-job" className="btn btn-warning btn-apply" onClick={() => this.handClick(item.id)}>Xem hồ sơ</Link>
               <h3>Nhà tuyển dụng:<Link to="#"> {curentRecruiter.companyName}</Link></h3>
-              <address className="addre">Địa chỉ: {item.city.name}</address>
+              <address className="addre">Địa chỉ: {item.city.name} </address>
               <p className="mb-0">
                 <span className="review">Hạn nộp hồ sơ: {item.expired}</span>
               </p>

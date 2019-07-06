@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import Menu from "../../PageRecruiter/ComponentRecruiter/Header/Menu";
-import "./style.css"
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import JobRecruiter from "./myJobRecruiter";
