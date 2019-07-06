@@ -13,6 +13,7 @@ class JobInfo extends Component {
       job: {
         recruiter: {},
         city: {},
+        status:{},
         jobRequireProfessionJobList: []
       }
     }

@@ -30,6 +30,10 @@ class Infomation extends Component {
                 <span className="txt-content">{job.city.name}</span>
               </div>
               <div className="col-xs-10 box-info">
+                <span className="wid">Trạng thái</span>
+                <span className="txt-content">{job.status.statusName}</span>
+              </div>
+              <div className="col-xs-10 box-info">
                 <span className="wid">Kỹ năng</span>
                 <span className="txt-content">
                   {job.jobRequireSkillList ?
