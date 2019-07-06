@@ -65,7 +65,7 @@ export class FormDialog extends React.Component {
             <GridContainer justify="center" noMargin>
               <GridItem xs={11} md={5}>
                 <Input
-                  labelText="Họ tên"
+                  labelText="Họ tên *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -90,7 +90,7 @@ export class FormDialog extends React.Component {
               </GridItem>
               <GridItem xs={11} md={4}>
                 <Input
-                  labelText="Email"
+                  labelText="Email *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -102,7 +102,7 @@ export class FormDialog extends React.Component {
               </GridItem>
               <GridItem xs={11} md={3}>
                 <Input
-                  labelText="Mật khẩu"
+                  labelText="Mật khẩu *"
                   formControlProps={{
                     fullWidth: true
                   }}

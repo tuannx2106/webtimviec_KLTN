@@ -120,7 +120,7 @@ class FormDialog extends React.Component {
             <GridContainer justify="center" noMargin>
               <GridItem xs={11} md={7}>
                 <Input
-                  labelText="Tên công việc"
+                  labelText="Tên công việc *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -132,7 +132,7 @@ class FormDialog extends React.Component {
               </GridItem>
               <GridItem xs={11} md={3}>
                 <Input
-                  labelText="Kinh nghiệm (năm)"
+                  labelText="Kinh nghiệm (năm) *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -147,7 +147,7 @@ class FormDialog extends React.Component {
 
               <GridItem xs={11} md={5}>
                 <Input
-                  labelText="Ngày đăng tuyển (yyyy-mm-dd)"
+                  labelText="Ngày đăng tuyển (yyyy-mm-dd) *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -159,7 +159,7 @@ class FormDialog extends React.Component {
               </GridItem>
               <GridItem xs={11} md={5}>
                 <Input
-                  labelText="Kết thúc (yyyy-mm-dd)"
+                  labelText="Kết thúc (yyyy-mm-dd) *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -170,7 +170,7 @@ class FormDialog extends React.Component {
                 />
               </GridItem>
               <GridItem xs={11} md={4} style={{ marginTop: "45px" }}>
-                <InputLabel>Thành phố</InputLabel>
+                <InputLabel>Thành phố *</InputLabel>
                 <Autocomplete
                   data={citys ? citys.map(el => ({ label: el.name, value: el.id })) : []}
                   defaultValue={cities}
@@ -179,7 +179,7 @@ class FormDialog extends React.Component {
                 />
               </GridItem>
               <GridItem xs={11} md={4} style={{ marginTop: "45px" }}>
-                <InputLabel>Nhà tuyển dụng</InputLabel>
+                <InputLabel>Nhà tuyển dụng *</InputLabel>
                 <Autocomplete
                   data={recruiters ? recruiters.map(el => ({ label: el.companyName, value: el.id })) : []}
                   defaultValue={recrui}
@@ -188,7 +188,7 @@ class FormDialog extends React.Component {
                 />
               </GridItem>
               <GridItem xs={11} md={2} style={{ marginTop: "45px" }}>
-                <InputLabel>Trạng thái</InputLabel>
+                <InputLabel>Trạng thái *</InputLabel>
                 <Autocomplete
                   data={statuss ? statuss.map(el => ({ label: el.statusName, value: el.id })) : []}
                   defaultValue={statu}
@@ -197,7 +197,7 @@ class FormDialog extends React.Component {
                 />
               </GridItem>
               <GridItem xs={11} md={9} style={{ margin: "35px 0px 20px 0px" }}>
-                <InputLabel>Ngành nghề</InputLabel>
+                <InputLabel>Ngành nghề *</InputLabel>
                 <SelectField
                   row={row}
                   types={types}
@@ -219,7 +219,7 @@ class FormDialog extends React.Component {
                 </GridItem>
               }
               <GridItem xs={11} md={9} style={{ margin: "0px 0px 20px 0px" }}>
-                <InputLabel>Kỹ năng</InputLabel>
+                <InputLabel>Kỹ năng *</InputLabel>
                 <SelectField
                   sk
                   row={row}
@@ -258,7 +258,7 @@ class FormDialog extends React.Component {
                       paddingBottom: 10
                     }}
                   >
-                    Description
+                    Description *
                   </FormLabel>
                   <ReactQuill
                     theme="snow"

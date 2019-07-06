@@ -46,7 +46,7 @@ class FormDialog extends React.Component {
             <GridContainer justify="center" noMargin>
               <GridItem xs={11} md={5}>
                 <Input
-                  labelText="Tên nhà tuyển dụng"
+                  labelText="Tên nhà tuyển dụng *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -58,7 +58,7 @@ class FormDialog extends React.Component {
               </GridItem>
               <GridItem xs={11} md={5}>
                 <Input
-                  labelText="Email"
+                  labelText="Email *"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -81,7 +81,7 @@ class FormDialog extends React.Component {
                 />
               </GridItem>
               <GridItem xs={11} md={5} style={{marginTop:"9px"}}>
-                <InputLabel >Thành phố</InputLabel>
+                <InputLabel >Thành phố *</InputLabel>
                 <Autocomplete
                   data={citys ? citys.map(el => ({ label: el.name, value: el.id })) : []}
                   defaultValue={cities}
@@ -104,7 +104,7 @@ class FormDialog extends React.Component {
               </GridItem>
               <GridItem xs={11} md={3}>
                 <Input
-                  labelText="Mật khẩu"
+                  labelText="Mật khẩu *"
                   formControlProps={{
                     fullWidth: true
                   }}
