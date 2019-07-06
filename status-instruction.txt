@@ -1,0 +1,2 @@
+AVAILABLE: còn hạn, còn được hiển thị
+UNAVAILABLE: hết hạn

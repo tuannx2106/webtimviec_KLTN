@@ -20,6 +20,7 @@ class Header extends Component {
   }
 
   handleOnChangeSelectedProfession = (e) => {
+    document.querySelector('#search-job-title').disabled = false;
     this.setState({ selectedProf: e.target.value });
   }
 
@@ -44,9 +45,6 @@ class Header extends Component {
         <div className="form-search-wrap mb-3" style={{ width: "85%" }} data-aos="fade-up" data-aos-delay={200}>
           <form method="post">
             <div className="row align-items-center">
-              <div className="col-lg-12 mb-4 mb-xl-0 col-xl-4">
-                <input type="text" className="form-control rounded" placeholder="Tìm công việc..." onChange={this.handleOnChangeInput} />
-              </div>
               <div className="col-lg-12 mb-4 mb-xl-0 col-xl-3">
                 <div className="select-wrap">
                   <span className="icon"><span className="icon-keyboard_arrow_down" /></span>
@@ -57,6 +55,9 @@ class Header extends Component {
                     ))}
                   </select>
                 </div>
+              </div>
+              <div className="col-lg-12 mb-4 mb-xl-0 col-xl-4">
+                <input id="search-job-title" type="text" className="form-control rounded" placeholder="Tìm công việc..." onChange={this.handleOnChangeInput} disabled/>
               </div>
               <div className="col-lg-12 mb-4 mb-xl-0 col-xl-3">
                 <div className="select-wrap">

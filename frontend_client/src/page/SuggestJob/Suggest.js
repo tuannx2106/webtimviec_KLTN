@@ -25,8 +25,10 @@ class SuggestJob extends Component {
 
     this.setState({
       curentUser: curUser,
-      jobs: jobList.filter(job => this.hasCommonElement(curUser.usersSkillList.map(item => item.skill.id),job.jobRequireSkillList.map(item => item.skill.id)))
+      jobs: jobList.filter(job => Date.parse(job.expired) > Date.now() && this.hasCommonElement(curUser.usersSkillList.map(item => item.skill.id),job.jobRequireSkillList.map(item => item.skill.id)))
     })
+
+    console.log(this.state.jobs)
   }
 
   hasCommonElement = (usersSkillList, jobSkillList) => { 
@@ -45,16 +47,16 @@ class SuggestJob extends Component {
         <div className="container bootstrap snippet" data-aos="fade" data-stellar-background-ratio="0.5">
           <div className="row" style={{ marginTop: "135px" }}>
             <div className="col-sm-4">
-              <div class="page-dashboard__user-profile-info">
-                <div class="avatar img-circle">
+              <div className="page-dashboard__user-profile-info">
+                <div className="avatar img-circle">
                   <img style={{ height: "100px", width: "100px", borderRadius: "100%" }} src={curentUser.avatar} alt=""></img>
                 </div>
-                <a href="##"><h3 class="full-name">{curentUser.name}</h3></a>
-                <ul class="list-group user-info m-b-sm text-left">
-                  <li class="list-group-item hidden-xs hidden-sm">Email: {curentUser.email}</li>
-                  <li class="list-group-item hidden-xs hidden-sm">Ngày sinh: {curentUser.birthday}</li>
-                  <li class="list-group-item hidden-xs hidden-sm">Địa chỉ: {curentUser.address}</li>
-                  <li class="list-group-item hidden-xs hidden-sm">Số điện thoại: {curentUser.sdt}</li>
+                <a href="##"><h3 className="full-name">{curentUser.name}</h3></a>
+                <ul className="list-group user-info m-b-sm text-left">
+                  <li className="list-group-item hidden-xs hidden-sm">Email: {curentUser.email}</li>
+                  <li className="list-group-item hidden-xs hidden-sm">Ngày sinh: {curentUser.birthday}</li>
+                  <li className="list-group-item hidden-xs hidden-sm">Địa chỉ: {curentUser.address}</li>
+                  <li className="list-group-item hidden-xs hidden-sm">Số điện thoại: {curentUser.sdt}</li>
                 </ul>
               </div>
             </div>
@@ -62,7 +64,7 @@ class SuggestJob extends Component {
               <ul className="nav nav-tabs" style={{ fontSize: "20px", fontWeight: "bold" }}>
                 CÔNG VIỆC ĐƯỢC GỢI Ý CHO BẠN
               </ul>
-              <div class="col-xs-12 page-dashboard__jobs-list">
+              <div className="col-xs-12 page-dashboard__jobs-list">
                 <SuggestJobItem jobs={this.state.pageOfItems} />
                 <div className='pagination-controls'>
                   <Pagination items={jobs} onChangePage={this.onChangePage}/>
