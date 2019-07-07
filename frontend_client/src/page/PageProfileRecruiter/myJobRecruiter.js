@@ -10,16 +10,34 @@ class myJobRecruiter extends Component {
   }
 
   handleUpdateJob = (id) => {
-  
+    const { listJobRecruiter } = this.state
+    const jobBeforeUpdate = listJobRecruiter.filter(item => item.id === id)[0]
+    const jobAfterUpdate = {
+      ...jobBeforeUpdate,
+      status: {
+        id: (jobBeforeUpdate.status.statusName === 'AVAILABLE') ? 2 : 1
+      }
+    }
+    // document.querySelector(`#job-status-${id}`).innerHTML = jobAfterUpdate.status.statusName === 'AVAILABLE' ? 'Ẩn Bài Đăng' : 'Hiển thị'
+    // console.log(id + document.querySelector(`#job-status-${id}`).innerHTML)
+    fetch(`/admin/api/job/`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(jobAfterUpdate)
+    }).then(res => window.location.reload())
   };
-  
+
   handClick = (id) => {
     localStorage.setItem('userAddJob', id);
   }
 
   render() {
     const { curentRecruiter } = this.props;
-    const {listJobRecruiter} = this.state
+    const { listJobRecruiter } = this.state
+    
     return (
       <Fragment>
         {listJobRecruiter && listJobRecruiter.map(item => (
@@ -29,12 +47,10 @@ class myJobRecruiter extends Component {
             </div>
             <div className="lh-content" >
               <Link to={"/job-recruiter/"+item.id}><h6> {item.title}</h6></Link>
-              {item.status.statusName ==="Có hiệu lực" ? (
-              <button className="btn btn-light" style={{float:"right", position:"absolute", right:"25px", top:"10px"}} onClick={() => this.handleUpdateJob(item.id)}>Ẩn bài đăng</button>
-              ):
-              <button className="btn btn-light" style={{float:"right", position:"absolute", right:"25px", top:"10px"}}>Hiển thị </button>
-
-              }
+              <button id={`job-status-${item.id}`} className="btn btn-light" style={{float:"right", position:"absolute", right:"25px", top:"10px"}} onClick={() => this.handleUpdateJob(item.id)}>{
+                item.status.statusName ==="AVAILABLE" ? 'Ẩn bài đăng' : 'Hiển thị'
+              }</button>
+              
 
               <Link to="/user-apply-job" className="btn btn-warning btn-apply" onClick={() => this.handClick(item.id)}>Xem hồ sơ</Link>
               <h3>Nhà tuyển dụng:<Link to="#"> {curentRecruiter.companyName}</Link></h3>

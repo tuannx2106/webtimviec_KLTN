@@ -29,10 +29,11 @@ class AllJob extends Component {
   async componentDidMount() {
     const { selectedCity, selectedProf, searchInput } = this.props.location.state ? this.props.location.state : { selectedCity: 0 }
 
-    this.allJob = await fetch('/admin/api/job/list').then(response => response.json())
+    let jobList = await fetch('/admin/api/job/list').then(response => response.json())
     let cityList = await fetch('/admin/api/city/list').then(response => response.json())
     let profList = await fetch('admin/api/profession/list').then(response => response.json())
     let jobsResult = this.jobsSearchResult(this.allJob, searchInput, parseInt(selectedCity), parseInt(selectedProf))
+    this.allJob = jobList.filter(job => job.status.statusName === 'AVAILABLE')
 
     if (jobsResult.length !== 0) {
       this.setState({
@@ -54,13 +55,14 @@ class AllJob extends Component {
       return job.city.id === cityId
         && job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === professionId).length !== 0
         && job.title.toLowerCase().trim().indexOf(inputSearch.toLowerCase().trim()) !== -1
+        && job.status.statusName === 'AVAILABLE'
     })
   }
 
-  jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id === cityId))
+  jobsFilterByCity = (jobList, cityId) => (jobList.filter(job => job.city.id === cityId && job.status.statusName === 'AVAILABLE' ))
 
   jobsFilterByProf = (jobList, profId) => (jobList.filter(job => {
-    return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length !== 0 ? job : null
+    return job.jobRequireProfessionJobList.filter(jrpj => jrpj.professionJob.id === profId).length !== 0 && job.status.statusName === 'AVAILABLE' ? job : null
   }))
 
   jobSortByDate = (jobList) => (jobList.sort((a, b) => Date.parse(a.date) < Date.parse(b.date)))
