@@ -102,7 +102,6 @@ class UsersPageContainer extends React.Component {
     // eslint-disable-next-line react/no-direct-mutation-state
     this.state.form[key] = value;
     // eslint-disable-next-line no-console
-    console.log(value);
   };
 
   onCreateUser = async () => {

@@ -12,13 +12,11 @@ class FormDialog extends React.Component {
     const { job } = this.props;
     job[event.target.name] = event.target.value
     this.setState({ job: { ...job } })
-    console.log(event.target.value)
   };
 
   onChangeValueEditor = (key, value) => {
     // eslint-disable-next-line react/no-direct-mutation-state
     this.props.job[key] = value;
-    console.log(value);
   };
 
   handleChangeSelect = event => {
@@ -31,7 +29,6 @@ class FormDialog extends React.Component {
       id: value
     };
     this.setState({ job: item });
-    console.log(target.value);
   };
 
   onUpdateJob = () => {

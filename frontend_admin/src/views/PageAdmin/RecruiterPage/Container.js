@@ -111,7 +111,6 @@ class RecruiterPageContainer extends React.Component {
   onChangeValue = (key, value) => {
     // eslint-disable-next-line react/no-direct-mutation-state
     this.state.form[key] = value;
-    console.log(value)
   };
 
   handleChangeSelect = (key, value) => {
@@ -120,7 +119,6 @@ class RecruiterPageContainer extends React.Component {
       id: value
     };
     this.setState({ form: form });
-    console.log(value);
   };
 
 

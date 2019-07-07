@@ -28,7 +28,6 @@ class SuggestJob extends Component {
       jobs: jobList.filter(job => Date.parse(job.expired) > Date.now() && this.hasCommonElement(curUser.usersSkillList.map(item => item.skill.id),job.jobRequireSkillList.map(item => item.skill.id)))
     })
 
-    console.log(this.state.jobs)
   }
 
   hasCommonElement = (usersSkillList, jobSkillList) => { 

@@ -20,11 +20,9 @@ export default class SelectFieldExampleSelectionRenderer extends Component {
     if (values) {
       onChange(type, values);
     }
-    console.log(values)
   }
 
   handleDelete = async (id) => {
-    console.log(id)
     const { row } = this.props;
     this.props.sk ? (await fetch(`/admin/api/jobrequireskill/${row.id}/${id}`, {
       method: "DELETE",

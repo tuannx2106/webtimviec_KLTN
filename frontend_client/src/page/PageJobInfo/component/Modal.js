@@ -43,7 +43,6 @@ class FormDialog extends React.Component {
 
   onTextAreaChange = event => {
     this.emailContent = event.target.value
-    console.log(this.props.job.recruiter.email)
   }
 
   render() {

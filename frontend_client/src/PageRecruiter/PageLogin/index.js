@@ -21,7 +21,6 @@ class PageLogin extends Component {
   componentDidMount() {
     const curRecruiter = JSON.parse(localStorage.getItem('currentRecruiter'));
     this.setState({ curentRecruiter: curRecruiter });
-    console.log(curRecruiter);
   }
 
   handleChange = (event) => {
@@ -31,7 +30,6 @@ class PageLogin extends Component {
     let loginInfo = { ...this.state.loginInfo };
     loginInfo[name] = value;
     this.setState({ loginInfo: loginInfo });
-    console.log(target.value)
   }
 
   handleSubmit = (event) => {

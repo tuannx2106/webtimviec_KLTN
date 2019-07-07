@@ -28,7 +28,6 @@ class UpdateInfoPrSk extends Component {
       id: value
     };
     this.setState({ item: item });
-    console.log(value)
   };
 
   handAddPrefSkill = async () => {

@@ -10,7 +10,6 @@ class myJobRecruiter extends Component {
   }
 
   handleUpdateJob = (id) => {
-    console.log(id)
   
   };
   
@@ -33,7 +32,7 @@ class myJobRecruiter extends Component {
               {item.status.statusName ==="Có hiệu lực" ? (
               <button className="btn btn-light" style={{float:"right", position:"absolute", right:"25px", top:"10px"}} onClick={() => this.handleUpdateJob(item.id)}>Ẩn bài đăng</button>
               ):
-              <button className="btn btn-light" style={{float:"right", position:"absolute", right:"25px", top:"10px"}}>Hiện thị </button>
+              <button className="btn btn-light" style={{float:"right", position:"absolute", right:"25px", top:"10px"}}>Hiển thị </button>
 
               }
 

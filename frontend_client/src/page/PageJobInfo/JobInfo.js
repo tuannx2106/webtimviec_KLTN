@@ -27,7 +27,6 @@ class JobInfo extends Component {
 
   render() {
     const {job} = this.state;
-    console.log(job)
     return (
       <div className="site-wrap bg-light">
         <div className="site-mobile-menu">

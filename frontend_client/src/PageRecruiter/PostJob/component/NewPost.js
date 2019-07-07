@@ -42,13 +42,11 @@ class NewPost extends Component {
     let item = { ...this.state.item };
     item[name] = value;
     this.setState({ item: item });
-    console.log(target.value);
   };
 
   onChangeValueEditor = (key, value) => {
     // eslint-disable-next-line react/no-direct-mutation-state
     this.state.item[key] = value;
-    console.log(value);
   };
 
   handleChangeSelect = event => {
@@ -60,7 +58,6 @@ class NewPost extends Component {
       id: value
     };
     this.setState({ item: item });
-    console.log(target.value);
   };
 
   handleChangeSelectField = (key, value) => {

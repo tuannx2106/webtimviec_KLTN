@@ -51,7 +51,6 @@ class index extends Component {
 
   handleChangeClose = async (id) => {
     const { curentUser } = this.state;
-    console.log(curentUser.id)
     await fetch(`/admin/api/usersskill/${curentUser.id}/${id}`, {
       method: "DELETE",
       headers: {

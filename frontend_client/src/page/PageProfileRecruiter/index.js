@@ -46,7 +46,6 @@ class index extends Component {
   onChangeValueEditor = (key, value) => {
     // eslint-disable-next-line react/no-direct-mutation-state
     this.state.curentRecruiter[key] = value;
-    console.log(value);
   };
 
   onUpdateRecruiter = () => {

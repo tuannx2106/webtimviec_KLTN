@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 class JobOfRecruiter extends Component {
   render() {
     const { listJobRecruiter } = this.props;
-    // console.log(listJobRecruiter)
     return (
       <div className="info-employer col-xs-12" style={{ padding: "15px 23px" }}>
         {listJobRecruiter && listJobRecruiter.map(item => (

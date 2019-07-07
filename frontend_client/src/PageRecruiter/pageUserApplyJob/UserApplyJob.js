@@ -23,7 +23,6 @@ class UserApplyjob extends Component {
   }
   render() {
     const { curentRecruiter, userAddJob } = this.state;
-    console.log(userAddJob)
     if (!curentRecruiter)
       return <div>Đang tải ...</div>
     return (

@@ -90,7 +90,6 @@ class CityPageContainer extends React.Component {
 
   onChangeValue = (key, value) => {
     this.state.form[key] = value;
-    console.log(value);
   };
 
   onCreateCity = async () => {

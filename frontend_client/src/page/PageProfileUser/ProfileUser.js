@@ -47,7 +47,6 @@ class ProfileUser extends React.Component {
 
   render() {
     const { skills } = this.state;
-    console.log(skills)
     const { curentUser } = this.props;
     if (!curentUser)
       return <div>Loading ...</div>

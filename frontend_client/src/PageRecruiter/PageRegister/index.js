@@ -32,7 +32,6 @@ class PageRegister extends Component {
     let item = { ...this.state.item };
     item[name] = value;
     this.setState({ item: item });
-    console.log(target.value)
   }
 
   handleChangeSelect = event => {
