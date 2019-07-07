@@ -45,6 +45,7 @@ class UpdateJob extends Component {
     })
     this.props.history.goBack()
   };
+  
   handleExit = () =>{
     this.props.history.goBack()
   }
