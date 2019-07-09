@@ -216,7 +216,7 @@ class index extends Component {
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="email"><h4>Email</h4></label>
-                        <input type="email" className="form-control input-form" value={curentUser.email ? curentUser.email : ""} name="email" onChange={this.handleChange} />
+                        <input type="email" className="form-control input-form" value={curentUser.email ? curentUser.email : ""} name="email" onChange={this.handleChange} disabled/>
                       </div>
                     </div>
                     <div className="form-group">

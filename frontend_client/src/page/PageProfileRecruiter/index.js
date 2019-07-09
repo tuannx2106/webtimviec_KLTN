@@ -130,13 +130,13 @@ class index extends Component {
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="email"><h4>Email</h4></label>
-                        <input type="email" className="form-control input-form" value={curentRecruiter.email ? curentRecruiter.email : ""} name="email" onChange={this.handleChange} />
+                        <input type="email" className="form-control input-form" value={curentRecruiter.email ? curentRecruiter.email : ""} name="email" onChange={this.handleChange} disabled/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="address"><h4>Địa chỉ</h4></label>
-                        <input type="text" className="form-control input-form" value={curentRecruiter.address ? curentRecruiter.address : ""} name="address" onChange={this.handleChange} />
+                        <input type="text" className="form-control input-form" value={curentRecruiter.address ? curentRecruiter.address : ""} name="address" onChange={this.handleChange}/>
                       </div>
                     </div>
                     <div className="form-group">
