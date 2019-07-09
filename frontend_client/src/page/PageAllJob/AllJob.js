@@ -32,8 +32,8 @@ class AllJob extends Component {
     let jobList = await fetch('/admin/api/job/list').then(response => response.json())
     let cityList = await fetch('/admin/api/city/list').then(response => response.json())
     let profList = await fetch('admin/api/profession/list').then(response => response.json())
-    let jobsResult = this.jobsSearchResult(this.allJob, searchInput, parseInt(selectedCity), parseInt(selectedProf))
     this.allJob = jobList.filter(job => job.status.statusName === 'AVAILABLE')
+    let jobsResult = this.jobsSearchResult(this.allJob, searchInput, parseInt(selectedCity), parseInt(selectedProf))
 
     if (jobsResult.length !== 0) {
       this.setState({
